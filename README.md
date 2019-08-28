@@ -22,6 +22,17 @@ $ cd fitness-tracker
 $ npm install
 ```
 
+After the server installation, go next to the Miband2 hacking source code
+``` javascript
+$ cd src/utils
+
+$ git clone https://github.com/nmtoan251998/miband2.git
+
+$ cd miband2
+
+$ pip install -r requirements.txt
+```
+
 ### Error with npm audit
 If you see error when installing npm packages as the below message (problems with npm packages)
 ``` javascript
