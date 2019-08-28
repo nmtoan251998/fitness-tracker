@@ -24,13 +24,15 @@ $ npm install
 
 After the server installation, go next to the Miband2 hacking source code
 ``` javascript
+$ mkdir src/utils
+
 $ cd src/utils
 
 $ git clone https://github.com/nmtoan251998/miband2.git
 
 $ cd miband2
 
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 ### Error with npm audit
@@ -47,7 +49,7 @@ $ npm audit fix
 ```
 
 ## Available scripts
-Run client on dev mode (create markup files)
+Run client on dev mode (edit markup file)
 ``` javascript
 $ npm run dev:client
 ```
