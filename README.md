@@ -23,13 +23,13 @@ $ npm install
 ```
 
 ### Error with npm audit
-If you see error when installing npm packages as the below message
+If you see error when installing npm packages as the below message (problems with npm packages)
 ``` javascript
 added 4 packages from 8 contributors and audited 15934 packages in 19.166s
 found 2 vulnerabilities (1 low, 1 high)
 run `npm audit fix` to fix them, or `npm audit` for details
 ```
-All you have to do is just to run 
+All you have to do is just to run
 
 ``` javasciprt
 $ npm audit fix
@@ -53,7 +53,7 @@ $ npm run production
 
 Start on production mode
 ``` javascript
-$ npm run start
+$ npm start
 ```
 
 Test server APIs (unit test)
