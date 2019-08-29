@@ -1,6 +1,6 @@
 {
     "verbose": true,
-    "ignore": ["src/api/tests/*", "dist", "docs", "node_modules", "src/utils/miband2"],
+    "ignore": ["bin", "src/api/tests/*", "dist", "docs", "node_modules", "src/utils/miband2"],
     "execMap": {
         "rb": "ruby",
         "pde": "processing --sketch={{pwd}} --run"

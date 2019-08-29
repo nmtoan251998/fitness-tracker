@@ -37,15 +37,25 @@ $ pip3 install -r requirements.txt
 
 ### Error with npm audit
 If you see error when installing npm packages as the below message (problems with npm packages)
-``` javascript
+``` sh
 added 4 packages from 8 contributors and audited 15934 packages in 19.166s
 found 2 vulnerabilities (1 low, 1 high)
 run `npm audit fix` to fix them, or `npm audit` for details
 ```
-All you have to do is just to run
 
-``` javasciprt
+All you have to do is just to run
+``` sh
 $ npm audit fix
+```
+
+### Error with nodemon large files watching
+``` sh
+[nodemon] Internal watch failed: watch /path/
+```
+
+In linux, run the below command to solve the problem
+``` sh
+$ echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
 
 ## Available scripts
