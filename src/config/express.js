@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
 const methodOverride = require('method-override');
+const cors = require('cors');
 
 /**
  * Server instances requirements
@@ -28,6 +29,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // log all api call to console
 app.use(morgan(log));
+
+// enable CORS in headers
+app.use(cors());
 
 // use Http request such as PUT, DELETE
 app.use(methodOverride());
