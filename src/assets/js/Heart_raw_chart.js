@@ -1,3 +1,5 @@
+import { changeStatusHeart } from './function';
+
 window.onload = function() {
     const dataHeart = [];
      
@@ -27,13 +29,14 @@ window.onload = function() {
         const updateChart = function() {
                    
             // Gán giá trị từ localhost:8000/get vào textbox để hiển thị bước đi, calo
-            const fat_gramms =   document.getElementById("fat_gramms");
+            const fat_gramms    =   document.getElementById("fat_gramms");
             const meters        =   document.getElementById("meters");
             const steps         =   document.getElementById("steps");
             const callories     =   document.getElementById("callories");
             const heart_rate    =   document.getElementById("heart_rate");
-                        // Xuất ra màn hình console trên browser giá trị nhận được từ localhost:8000/get
 
+            changeStatusHeart();
+            // Xuất ra màn hình console trên browser giá trị nhận được từ localhost:8000/get
             time.setTime(time.getTime() + updateInterval);
             yHeartVal = parseInt(Math.round((0+200)*150)/100);
             dataHeart.push({ // cập nhât dữ liệu mới từ server
