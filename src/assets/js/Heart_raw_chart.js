@@ -27,7 +27,7 @@ window.onload = function() {
         const updateChart = function() {
                    
             // Gán giá trị từ localhost:8000/get vào textbox để hiển thị bước đi, calo
-            const fat_gramms    =   document.getElementById("fat_gramms");
+            const fat_gramms =   document.getElementById("fat_gramms");
             const meters        =   document.getElementById("meters");
             const steps         =   document.getElementById("steps");
             const callories     =   document.getElementById("callories");
