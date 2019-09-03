@@ -15,10 +15,10 @@ const {
     log
 } = require(path.join(__dirname, './vars'));
 
-const Router = require(path.join(__dirname, '../api/routes/index.route'));
-
 // Express instance
+const Router = require(path.join(__dirname, '../api/routes/index.route'));
 const app = express();
+const io = require('./socketio');
 
 /**
  * Use middlewares
@@ -39,6 +39,12 @@ app.use(cors());
 // use Http request such as PUT, DELETE
 app.use(methodOverride());
 
+// append socketio instance to every server response
+app.use(function(req, res, next) {
+    res.io = io;
+    next();
+});
+
 // Router
 app.use(Router);
 
@@ -46,4 +52,7 @@ app.use(Router);
  * Express instance
  * @public
  */
-module.exports = app;
+module.exports = {
+    app,
+    io,
+};

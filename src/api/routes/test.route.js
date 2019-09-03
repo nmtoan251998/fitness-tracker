@@ -2,6 +2,7 @@ const Router = require('express').Router();
 
 const {
     testController,
+    renderIndex,
 } = require('../controllers/test.controller');
 
 const {
@@ -26,5 +27,7 @@ Router.route('')
         sayHelloMiddleware,
         testController
     );
+
+Router.route('/home').get(renderIndex);
 
 module.exports = Router;
