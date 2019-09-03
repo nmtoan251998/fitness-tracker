@@ -5,23 +5,23 @@ window.onload = function() {
      
     const Chart = new CanvasJS.Chart("ChartContainer", {
         zoomEnabled: true, // Dùng thuộc tính có thể zoom vào graph
-            title: {
-                text: "HEART BEAT GRAPH" // Viết tiêu đề cho graph
-                    },
-            toolTip: { // Hiển thị truường trên graph
-                shared: true
-                    },
-            axisX: {
-                title: "chart updates every 2 secs" // Chú thích cho trục X
-                    },
-            data: [{
-                type: "line", // Chọn kiểu dữ liệu đường
-                xValueType: "dateTime", // Cài đặt kiểu giá trị tại trục X là thuộc tính thời gian
-                showInLegend: true, // Hiển thị "temp" ở mục chú thích (legend items)
-                name: "heart beat",
-                dataPoints: dataHeart // Dữ liệu hiển thị sẽ lấy từ data
-                    }],
-                });
+        title: {
+            text: "HEART BEAT GRAPH" // Viết tiêu đề cho graph
+        },
+        toolTip: { // Hiển thị truường trên graph
+            shared: true
+        },
+        axisX: {
+            title: "chart updates every 2 secs" // Chú thích cho trục X
+                },
+        data: [{
+            type: "line", // Chọn kiểu dữ liệu đường
+            xValueType: "dateTime", // Cài đặt kiểu giá trị tại trục X là thuộc tính thời gian
+            showInLegend: true, // Hiển thị "temp" ở mục chú thích (legend items)
+            name: "heart beat",
+            dataPoints: dataHeart // Dữ liệu hiển thị sẽ lấy từ data
+        }],
+    });
         let yHeartVal = 0; // Biến lưu giá trị nhip tim theo trục Y
         const updateInterval = 2000; // Thời gian cập nhật dữ liệu 2000ms = 2s
         const time = new Date(); // Lấy thời gian hiện tại
