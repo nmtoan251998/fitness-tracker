@@ -1,21 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>HEATHCARE APPLICATION IOT</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+        <!-- Nhúng file Javasript tại đường dẫn src để có thể xây dựng 1 graph -->
+        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </head>
 
-    <link rel="stylesheet" href="../assets/css/home.css">
+    <body>
+        <div class="container">
+            <div class="jumbotron text-center">
+                <h2> HEATHCARE APPLICATION IOT</h2><br> 
+            </div>       
 
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello world</h1>
-    <form>
-        <input type="search" name="q" placeholder="Search" disabled>
-    </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-    <script src="../assets/js/home.js"></script>
-    <script src="../assets/js/socketio.js"></script>
-</body>
+            <form>
+                <input type="search" name="q" placeholder="Search" disabled>
+            </form>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    
+                    <!-- Display heart raw -->
+                    <div class="media border p-3" id="heart_rate_box">
+                        <img src="../assets/images/heartbeat.png" alt="Heart-rate" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        <div class="media-body">
+                            <h4>Heart-raw</h4>
+                            <p><input type="text" size="6" id="heart_rate"><span>&ensp;beat</span></p>  
+                        </div>
+                    </div>
+                    
+                    <!-- Display step -->
+                    <div class="media border p-3">
+                        <img src="../assets/images/step.png" alt="Real-time step" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        <div class="media-body">
+                            <h4>Real-time step</h4>
+                            <p><input type="text" size="6" id="steps"><span>&ensp;steps</span></p>  
+                        </div>
+                    </div>
+
+                    <!-- Display callories -->
+                    <div class="media border p-3">
+                        <img src="../assets/images/chick.png" alt="Callories" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        <div class="media-body">
+                            <h4>Callories</h4>
+                            <p><input type="text" size="6" id="callories"><span>&ensp;Kcal</span></p>  
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm-6">
+                    
+                    <!-- Display Status -->
+                    <div class="media border p-3">
+                        <img src="../assets/images/status.png" alt="status" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        <div class="media-body">
+                            <h5>Status  <input type="text" size="6" id="status"></h5>
+                            <p>Time:&ensp;&ensp;&ensp;<input type="text" size="10" id="status-time"></p>  
+                        </div>
+                    </div>
+
+                    <!-- Display Fat -->
+                    <div class="media border p-3">
+                        <img src="../assets/images/fatburn.png" alt="Fat burn" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        <div class="media-body">
+                            <h4>Fat burned  </h4>
+                            <p>Total:&ensp;&ensp;<input type="text" size="6" id="fat_gramms"></p>  
+                        </div>
+                    </div>
+
+                    <!-- Display Meters -->
+                    <div class="media border p-3">
+                        <img src="../assets/images/meter.png" alt="meters" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        <div class="media-body">
+                            <h4>Meters</h4>
+                            <p>Total:&ensp;&ensp;<input type="text" size="6" id="meters">&ensp;meters</p>  
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        
+            <!-- thiết lập kích thước cho graph thông qua id ChartContainer đã thiết lập ở trên  -->
+            <div style="margin: 20px 15px 15px 10px">
+                <div class="containner-fluid">
+                    <div id="ChartContainer" style="height: 300px; width:100%;"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+
+        <script src="../assets/js/heartRawChart.js"></script>
+        <script src="../assets/js/home.js"></script>
+        <script src="../assets/js/socketio.js"></script>
+    </body>
 </html>
