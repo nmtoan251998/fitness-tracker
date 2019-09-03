@@ -22,7 +22,7 @@ window.onload = function() {
                 dataPoints: dataHeart // Dữ liệu hiển thị sẽ lấy từ data
                     }],
                 });
-        var yHeartVal = 0; // Biến lưu giá trị nhip tim theo trục Y
+        let yHeartVal = 0; // Biến lưu giá trị nhip tim theo trục Y
         const updateInterval = 2000; // Thời gian cập nhật dữ liệu 2000ms = 2s
         const time = new Date(); // Lấy thời gian hiện tại
 
