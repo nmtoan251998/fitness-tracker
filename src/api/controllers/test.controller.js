@@ -35,3 +35,15 @@ module.exports.renderIndex = (req, res, next) => {
         next(error);
     }
 }
+
+module.exports.getMACaddresses = (req, res, next) => {
+    try {
+        const sh = require('shelljs');
+
+        sh.exec('node -v');
+
+        sh.exec('sudo hcitool lescan');
+    } catch (error) {
+        next(error);
+    }
+}
