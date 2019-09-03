@@ -1,14 +1,23 @@
-const app = require('./config/express');
+const {
+    app,
+    io,
+} = require('./config/express');
 
 const {
     port,
     env
 } = require('./config/vars');
 
-app.listen(port, () => console.log(`Server is started on port: ${port} (${env})`));
+const server = require('http').createServer(app);
+io.attach(server);
+
+server.listen(port, () => console.log(`Server is started on port: ${port} (${env})`));
 
 /**
  * App instance - For testing purposes
  * @public
  */
-module.exports = app;
+module.exports = {
+    app,
+    server,
+};

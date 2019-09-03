@@ -10,15 +10,14 @@
         <!-- Nhúng file Javasript tại đường dẫn src để có thể xây dựng 1 graph -->
         <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </head>
-<body>
-    <div class="container">
-        <div class="jumbotron text-center">
-            <h2> HEATHCARE APPLICATION IOT</h2><br> 
-        </div>
 
-       
+    <body>
+        <div class="container">
+            <div class="jumbotron text-center">
+                <h2> HEATHCARE APPLICATION IOT</h2><br> 
+            </div>       
+
             <div class="row">
-
                 <div class="col-sm-6">
                     
                     <!-- Display heart raw -->
@@ -81,25 +80,26 @@
                     </div>
 
                 </div>
-               
             </div>
-    
-        <!-- thiết lập kích thước cho graph thông qua id ChartContainer đã thiết lập ở trên  -->
-        <div style="margin: 20px 15px 15px 10px">
-            <div class="containner-fluid">
-                <div id="ChartContainer" style="height: 300px; width:100%;"></div>
+        
+            <!-- thiết lập kích thước cho graph thông qua id ChartContainer đã thiết lập ở trên  -->
+            <div style="margin: 20px 15px 15px 10px">
+                <div class="containner-fluid">
+                    <div id="ChartContainer" style="height: 300px; width:100%;"></div>
+                </div>
             </div>
+
         </div>
 
-    </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script src="../assets/js/heartRawChart.js"></script>
-</body>
+        <script src="../assets/js/heartRawChart.js"></script>
+        <script src="../assets/js/home.js"></script>
+        <script src="../assets/js/socketio.js"></script>
+    </body>
 </html>
