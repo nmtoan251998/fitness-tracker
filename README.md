@@ -69,6 +69,11 @@ Run server on dev mode
 $ npm run dev:server
 ```
 
+Run dev mode
+``` javascript
+$ npm run dev
+```
+
 Build
 ``` javascript
 $ npm run production
