@@ -4,7 +4,7 @@ const httpStatus = require('http-status');
 const path = require('path');
 const { 
     spawn,
-    spawnSync 
+    spawnSync,    
 } = require('child_process');
 
 const ASSETS_DATA_PATH = '../../assets/data';
@@ -53,22 +53,13 @@ module.exports.getConnectedAdds = async (req, res, next) => {
             'timeout', 
             ['1', 'bluetoothctl' ,'>' , pathToMACFile], 
             { shell: true }
-        );        
-        
-        /**
-         * child process return codes:
-         * 0: OK
-         * !0 : Error
-         */
-        if (child.status !== 0) {
-            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ msg: 'Error getting connection history' }).end();
-        }
+        );
                 
         const addresses = await fs.readFileAsync(pathToMACFile, 'utf-8').then(data => data);
         /**
          * MAC addresses pattern
-         * Device 9C:5C:F9:19:A5:DB MI Band2
-         * Device EC:79:71:75:7E:8F XPeriaZ
+         * 9C:5C:F9:19:A5:DB MI Band2
+         * EC:79:71:75:7E:8F XPeriaZ
          */
         const MACAddPattern = /(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2}) [^\n]+/g;
         const MACAdd = addresses.toString().match(MACAddPattern);                                         
@@ -103,15 +94,16 @@ module.exports.startPython = async (req, res, next) => {
             'python3', 
             ['sendall.py', '--live', `--mac ${address}`], 
             {
+                detached: true,
                 shell: true,
                 cwd: path.join(__dirname, '../../utils/miband2')
             }
-        );
+        );        
         
         // because the child_process is infinite request, we need to end req-res lifecycle in the first time
         // prevent the header is sent again
         let isRequestEnded = false;
-        child.on('exit', (code) => {
+        child.on('exit', (code, signal) => {
             /**
              * code values:
              * 0: child process executed successfully
@@ -127,7 +119,7 @@ module.exports.startPython = async (req, res, next) => {
             }
 
             if (code === 2 && !isRequestEnded) {
-                isRequestEnded = true;
+                isRequestEnded = true;                
                 return res.status(httpStatus.BAD_REQUEST).json({ err: 'Failed to start python script' }).end();
             }
             console.log(`child process exit with code: ${code}`);

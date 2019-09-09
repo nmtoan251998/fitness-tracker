@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "clean": "rimraf dist/*  ",
-    "test": "mocha --exit src/api/tests/*.test.js --timeout 10000",
+    "test": "mocha --exit src/api/tests/*.test.js --timeout 30000",
     "test-coverage": "nyc npm run test",
     "dev:client": "parcel src/views/home.html --no-source-maps --port 3000 --no-cache",
     "dev:server": "nodemon --inspect src/server",

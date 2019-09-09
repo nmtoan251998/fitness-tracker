@@ -1390,5 +1390,709 @@
         "meters": 143,
         "callories": 5,
         "time": "10:51:49"
+    },
+    {
+        "heart_rate": 100,
+        "steps": 210,
+        "fat_gramms": 0,
+        "meters": 143,
+        "callories": 5,
+        "time": "10:54:19"
+    },
+    {
+        "heart_rate": 75,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:53:33"
+    },
+    {
+        "heart_rate": 76,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:53:40"
+    },
+    {
+        "heart_rate": 75,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:55:14"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:55:21"
+    },
+    {
+        "heart_rate": 80,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:55:58"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:55:59"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:56:36"
+    },
+    {
+        "heart_rate": 76,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:56:43"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:57:41"
+    },
+    {
+        "heart_rate": 67,
+        "steps": 257,
+        "fat_gramms": 1,
+        "meters": 175,
+        "callories": 6,
+        "time": "11:57:48"
+    },
+    {
+        "heart_rate": 68,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:03:55"
+    },
+    {
+        "heart_rate": 70,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:02"
+    },
+    {
+        "heart_rate": 72,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:04"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:06"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:07"
+    },
+    {
+        "heart_rate": 72,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:08"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:10"
+    },
+    {
+        "heart_rate": 70,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:11"
+    },
+    {
+        "heart_rate": 68,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:13"
+    },
+    {
+        "heart_rate": 67,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:15"
+    },
+    {
+        "heart_rate": 65,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:16"
+    },
+    {
+        "heart_rate": 64,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:04:18"
+    },
+    {
+        "heart_rate": 76,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:21:50"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:21:58"
+    },
+    {
+        "heart_rate": 74,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:21:59"
+    },
+    {
+        "heart_rate": 75,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:22:00"
+    },
+    {
+        "heart_rate": 55,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:24:45"
+    },
+    {
+        "heart_rate": 70,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:24:52"
+    },
+    {
+        "heart_rate": 72,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:24:53"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:24:54"
+    },
+    {
+        "heart_rate": 67,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:24:55"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:24:58"
+    },
+    {
+        "heart_rate": 70,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:24:59"
+    },
+    {
+        "heart_rate": 68,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:00"
+    },
+    {
+        "heart_rate": 67,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:01"
+    },
+    {
+        "heart_rate": 67,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:07"
+    },
+    {
+        "heart_rate": 65,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:12"
+    },
+    {
+        "heart_rate": 67,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:13"
+    },
+    {
+        "heart_rate": 65,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:14"
+    },
+    {
+        "heart_rate": 66,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:15"
+    },
+    {
+        "heart_rate": 65,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:18"
+    },
+    {
+        "heart_rate": 69,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:19"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:20"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:21"
+    },
+    {
+        "heart_rate": 67,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:22"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:24"
+    },
+    {
+        "heart_rate": 70,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:26"
+    },
+    {
+        "heart_rate": 69,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:28"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:29"
+    },
+    {
+        "heart_rate": 70,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:30"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:32"
+    },
+    {
+        "heart_rate": 72,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:33"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:35"
+    },
+    {
+        "heart_rate": 74,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:36"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:38"
+    },
+    {
+        "heart_rate": 74,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:39"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:43"
+    },
+    {
+        "heart_rate": 74,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:25:44"
+    },
+    {
+        "heart_rate": 64,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:05"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:12"
+    },
+    {
+        "heart_rate": 72,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:13"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:14"
+    },
+    {
+        "heart_rate": 72,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:16"
+    },
+    {
+        "heart_rate": 73,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:17"
+    },
+    {
+        "heart_rate": 70,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:18"
+    },
+    {
+        "heart_rate": 80,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:19"
+    },
+    {
+        "heart_rate": 76,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:20"
+    },
+    {
+        "heart_rate": 77,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:21"
+    },
+    {
+        "heart_rate": 74,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:23"
+    },
+    {
+        "heart_rate": 72,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:24"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:26"
+    },
+    {
+        "heart_rate": 70,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:27"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:30"
+    },
+    {
+        "heart_rate": 72,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:31"
+    },
+    {
+        "heart_rate": 72,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:36"
+    },
+    {
+        "heart_rate": 71,
+        "steps": 309,
+        "fat_gramms": 1,
+        "meters": 210,
+        "callories": 7,
+        "time": "12:30:37"
+    },
+    {
+        "heart_rate": 78,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:09:19"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:09:19"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:09:23"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:09:29"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:09:35"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:09:40"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:09:44"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:09:50"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:09:56"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:10:01"
+    },
+    {
+        "heart_rate": 0,
+        "steps": 615,
+        "fat_gramms": 2,
+        "meters": 418,
+        "callories": 15,
+        "time": "14:10:06"
     }
 ]

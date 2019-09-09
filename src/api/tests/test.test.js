@@ -8,13 +8,15 @@ const httpStatus = require('http-status');
 const expect = chai.expect;
 
 // server
-const server = require('../../server');
+const {
+    server
+} = require('../../server');
 
 chai.use(chaiHttp);
 
-describe('Test', function() {
-    describe('Test /test endpoint', function() {
-        it('Should return 200 when api is succesfully accessed', function(done) {
+describe('Test', () => {
+    describe('Test /test endpoint', () => {
+        it('Should return 200 when api is succesfully accessed', done => {
             chai.request(server)
                 .get('/test')
                 .end((error, res) => {

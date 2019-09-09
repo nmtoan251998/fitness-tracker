@@ -5,7 +5,7 @@ import axios from 'axios';
 const socket = io();
 
 socket.on('connect', () => {
-    console.log('Connected');
+    console.log('Communication on socket: '+socket.id);
 });
 
 socket.on('result', (result) => {
@@ -62,7 +62,6 @@ document.querySelector("#render-data").addEventListener("submit", async (event) 
         // clear loading...
         clearInterval(loading);
         console.log('Get result, stop loading...');
-        console.log(startPythonResult);
         
         if (startPythonResult.status === 200) {
             const startSocketDataResult = await axios({
