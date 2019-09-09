@@ -1,1 +1,0 @@
-{"heart_rate":80,"steps":855,"fat_gramms":3,"meters":560,"callories":17}

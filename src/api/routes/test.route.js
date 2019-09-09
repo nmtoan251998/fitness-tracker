@@ -4,6 +4,7 @@ const {
     testController,
     renderIndex,
     getMACaddresses,
+    startPython,
 } = require('../controllers/test.controller');
 
 const {
@@ -16,8 +17,10 @@ Router.route('')
         testController
     );
 
-Router.route('/home').get(renderIndex);
+// Router.route('/home').get(renderIndex);
 
-Router.route('/mac').get(getMACaddresses);
+// Router.route('/mac').get(getMACaddresses);
+
+// Router.route('/ble').get(startPython);
 
 module.exports = Router;
