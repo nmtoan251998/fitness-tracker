@@ -35,6 +35,13 @@ window.onload = function() {
         const callories     =   document.getElementById("callories");
         const heart_rate    =   document.getElementById("heart_rate");
 
+        //recieve data from server
+        heart_rate.value    =   result[0].heart_rate;
+        steps.value         =   result[0].steps;
+        callories.value     =   result[0].callories;
+        meters.value        =   result[0].meters;
+        fat_gramms.value    =   result[0].fat_gramms;
+
         changeStatusHeart();
             // Xuất ra màn hình console trên browser giá trị nhận được từ localhost:8000/get
         time.setTime(time.getTime() + updateInterval);

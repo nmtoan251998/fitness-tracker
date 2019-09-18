@@ -9,7 +9,7 @@ socket.on('connect', () => {
 });
 
 socket.on('result', (result) => {
-    console.log(result);
+    console.log(result + "Test");
 });
 
 /**

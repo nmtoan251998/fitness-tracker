@@ -9,7 +9,7 @@
    
         <!-- Nhúng file Javasript tại đường dẫn src để có thể xây dựng 1 graph -->
         <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="../assets/home.css">
+       
     </head>
     <style type="">
         #heart_image {      
@@ -29,59 +29,77 @@
         <div class="container">
             <div class="jumbotron text-center">
                 <h2> HEATHCARE APPLICATION IOT</h2><br> 
-            </div>       
-            <div class="row ">
-                <div class="col-lg-4 col-md-4 col-sm-4"></div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="form-inline">
-                        <form id="render-data">
-                            <input type="text" name="add" id="mac-add">
-                        </form>
-                        <button id="get-mac" class="btn btn-primary btn-sm">Get MAC</button>
-                    </div>                                                          
-                </div>
-            </div>
-            <br>
-            <div class="row">    
-                <div class="col-lg-4 col-md-4 col-sm-4"></div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div  >
-                        <label>Sex: </label><span id="sex"></span><span>&emsp;&emsp;</span>
-                        <label>Old: </label><span id="old"></span><span>&emsp;&emsp;</span>                   
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#inforModal">Change</button>
-                    </div>              
-                </div>
+            </div> 
 
-                <div class="modal" id="inforModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                      
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <i class='fas fa-users' style='font-size:24px'>&ensp;</i>
-                                <h4>Infor user</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                        
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form action="">
-                                    <div class="form-group">
-                                        <label for="new_sex">Choose Sex:</label>
-                                        <select class="form-control" id="new_sex">
-                                            <option></option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="new_old">Enter old:</label>
-                                        <input type="text" class="form-control" id="new_old">
-                                    </div>
-                                  <button type="submit" class="btn btn-primary">Save</button>
-                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3"></div>
+                <div class="col-lg-5 col-md-5 col-sm-4">
+                    <table class="table table-borderless">
+                        <tbody>
+                          <tr>
+                            <td>
+                                <form id="render-data">
+                                    <input type="text" name="add" id="mac-add">
                                 </form>
-                            </div>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary btn-sm">Connect</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                                <span>List of MAC addresses connected: </span>
+                            </td>
+                            <td>
+                                <button id="get-mac" class="btn btn-primary btn-sm">Get MAC</button>
+                            </td>
+                            
+                          </tr>
+                          <tr>
+                            <td>
+                                <label>Sex: </label><span id="sex"></span><span>&emsp;&emsp;</span>
+                                <label>Old: </label><span id="old"></span><span>&emsp;&emsp;</span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#inforModal">Change</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>      
+            
+
+
+            <div class="modal" id="inforModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                  
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <i class='fas fa-users' style='font-size:24px'>&ensp;</i>
+                            <h4>Infor user</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                    
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="new_sex">Choose Sex:</label>
+                                    <select class="form-control" id="new_sex">
+                                        <option></option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="new_old">Enter old:</label>
+                                    <input type="text" class="form-control" id="new_old">
+                                </div>
+                              <button type="submit" class="btn btn-primary">Save</button>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+                            </form>
                         </div>
                     </div>
                 </div>
