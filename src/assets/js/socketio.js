@@ -2,6 +2,8 @@ import io from 'socket.io-client';
 // XML Http Request instance
 import axios from 'axios';
 
+import { updateChart } from './heartRawChart';
+
 const socket = io();
 
 socket.on('connect', () => {
@@ -9,7 +11,7 @@ socket.on('connect', () => {
 });
 
 socket.on('result', (result) => {
-    console.log(result);
+    updateChart(result);
 });
 
 /**
