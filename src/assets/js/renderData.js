@@ -23,11 +23,11 @@ window.onload = function() {
         }],
     });
     let yHeartVal = 0; // Biến lưu giá trị nhip tim theo trục Y
-    const updateInterval = 2000; // Thời gian cập nhật dữ liệu 2000ms = 2s
+    
     const time = new Date(); // Lấy thời gian hiện tại
 
     const updateChart = function() {
-                   
+        const updateInterval = 2000; // Thời gian cập nhật dữ liệu 2000ms = 2s           
         // Gán giá trị từ localhost:8000/get vào textbox để hiển thị bước đi, calo
         const fat_gramms    =   document.getElementById("fat_gramms");
         const meters        =   document.getElementById("meters");
@@ -45,7 +45,7 @@ window.onload = function() {
         changeStatusHeart(data.heart_rate, localStorage.getItem('old')); //changeStatusHeart(rate,old)
             // Xuất ra màn hình console trên browser giá trị nhận được từ localhost:8000/get
         time.setTime(time.getTime() + updateInterval);
-        yHeartVal = parseInt(Math.round((0+200)*150)/100);
+        yHeartVal = parseInt(data.heart_rate);
         dataHeart.push({ // cập nhât dữ liệu mới từ server
             x: time.getTime(),
             y: yHeartVal
