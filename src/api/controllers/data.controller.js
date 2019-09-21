@@ -107,7 +107,7 @@ module.exports.startPython = async (req, res, next) => {
         
         // because the child_process is infinite request, we need to end req-res lifecycle in the first time
         // prevent the header is sent again
-        let isRequestEnded = false;
+        let isRequestSentOnce = false;
         child.on('exit', (code, signal) => {
             /**
              * code values:
@@ -118,13 +118,13 @@ module.exports.startPython = async (req, res, next) => {
              * 2: child process executed failed because of a bad request
              *  - Failed case: Wrong starting script
              */            
-            if (code === 1 && !isRequestEnded) {
-                isRequestEnded = true;
+            if (code === 1 && !isRequestSentOnce) {
+                isRequestSentOnce = true;
                 return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error starting python script' }).end();
             }
 
-            if (code === 2 && !isRequestEnded) {
-                isRequestEnded = true;                
+            if (code === 2 && !isRequestSentOnce) {
+                isRequestSentOnce = true;                
                 return res.status(httpStatus.BAD_REQUEST).json({ err: 'Failed to start python script' }).end();
             }
             console.log(`child process exit with code: ${code}`);
@@ -135,17 +135,20 @@ module.exports.startPython = async (req, res, next) => {
         });
 
         child.on('error', (error) => {
-            if (!isRequestEnded) {
-                isRequestEnded = true;
+            if (!isRequestSentOnce) {
+                isRequestSentOnce = true;
                 return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error starting python client script' }).end();
-            }            
+            }
         });
         
         child.stdout.on('data', async (data) => {
-            if (!isRequestEnded) {
-                isRequestEnded = true;
+            if (!isRequestSentOnce) {
+                isRequestSentOnce = true;
+
                 return res.status(httpStatus.OK).json({ msg: 'Successful to start python client script' }).end();
             }
+
+            console.log(data.toString());
         });
     } catch (error) {
         next(error);

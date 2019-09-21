@@ -11,6 +11,7 @@ socket.on('connect', () => {
 });
 
 socket.on('result', (result) => {
+    console.log(result);
     updateChart(result);
 });
 
