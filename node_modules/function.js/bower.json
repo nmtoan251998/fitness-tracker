@@ -1,0 +1,17 @@
+{
+  "name": "function.js",
+  "description": "Functional programming just easier",
+  "main": "lib/function.js",
+  "authors": [
+    "Stefan Wimmer <stefanwimmer128@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "function.js",
+    "fn.js",
+    "function",
+    "functional",
+    "programming"
+  ],
+  "homepage": "https://github.com/stefanwimmer128/function.js"
+}
