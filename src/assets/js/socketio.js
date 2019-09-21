@@ -59,7 +59,9 @@ document.querySelector("#render-data").addEventListener("submit", async (event) 
             params: {
                 add: document.querySelector('#mac-add').value
             }
-        });        
+        });
+
+        console.log(startPythonResult);
         
         // clear loading...
         clearInterval(loading);

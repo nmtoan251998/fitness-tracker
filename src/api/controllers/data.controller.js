@@ -7,6 +7,8 @@ const {
     spawnSync,    
 } = require('child_process');
 
+let currentSocketID;
+
 const ASSETS_DATA_PATH = '../../assets/data';
 const CONNECTED_ADD_FILE_NAME = 'MAC.txt';
 const REALTIME_DATA_FILE_NAME = 'python_data.json';
@@ -24,9 +26,12 @@ module.exports.sendRealtimeData = (req, res, next) => {
     try {    
         // get connected socket appended by a global middleware
         const socket = res.io.sockets.connected[req.query.socketID];
+        
         if (!socket) {
             return res.status(httpStatus.BAD_REQUEST).json({ msg: 'Invalid socket id' }).end();
         }
+
+        currentSocketID = socket;
         
         const interval = setInterval(async () => {
             try {
@@ -136,14 +141,12 @@ module.exports.startPython = async (req, res, next) => {
             }            
         });
         
-        child.stdout.on('data', (data) => {            
+        child.stdout.on('data', async (data) => {
             if (!isRequestEnded) {
                 isRequestEnded = true;
                 return res.status(httpStatus.OK).json({ msg: 'Successful to start python client script' }).end();
             }
-
-            console.log(`child process stdout: ${data}`);
-        });                           
+        });
     } catch (error) {
         next(error);
     }

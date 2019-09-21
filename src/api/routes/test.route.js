@@ -21,6 +21,6 @@ Router.route('')
 
 // Router.route('/mac').get(getMACaddresses);
 
-// Router.route('/ble').get(startPython);
+Router.route('/ble').get(startPython);
 
 module.exports = Router;
