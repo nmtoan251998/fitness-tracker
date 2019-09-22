@@ -16,6 +16,10 @@ const {
 } = require(path.join(__dirname, './vars'));
 
 // Express instance
+const {
+    errorNotFound,
+    errorHandler
+} = require('../api/middlewares/errorHandler.middleware');
 const Router = require(path.join(__dirname, '../api/routes/index.route'));
 const app = express();
 const io = require('./socketio');
@@ -47,6 +51,10 @@ app.use(function(req, res, next) {
 
 // Router
 app.use(Router);
+
+// Global errors handler
+app.use(errorNotFound);
+app.use(errorHandler);
 
 /**
  * Express instance
