@@ -44,7 +44,7 @@ window.onload = function() {
 
         changeStatusHeart(data.heart_rate, localStorage.getItem('old')); //changeStatusHeart(rate,old)
             // Xuất ra màn hình console trên browser giá trị nhận được từ localhost:8000/get
-        time.setTime(time.getTime() + updateInterval);
+     //   time.setTime(time.getTime() + updateInterval);
         yHeartVal = parseInt(data.heart_rate);
         dataHeart.push({ // cập nhât dữ liệu mới từ server
             x: time.getTime(),
