@@ -1,0 +1,14 @@
+{
+    "presets": ["es2015", "env", "stage-2"],
+    "ignore": [
+        "src/assets",
+        "src/views",
+    ],    
+    "plugins": [
+        ["transform-runtime",
+        {
+            "polyfill": false,
+            "regenerator": true
+        }]
+    ]
+}
