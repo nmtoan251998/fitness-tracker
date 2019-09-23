@@ -5,7 +5,7 @@ $(document).ready(function(){
 		$('#list_mac').empty();
   		const listMac = ['a', 'b', 'c'];
   		listMac.forEach(item => {
-  			const output = '<li>'+ item + '</li>';
+  			const output = '<a href="/data/start-python?add = item"/>';
   			$('#list_mac').append(output);
   		});
   	});
