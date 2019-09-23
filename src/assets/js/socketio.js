@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 // XML Http Request instance
 import axios from 'axios';
 
-import { updateChart } from './heartRawChart';
+import { updateChart } from './rederData';
 
 const socket = io();
 
