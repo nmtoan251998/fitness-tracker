@@ -11,6 +11,9 @@ const {
 const server = require('http').createServer(app);
 io.attach(server);
 
+// connect to mongodb
+require('./config/mongoose').connect();
+
 server.listen(port, () => console.log(`Server is started on port: ${port} (${env})`));
 
 /**

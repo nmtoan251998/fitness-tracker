@@ -7,12 +7,9 @@ const {
     spawnSync,    
 } = require('child_process');
 
-let currentSocketID;
+const DeviceDataModel = require('../models/deviceData.model');
 
 const ASSETS_DATA_PATH = '../../assets/data';
-const CONNECTED_ADD_FILE_NAME = 'MAC.txt';
-const REALTIME_DATA_FILE_NAME = 'python_data.json';
-
 
 module.exports.getIndexPage = (req, res, next) => {
     try {
@@ -22,16 +19,16 @@ module.exports.getIndexPage = (req, res, next) => {
     }
 }
 
-module.exports.sendRealtimeData = (req, res, next) => {
+module.exports.sendRealtimeData = (req, res, next) => {    
     try {    
+        const REALTIME_DATA_FILE_NAME = 'python_data.json';
+
         // get connected socket appended by a global middleware
         const socket = res.io.sockets.connected[req.query.socketID];
         
         if (!socket) {
             return res.status(httpStatus.BAD_REQUEST).json({ msg: 'Invalid socket id' }).end();
-        }
-
-        currentSocketID = socket;
+        }        
         
         const interval = setInterval(async () => {
             try {
@@ -50,9 +47,10 @@ module.exports.sendRealtimeData = (req, res, next) => {
 }
 
 module.exports.getConnectedAdds = async (req, res, next) => {
-    try {                
-        // const pathToMACFile = path.join(__dirname, `${ASSETS_DATA_PATH}/${CONNECTED_ADD_FILE_NAME}`);
-        const pathToMACFile = path.join(__dirname, ASSETS_DATA_PATH, CONNECTED_ADD_FILE_NAME);
+    try {
+        const MAC_ADDS_FILE_NAME = 'MAC.txt';
+        const pathToMACFile = path.join(__dirname, ASSETS_DATA_PATH, MAC_ADDS_FILE_NAME);
+
         // execute Shellscript within 1s timeout
         const child = spawnSync(
             'timeout', 
@@ -115,41 +113,95 @@ module.exports.startPython = async (req, res, next) => {
              * 1: child process executed failed because of an uncaught error
              *  - Failed case: No addresses found
              *  - Failed case: Unknown error
-             * 2: child process executed failed because of a bad request
-             *  - Failed case: Wrong starting script
+             *  - Failed case: Duplicate connection to BLE 
              */            
             if (code === 1 && !isRequestSentOnce) {
                 isRequestSentOnce = true;
                 return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error starting python script' }).end();
             }
 
-            if (code === 2 && !isRequestSentOnce) {
-                isRequestSentOnce = true;                
-                return res.status(httpStatus.BAD_REQUEST).json({ err: 'Failed to start python script' }).end();
-            }
             console.log(`child process exit with code: ${code}`);
-        });
-
-        child.on('close', (code) => {
-            console.log(`child process close with code: ${code}`);
+            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error communicating with BLE' }).end();
         });
 
         child.on('error', (error) => {
             if (!isRequestSentOnce) {
                 isRequestSentOnce = true;
-                return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error starting python client script' }).end();
+                return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error communicating with BLE device' }).end();
             }
+
+            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error communicating with BLE' }).end();
         });
         
         child.stdout.on('data', async (data) => {
             if (!isRequestSentOnce) {
-                isRequestSentOnce = true;
+                const DEVICE_DATA_FILE_NAME = `${address}_device_data.json`;
+                const pathToFile = path.join(__dirname, ASSETS_DATA_PATH, '/', DEVICE_DATA_FILE_NAME);
 
-                return res.status(httpStatus.OK).json({ msg: 'Successful to start python client script' }).end();
+                const fileContent = await fs.readFileAsync(pathToFile, 'utf-8').then(data => JSON.parse(data));
+
+                const macAdd = fileContent.mac,
+                    serial = fileContent.serial,
+                    softwareRevision = fileContent.software_revision,
+                    hardwareRevision = fileContent.hardware_revision,
+                    connectionTime = fileContent.connection_time;
+                                
+                const existDeviceData = await DeviceDataModel.findByMacAdd(macAdd);
+
+                if (!existDeviceData) {
+                    const newDeviceData = new DeviceDataModel({
+                        macAdd: macAdd,
+                        serial: serial,
+                        softwareRevision: softwareRevision,
+                        hardwareRevision: hardwareRevision,
+                        connectionTime: [connectionTime]
+                    });
+
+                    const result = await newDeviceData.save();
+
+                    res
+                        .status(httpStatus.OK)
+                        .json({ 
+                            result,
+                            msg: 'Successful to start python and save device data' 
+                        })
+                        .end();
+                } else {
+                    const newDeviceData = {
+                        macAdd: existDeviceData.macAdd,
+                        serial: existDeviceData.serial,
+                        softwareRevision: existDeviceData.softwareRevision,
+                        hardwareRevision: existDeviceData.hardwareRevision,
+                        connectionTime: [...existDeviceData.connectionTime, connectionTime]
+                    };
+
+                    const result = await DeviceDataModel
+                                .findOneAndUpdate({ macAdd }, newDeviceData);
+
+                    res
+                        .status(httpStatus.OK)
+                        .json({ 
+                            result, 
+                            msg: 'Successful to start python and save device data' 
+                        })
+                        .end();
+                }
+                
+                return isRequestSentOnce = true;
             }
-
-            console.log(data.toString());
         });
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.deviceData = async (req, res, next) => {
+    try {
+        const macAdd = req.params.mac;
+        
+        const data = await DeviceDataModel.findByMacAdd(macAdd);
+
+        return res.status(httpStatus.OK).json(data).end();
     } catch (error) {
         next(error);
     }
