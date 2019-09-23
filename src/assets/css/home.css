@@ -1,13 +1,17 @@
-
-
- #heart_image {      
-            display:block;
-            -webkit-animation: heartbeat 1s infinite;
+ #heart_image {
+            
+    display:block;
+    -webkit-animation: heartbeat 1s infinite;
 }
 @-webkit-keyframes heartbeat {
-            92% { transform: scale(1, 1);}
-            94% {  transform: scale(1.2, 1.2); }
-            96% {  transform: scale(1, 1); }
-            98% {  transform: scale(1.1, 1.1); }
-            100% { transform: scale(1, 1);}
+
+    92% { transform: scale(1, 1);}
+    94% {  transform: scale(1.2, 1.2); }
+    96% {  transform: scale(1, 1); }
+    98% {  transform: scale(1.1, 1.1); }
+    100% { transform: scale(1, 1);}
+}
+
+.display {
+	margin-left: 20px;
 }

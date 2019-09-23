@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <!-- Nhúng file Javasript tại đường dẫn src để có thể xây dựng 1 graph -->
         <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <link rel="stylesheet" href="../assets/css/home.css" />
@@ -22,33 +22,31 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3"></div>
                 <div class="col-lg-5 col-md-5 col-sm-4">
-                    <table class="table table-borderless">
-                        <tbody>
-                            <tr>                                
-                                <form id="render-data">
-                                    <input type="text" name="add" id="mac-add">
-                                    <button type="submit" class="btn btn-primary btn-sm">Connect</button>
-                                </form>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>List of MAC addresses connected: </span>
-                                </td>
-                                <td>
-                                    <button id="get-mac" class="btn btn-primary btn-sm">Get MAC</button>
-                                </td>                            
-                            </tr>
-                          <tr>
-                            <td>
-                                <label>Sex: </label><span id="sex"></span><span>&emsp;&emsp;</span>
-                                <label>Old: </label><span id="old"></span><span>&emsp;&emsp;</span>
-                            </td>
-                            <td>
-                                <button type="button" class ="btn btn-primary btn-sm" data-toggle="modal" data-target="#inforModal">Change</button>
-                            </td>
-                          </tr>
-                        </tbody>
-                    </table>
+                    
+                    <div class="display"> 
+                        <div class="row">
+                            <form id="render-data">
+                                <input type="text" name="add" size="28" id="mac-add">
+                                <button type="submit" class="btn btn-primary btn-sm">Connect</button>
+                            </form>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <span>List of MAC addresses connected:&ensp;</span>
+                            <button id="get-mac" class="btn btn-primary btn-sm">Get MAC</button>
+                        </div>
+                        <div class="row">
+                            <ol id="list_mac">
+                                
+                            </ol>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label>Gender:&ensp;</label><input type="text" name="gender" size="4" id="gender" /><span>&emsp;</span>
+                            <label>Old:&ensp; </label><input type='text' name="old" size="4" id="old" /><span>&emsp;</span>
+                            <button type="button" class ="btn btn-primary btn-sm" data-toggle="modal" data-target="#inforModal">Change</button>
+                        </div>
+                    </div>       
                 </div>
             </div>      
             
@@ -68,18 +66,19 @@
                         <div class="modal-body">
                             <form action="">
                                 <div class="form-group">
-                                    <label for="new_sex">Choose Sex:</label>
-                                    <select class="form-control" id="new_sex">
+                                    <label for="new_gender">Choose Sex:</label>
+                                    <select class="form-control" id="new_gender">
                                         <option></option>
                                         <option>Male</option>
                                         <option>Female</option>
+                                        <option>Others</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="new_old">Enter old:</label>
                                     <input type="text" class="form-control" id="new_old">
                                 </div>
-                              <button type="submit" class="btn btn-primary">Save</button>
+                              <button type="submit" id="change_infor" class="btn btn-primary">Save</button>
                               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
                             </form>
                         </div>
@@ -168,8 +167,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>        
 
-        <script src="../assets/js/heartRawChart.js"></script>
+        <script src="../assets/js/rederData.js"></script>
         <script src="../assets/js/home.js"></script>
+        <script src="../assets/js/getMac.js"></script>
+        <script src="../assets/js/inforUser.js"></script>
         <script src="../assets/js/socketio.js"></script>
     </body>
 </html>
