@@ -1,0 +1,20 @@
+{
+  "cache": false,  
+  "extension": [
+    ".ts",
+    ".js"
+  ],
+  "include": [
+    "src/api/**/*.js"
+  ],
+  "exclude": [
+    "src/api/test/*.test.js"
+  ],
+  "sourceMap": true,
+  "reporter": [
+    "text",
+    "text-summary"
+  ],
+  "all": false,
+  "instrument": true
+}
