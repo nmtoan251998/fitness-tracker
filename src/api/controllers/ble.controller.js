@@ -82,16 +82,16 @@ module.exports.startPython = async (req, res, next) => {
          * @name BLEConnection - Sometimes there will be an error while trying to establish connection.
          *                      Error occurred and without any reason, we need to reconnect
          */        
-        const mibandMACAddPattern = new RegExp(/(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2} MI Band 2)/g);
+        const mibandMACAddPattern = new RegExp(/(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2})/g);
         
         if (!mibandMACAddPattern.test(req.query.add)) {
             return res.status(httpStatus.BAD_REQUEST).json({ msg: 'Invalid MI Band 2 MAC address' }).end();
         }
 
-        // get the address like this xx:xx:xx:xx:xx:xx MI Band 2
+        // get the address like this xx:xx:xx:xx:xx:xx
         // then slice the MI Band 2 out of the result
         // expected result = xx:xx:xx:xx:xx:xx (MAC address)
-        const address = req.query.add.toString().slice(0, 17);
+        const address = req.query.add;
 
         const child = spawn(
             'python3', 
@@ -117,20 +117,23 @@ module.exports.startPython = async (req, res, next) => {
              */            
             if (code === 1 && !isRequestSentOnce) {
                 isRequestSentOnce = true;
-                return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error starting python script' }).end();
+                return res
+                    .status(httpStatus.INTERNAL_SERVER_ERROR)
+                    .json({ err: 'Error starting python script' })
+                    .end();
             }
 
             console.log(`child process exit with code: ${code}`);
-            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error communicating with BLE' }).end();
         });
 
         child.on('error', (error) => {
             if (!isRequestSentOnce) {
                 isRequestSentOnce = true;
-                return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error communicating with BLE device' }).end();
+                return res
+                    .status(httpStatus.INTERNAL_SERVER_ERROR)
+                    .json({ err: 'Error communicating with BLE device' })
+                    .end();
             }
-
-            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Error communicating with BLE' }).end();
         });
         
         child.stdout.on('data', async (data) => {

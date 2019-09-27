@@ -1,0 +1,36 @@
+{	
+	"Web APIs documentation format": {
+		"scope": "javascript,typescript",
+		"prefix": "api-docs-format",
+		"body": [
+			"/**",
+			"* @api {method} /example",
+			"* @apiDescription Description",			
+			"* @apiGroup Auth",
+			"* @apiPermission Public",
+			"*",
+			"* @apiParam {Type} name - Description",
+			"*",
+			"* @apiSuccess (StatusMessage StatusCode) {Type} name - Description",
+			"*",
+			"* @apiError (StatusMessage StatusCode) {Type} name - Description",
+			"*/"
+		],
+	"description": "Sample APIs documentation"
+	},
+
+	"Web APIs controller (MVC) format": {
+		"scope": "javascript,typescript",
+		"prefix": "api-controller-format",
+		"body": [
+			"module.exports.$name = (req, res, next) => {",
+			"    try {",
+			"",
+			"    } catch (error) {",
+			"        next(error);",
+			"    }",
+			"}",
+		],
+	"description": "Sample APIs controller"
+	}
+}

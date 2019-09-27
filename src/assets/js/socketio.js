@@ -28,7 +28,7 @@ document.querySelector("#get-mac").addEventListener("click", async (event) => {
 
         const connectedAddresses = await axios({
             method: 'get',
-            url: '/data/mac'
+            url: '/ble/mac'
         });
 
         // clear loading...
@@ -56,7 +56,7 @@ document.querySelector("#render-data").addEventListener("submit", async (event) 
         
         const startPythonResult = await axios({
             method: 'get',
-            url: '/data/start-python',
+            url: '/ble/start-python',
             params: {
                 add: document.querySelector('#mac-add').value
             }
@@ -71,7 +71,7 @@ document.querySelector("#render-data").addEventListener("submit", async (event) 
         if (startPythonResult.status === 200) {
             const startSocketDataResult = await axios({
                 method: 'get',
-                url: '/data/socket',
+                url: '/ble/socket',
                 params: {
                     socketID: socket.id
                 }
