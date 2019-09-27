@@ -5,7 +5,8 @@ Make sure that your machine have installed all of the stuff below
 1. Node.js (v8.10.0+ prefered)
 2. NPM (v6.10.3 prefered)
 3. Python3
-4. .env file (contact author to get environment vars)
+4. Redis
+5. .env file (contact author to get environment vars)
 
 ## Installation
 Download the source code from 
