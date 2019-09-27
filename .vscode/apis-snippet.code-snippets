@@ -5,8 +5,7 @@
 		"body": [
 			"/**",
 			"* @api {method} /example",
-			"* @apiDescription Description",
-			"* @apiName Name",
+			"* @apiDescription Description",			
 			"* @apiGroup Auth",
 			"* @apiPermission Public",
 			"*",
