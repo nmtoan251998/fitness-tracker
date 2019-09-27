@@ -1,10 +1,10 @@
 {
-    "heart_rate": 0,
-    "steps": 61,
+    "heart_rate": 68,
+    "steps": 155,
     "fat_gramms": 0,
-    "meters": 42,
-    "callories": 1,
-    "time": "07:42:16",
-    "battery_level": 67,
+    "meters": 105,
+    "callories": 4,
+    "time": "23:54:07",
+    "battery_level": 59,
     "battery_status": "normal"
 }
