@@ -10,7 +10,7 @@ const uri = db.uri || 'mongodb+srv://admin:hbiit5XY8geJer7C@cluster0-6lu0f.mongo
 // mongoose configuration options
 const mongooseOpts = {
     useNewUrlParser: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
     useCreateIndex: true,
     keepAlive: true,
     useUnifiedTopology: true,

@@ -1,11 +1,16 @@
-const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
+const redis = require('redis');
 const puppeteer = require('puppeteer');
 const httpStatus = require('http-status');
-const path = require('path');
+const moment = require('moment');
 
-const baseFilename = 'baomoi.com';
-const crawledNewsDataFilePath = path.join(__dirname, '../../assets/data', baseFilename+'.crawl.json');
+const {
+    redisPort
+} = require('../../config/vars');
+
+const NewsHealthPosts = require('../models/newsHealthPost');
+const client = redis.createClient(redisPort);
+
+const baseCrawlURI = 'https://baomoi.com/suc-khoe-y-te.epi';
 
 module.exports.crawlData = async (req, res, next) => {
     try {   
@@ -32,9 +37,8 @@ module.exports.crawlData = async (req, res, next) => {
         (async () => {
             const browser = await puppeteer.launch({ headless: true });
             const page = await browser.newPage();
-        
-            const baseURI = 'https://baomoi.com/suc-khoe-y-te.epi';
-            await page.goto(baseURI);    
+                    
+            await page.goto(baseCrawlURI);    
             
             const postEls = await getPostData(page);            
             
@@ -42,10 +46,13 @@ module.exports.crawlData = async (req, res, next) => {
             
             const postJsonData = JSON.stringify(postEls, null, '\t');
             
-            await fs.writeFileAsync(
-                crawledNewsDataFilePath,
-                postJsonData
-            ).then(data => data);
+            const cacheResult = await client.set('news-health', postJsonData);            
+            if (!cacheResult) {
+                return res
+                    .status(httpStatus.INTERNAL_SERVER_ERROR)
+                    .json({ msg: 'Error caching data' })
+                    .end();
+            }
 
             return res.status(httpStatus.OK).json(postEls).end();
         })();
@@ -55,14 +62,37 @@ module.exports.crawlData = async (req, res, next) => {
     }
 }
 
-module.exports.saveCrawlData = async (req, res, next) => {
+module.exports.saveCrawlData = (req, res, next) => {
     try {
-        const crawledNewsData = await fs.readFileAsync(
-            crawledNewsDataFilePath
-            , 'utf-8'
-        ).then(data => JSON.parse(data));
+        client.get('news-health', async (error, value) => {
+            if (error) {
+                return res
+                    .status(httpStatus.INTERNAL_SERVER_ERROR)
+                    .json({ msg: 'Error getting cached crawled data' })
+                    .end();
+            }
 
-        return res.status(httpStatus.CREATED).json(crawledNewsData).end();
+            const cachedCrawledData = JSON.parse(value);
+            const today = moment(new Date()).format("DD/MM/YYYY");
+            const healthPosts = await NewsHealthPosts.findCrawledDataByDate(today);
+
+            if (!healthPosts) {
+                const newsHealthPosts = await new NewsHealthPosts({
+                    crawlerURI: baseCrawlURI,
+                    crawlDate: today,
+                    data: [...cachedCrawledData],
+                }).save();
+
+                return res.status(httpStatus.CREATED).json(newsHealthPosts).end();
+            } else {
+                const duplicateData = [...cachedCrawledData, ...healthPosts.data];
+                const cleanedData = [...new Set(duplicateData)];
+
+                const updatedData = await NewsHealthPosts.findByIdAndUpdate(healthPosts._id, cleanedData);
+                
+                return res.status(httpStatus.OK).json(updatedData).end();
+            }            
+        });                        
     } catch (error) {
         next(error);
     }
