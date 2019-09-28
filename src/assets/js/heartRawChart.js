@@ -2,7 +2,6 @@ import { changeStatusHeart } from './changeStatusHeart';
 
 const dataHeart = [];
 
-console.log('?');
 const Chart = new CanvasJS.Chart("ChartContainer", {
     zoomEnabled: true, // Dùng thuộc tính có thể zoom vào graph
     title: {

@@ -1,9 +1,0 @@
-Waiting to connect to bluetoothd...[0;94m[bluetooth][0m# [K[[0;92mNEW[0m] Controller 30:52:CB:86:B6:B0 Noat [default]
-[0;94m[bluetooth][0m# [K[[0;92mNEW[0m] Device CE:36:72:D8:4F:64 MI Band 2
-[0;94m[bluetooth][0m# [K[[0;92mNEW[0m] Device 9C:5C:F9:19:A5:DB Xperia XZ
-[0;94m[bluetooth][0m# [K[[0;92mNEW[0m] Device EC:79:71:75:7E:8F MI Band 2
-[0;94m[bluetooth][0m# [K[[0;92mNEW[0m] Device F4:7C:27:5B:36:98 MI Band 2
-[0;94m[bluetooth][0m# [KAgent registered
-[0;94m[bluetooth][0m# quit
-[0;94m[bluetooth][0m# [KAgent unregistered
-[[0;91mDEL[0m] Controller 30:52:CB:86:B6:B0 Noat [default]
