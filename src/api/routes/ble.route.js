@@ -2,7 +2,6 @@ const Router = require('express').Router();
 
 const {    
     getIndexPage,
-    sendRealtimeData,
     getConnectedAdds,
     startPython,
     deviceData,
@@ -20,18 +19,6 @@ const {
 * @apiError (Not Found 404) - No such file or directory. Wrong file path.
 */
 Router.route('').get(getIndexPage);
-
-/**
-* @api {get} /ble/socket
-* @apiDescription Send data from realtime data read from file to browser
-* @apiName Realtime data
-* @apiGroup Data
-* @apiPermission Public
-*
-* @apiSuccess (OK 200) - Render UI file to browser
-*                       Create socket event name 'result' to communicate with the client socket
-*/
-Router.route('/socket').get(sendRealtimeData);
 
 /**
 * @api {get} /ble/mac

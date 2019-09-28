@@ -12,7 +12,7 @@ const cors = require('cors');
  * Server instances requirements
  */
 const {
-    log
+    log,
 } = require(path.join(__dirname, './vars'));
 
 // Express instance
