@@ -1,7 +1,7 @@
 import { changeStatusHeart } from './changeStatusHeart';
 
 const dataHeart = [];
-    
+
 const Chart = new CanvasJS.Chart("ChartContainer", {
     zoomEnabled: true, // Dùng thuộc tính có thể zoom vào graph
     title: {
@@ -21,7 +21,9 @@ const Chart = new CanvasJS.Chart("ChartContainer", {
         dataPoints: dataHeart // Dữ liệu hiển thị sẽ lấy từ data
     }],
 });
+
 let yHeartVal = 0; // Biến lưu giá trị nhip tim theo trục Y
+// const updateInterval = 2000;
 const time = new Date(); // Lấy thời gian hiện tại
 
 export const updateChart = function(data) {

@@ -45,7 +45,10 @@ const NewsHealthPosts = new mongoose.Schema({
 
 NewsHealthPosts.static({
     findCrawledDataByDate: async function(date) {
-        const crawlData = await this.findOne({ crawlDate: date }).lean();
+        const crawlData = await this
+            .findOne({ crawlDate: date })
+            .select({ data: 1, _id: 0 })
+            .lean();
 
         if (!crawlData) {
             return null;
