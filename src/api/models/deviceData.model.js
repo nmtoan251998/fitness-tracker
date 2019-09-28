@@ -32,6 +32,13 @@ const DeviceDataSchema = new mongoose.Schema({
     }
 );
 
+/**
+ * Add yours
+ * - methods
+ * - hooks
+ * - statics
+ */
+
 DeviceDataSchema.static({
     /**
      * Get data by MAC address

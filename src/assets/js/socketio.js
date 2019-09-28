@@ -7,20 +7,22 @@ import { updateChart } from './rederData';
 const socket = io();
 
 socket.on('connect', () => {
-    console.log('Communication on socket: '+socket.id);
-});
+    socket.on('result', (result) => {
+        console.log(result);
+        updateChart(result);
+    });
 
-socket.on('result', (result) => {
-    console.log(result);
-    updateChart(result);
+    socket.on('exit-process', (msg) => {
+        socket.close();        
+    });
 });
 
 /**
  * Get connected MAC addresses
  */
-document.querySelector("#get-mac").addEventListener("click", async (event) => {
+document.querySelector("#get-mac").addEventListener("click", async (event) => {    
     event.preventDefault();
-    try {
+    try {        
         // loading...
         let loading = setInterval(() => {
             console.log('Loading...');
@@ -28,7 +30,7 @@ document.querySelector("#get-mac").addEventListener("click", async (event) => {
 
         const connectedAddresses = await axios({
             method: 'get',
-            url: '/data/mac'
+            url: '/ble/mac'
         });
 
         // clear loading...
@@ -56,9 +58,10 @@ document.querySelector("#render-data").addEventListener("submit", async (event) 
         
         const startPythonResult = await axios({
             method: 'get',
-            url: '/data/start-python',
+            url: '/ble/start-python',
             params: {
-                add: document.querySelector('#mac-add').value
+                add: document.querySelector('#mac-add').value,
+                socketID: socket.id
             }
         });
 
@@ -67,22 +70,6 @@ document.querySelector("#render-data").addEventListener("submit", async (event) 
         // clear loading...
         clearInterval(loading);
         console.log('Get result, stop loading...');
-        
-        if (startPythonResult.status === 200) {
-            const startSocketDataResult = await axios({
-                method: 'get',
-                url: '/data/socket',
-                params: {
-                    socketID: socket.id
-                }
-            })
-            
-            if (startSocketDataResult.status === 200) {
-                console.log('Emit an event to send data to socket');
-            }
-        } else {
-            console.log('no data to fetch');
-        }
     } catch (error) {
         console.log(error.response.data);
     }    

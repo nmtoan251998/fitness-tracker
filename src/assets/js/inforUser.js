@@ -13,14 +13,14 @@ else {
 $(document).ready(function(){
   $("#change_infor").click(function(){
     if (typeof(Storage) !== 'undefined') {
-    	const newGender	   =	document.getElementById('new_gender');
-    	const newOld       =	document.getElementById('new_old');
-	    localStorage.setItem('gender', newGender.value);
-	    localStorage.setItem('old', newOld.value);
-  	} 
+        const newGender	   =	document.getElementById('new_gender');
+        const newOld       =	document.getElementById('new_old');
+        localStorage.setItem('gender', newGender.value);
+        localStorage.setItem('old', newOld.value);
+    } 
     else {
-  	    console.log('Error browser not support localStorage. Upgrade your browser!');
-  	}
+      console.log('Error browser not support localStorage. Upgrade your browser!');
+    }
   });
 });
 

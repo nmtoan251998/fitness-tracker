@@ -2,14 +2,13 @@ const Router = require('express').Router();
 
 const {    
     getIndexPage,
-    sendRealtimeData,
     getConnectedAdds,
     startPython,
     deviceData,
-} = require('../controllers/data.controller');
+} = require('../controllers/ble.controller');
 
 /**
-* @api {get} /data
+* @api {get} /ble
 * @apiDescription Render home page
 * @apiName Render home page
 * @apiGroup Data
@@ -22,19 +21,7 @@ const {
 Router.route('').get(getIndexPage);
 
 /**
-* @api {get} /data/socket
-* @apiDescription Send data from realtime data read from file to browser
-* @apiName Realtime data
-* @apiGroup Data
-* @apiPermission Public
-*
-* @apiSuccess (OK 200) - Render UI file to browser
-*                       Create socket event name 'result' to communicate with the client socket
-*/
-Router.route('/socket').get(sendRealtimeData);
-
-/**
-* @api {get} /data/mac
+* @api {get} /ble/mac
 * @apiDescription Get MAC address by spawning a shell command 'bluetoothctl'
 * @apiName MAC Addresses
 * @apiGroup Data
@@ -45,7 +32,7 @@ Router.route('/socket').get(sendRealtimeData);
 Router.route('/mac').get(getConnectedAdds);
 
 /**
-* @api {get} /data/start-python
+* @api {get} /ble/start-python
 * @apiDescription Start python script
 * @apiName Start python
 * @apiGroup Data
@@ -79,7 +66,7 @@ Router.route('/start-python').get(startPython)
 
 
 /**
-* @api {get} /data/device/:mac
+* @api {get} /ble/device/:mac
 * @apiDescription Get device data with MAC address
 * @apiGroup Data
 * @apiPermission Public
@@ -98,6 +85,5 @@ Router.route('/start-python').get(startPython)
 * @apiError (StatusMessage StatusCode) {Type} name - Description
 */
 Router.route('/device/:mac').get(deviceData)
-
 
 module.exports = Router;

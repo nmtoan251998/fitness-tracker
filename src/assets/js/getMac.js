@@ -1,5 +1,4 @@
 //Lấy danh sách địa chỉ Mac đã kết nối
-
 $(document).ready(function(){
   	$("#get-mac").click(function(){
 
