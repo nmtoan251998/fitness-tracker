@@ -22,7 +22,13 @@ socket.on('connect', () => {
  */
 document.querySelector("#get-mac").addEventListener("click", async (event) => {    
     event.preventDefault();
-    try {        
+    
+    $("#btn_connect").click(function(){
+        $("#spinner").addClass("spinner-border spinner-border-sm");
+        $('#btn_connect').prop('disabled', true);
+    });
+
+    try {      
         // loading...
         let loading = setInterval(() => {
             console.log('Loading...');
@@ -36,8 +42,11 @@ document.querySelector("#get-mac").addEventListener("click", async (event) => {
         // clear loading...
         clearInterval(loading);
         console.log('Get result, stop loading...');
-
         console.log(connectedAddresses.data.addresses);
+
+        $("#spinner").removeClass("spinner-border spinner-border-sm");
+        $('#btn_connect').prop('disabled', false);
+        
     } catch (error) {
         console.log(error);
     }    
