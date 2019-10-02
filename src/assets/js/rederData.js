@@ -22,10 +22,10 @@ const xVal = 0;
 const yVal = 100; 
 const dataLength = 20; // number of dataPoints visible at any point
 
-const updateChart = function (count) {
+const updateChart = function (data) {
 
     const updateInterval = 2000; // Thời gian cập nhật dữ liệu 2000ms = 2s
-    const time = new Date(); // Lấy thời gian hiện tại           
+   // const time = new Date(); // Lấy thời gian hiện tại           
     // Gán giá trị từ localhost:8000/get vào textbox để hiển thị bước đi, calo
     const fat_gramms    =   document.getElementById("fat_gramms");
     const meters        =   document.getElementById("meters");
@@ -42,7 +42,7 @@ const updateChart = function (count) {
 
     changeStatusHeart();
     
-    xVal    =   time.getTime(); //Thoi gian thuc csdl
+    xVal    =   data.time; //Thoi gian thuc csdl
     yVal    =   data.heart_rate;
     
     dps.push({
@@ -57,13 +57,14 @@ const updateChart = function (count) {
     chart.render();
 };
 
-updateChart(dataLength);
+
+/*
+updateChart(data);
 setInterval(function(){
     updateChart()
 }, updateInterval);
 
 
-/*
 const dataHeart = [];
     
 const Chart = new CanvasJS.Chart("ChartContainer", {
