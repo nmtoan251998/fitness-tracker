@@ -24,7 +24,7 @@ Router.route('').get(getIndexPage);
 * @api {get} /ble/mac
 * @apiDescription Get MAC address by spawning a shell command 'bluetoothctl'
 * @apiName MAC Addresses
-* @apiGroup Data
+* @apiGroup BLE
 * @apiPermission Public
 *
 * @apiSuccess (OK 200) {[<String>]} addresses - MAC addresses received by spawning shell command
@@ -35,7 +35,7 @@ Router.route('/mac').get(getConnectedAdds);
 * @api {get} /ble/start-python
 * @apiDescription Start python script
 * @apiName Start python
-* @apiGroup Data
+* @apiGroup BLE
 * @apiPermission Public
 *
 * @apiSuccess (OK 200) {String} msg - Successful to start python and save device data
@@ -68,7 +68,7 @@ Router.route('/start-python').get(startPython)
 /**
 * @api {get} /ble/device/:mac
 * @apiDescription Get device data with MAC address
-* @apiGroup Data
+* @apiGroup BLE
 * @apiPermission Public
 *
 * @apiParam {String} mac - MAC address to get device data

@@ -8,6 +8,22 @@ const DeviceDataModel = require('../models/deviceData.model');
 
 const ASSETS_DATA_PATH = '../../assets/data';
 
+/**
+ * Convert buffer data to object returned by throwing a child process to start python script
+ * 
+ * @param {*} realtimeDataString  
+ * 
+ * @return {Number} heart_rate - realtime heart rate
+ * @return {Number} steps - realtime steps
+ * @return {Number} fat_gramms - realtime fat gram
+ * @return {Number} meters - realtime meters
+ * @return {Number} callories - realtime callories
+ * @return {Number} battery_level - realtime battery level
+ * @return {String} time - realtime current time
+ * @return {String} battery_status - realtime battery status
+ * 
+ * @private
+ */
 const formatRealtimeData = (realtimeDataString) => {
     const heartRatePattern = /'heart_rate': \w+/;
     const stepsPattern = /'steps': \w+/;

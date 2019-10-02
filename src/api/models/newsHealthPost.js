@@ -47,7 +47,7 @@ NewsHealthPosts.static({
     findCrawledDataByDate: async function(date) {
         const crawlData = await this
             .findOne({ crawlDate: date })
-            .select({ data: 1, _id: 0 })
+            .select({ data: 1, _id: 1 })
             .lean();
 
         if (!crawlData) {

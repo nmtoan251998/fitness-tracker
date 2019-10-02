@@ -17,7 +17,7 @@ const {
 
 // Express instance
 const {
-    errorNotFound,
+    notFound,
     errorHandler
 } = require('../api/middlewares/errorHandler.middleware');
 const Router = require(path.join(__dirname, '../api/routes/index.route'));
@@ -53,7 +53,7 @@ app.use(function(req, res, next) {
 app.use(Router);
 
 // Global errors handler
-app.use(errorNotFound);
+app.use(notFound);
 app.use(errorHandler);
 
 /**
