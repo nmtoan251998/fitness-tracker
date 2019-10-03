@@ -5,6 +5,9 @@ const path = require('path');
 const { spawn, spawnSync } = require('child_process');
 
 const DeviceDataModel = require('../models/deviceData.model');
+const {
+    APIError
+} = require('../utils/APIErrors');
 
 const ASSETS_DATA_PATH = '../../assets/data';
 
@@ -62,6 +65,43 @@ const formatRealtimeData = (realtimeDataString) => {
         battery_level: parseInt(batteryLevel),
         battery_status: batteryStatus
     }
+}
+
+const updateDeviceConnection = async (address) => {
+    try {
+        const DEVICE_DATA_FILE_NAME = `${address}_device_data.json`;
+        const pathToFile = path.join(__dirname, ASSETS_DATA_PATH, '/', DEVICE_DATA_FILE_NAME);
+    
+        const fileContent = await fs.readFileAsync(pathToFile, 'utf-8').then(data => JSON.parse(data));
+        const existDeviceData = await DeviceDataModel.findByMacAdd(fileContent.mac);
+    
+        if (!existDeviceData) {
+            const newDeviceData = new DeviceDataModel({
+                macAdd: fileContent.mac,
+                serial: fileContent.serial,
+                softwareRevision: fileContent.software_revision,
+                hardwareRevision: fileContent.hardware_revision,
+                connectionTime: [fileContent.connection_time]
+            });
+    
+            saveFileResult = await newDeviceData.save();                    
+        } else {
+            const newDeviceData = {
+                macAdd: existDeviceData.macAdd,
+                serial: existDeviceData.serial,
+                softwareRevision: existDeviceData.softwareRevision,
+                hardwareRevision: existDeviceData.hardwareRevision,
+                connectionTime: [...existDeviceData.connectionTime, fileContent.connection_time]
+            };
+    
+            saveFileResult = await DeviceDataModel.findOneAndUpdate({ macAdd: fileContent.mac }, newDeviceData);                    
+        }
+        await fs.unlink(pathToFile);
+
+        return true;
+    } catch (error) {
+        return false;
+    }        
 }
 
 module.exports.getIndexPage = (req, res, next) => {
@@ -127,14 +167,6 @@ module.exports.startPython = async (req, res, next) => {
         // prevent the header is sent again
         let isRequestSentOnce = false;
         child.on('exit', (code, signal) => {
-            /**
-             * code values:
-             * 0: child process executed successfully
-             * 1: child process executed failed because of an uncaught error
-             *  - Failed case: No addresses found
-             *  - Failed case: Unknown error
-             *  - Failed case: Duplicate connection to BLE 
-             */            
             if (code === 1 && !isRequestSentOnce) {
                 isRequestSentOnce = true;
                 return res
@@ -144,7 +176,6 @@ module.exports.startPython = async (req, res, next) => {
             }
 
             socket.emit('exit-process', 'meomeo');
-            console.log(`child process exit with code: ${code}`);
         });
 
         child.on('error', (error) => {
@@ -156,47 +187,22 @@ module.exports.startPython = async (req, res, next) => {
                     .end();
             }
 
-            socket.emit('meo', 'meomeo');
+            socket.emit('exit-process', 'meomeo');
         });
         
         child.stdout.on('data', async (data) => {
             if (!isRequestSentOnce) {
-                let saveFileResult;
-                const DEVICE_DATA_FILE_NAME = `${address}_device_data.json`;
-                const pathToFile = path.join(__dirname, ASSETS_DATA_PATH, '/', DEVICE_DATA_FILE_NAME);
+                const updateConnectionResponse = await updateDeviceConnection(address);
 
-                const fileContent = await fs.readFileAsync(pathToFile, 'utf-8').then(data => JSON.parse(data));
-                const existDeviceData = await DeviceDataModel.findByMacAdd(fileContent.mac);
-
-                if (!existDeviceData) {
-                    const newDeviceData = new DeviceDataModel({
-                        macAdd: fileContent.mac,
-                        serial: fileContent.serial,
-                        softwareRevision: fileContent.software_revision,
-                        hardwareRevision: fileContent.hardware_revision,
-                        connectionTime: [fileContent.connection_time]
-                    });
-
-                    saveFileResult = await newDeviceData.save();                    
-                } else {
-                    const newDeviceData = {
-                        macAdd: existDeviceData.macAdd,
-                        serial: existDeviceData.serial,
-                        softwareRevision: existDeviceData.softwareRevision,
-                        hardwareRevision: existDeviceData.hardwareRevision,
-                        connectionTime: [...existDeviceData.connectionTime, fileContent.connection_time]
-                    };
-
-                    saveFileResult = await DeviceDataModel.findOneAndUpdate({ macAdd: fileContent.mac }, newDeviceData);                    
+                if (!updateConnectionResponse) {
+                    throw new APIError('Update device connection to server data');
                 }
 
                 isRequestSentOnce = true;
-                fs.unlinkSync(pathToFile);                
                 
                 return res
                     .status(httpStatus.OK)
-                    .json({ 
-                        saveFileResult, 
+                    .json({
                         msg: 'Successful to start python and save device data' 
                     })
                     .end();                
