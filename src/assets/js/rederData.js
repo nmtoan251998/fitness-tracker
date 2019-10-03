@@ -41,6 +41,7 @@ export const updateChart = function (data) {
     const time  = new Date();
     time        =time.setTime(time.getTime())
     console.log (time); 
+    console.log ('format: getTime(milsiseconds) ex: 1570090514878');
     dps.push({
         x: xVal,
         y: yVal
