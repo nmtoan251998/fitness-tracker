@@ -3,6 +3,7 @@ const fs = Promise.promisifyAll(require('fs'));
 const httpStatus = require('http-status');
 const path = require('path');
 const { spawn, spawnSync } = require('child_process');
+const moment = require('moment');
 
 const DeviceDataModel = require('../models/deviceData.model');
 const {
@@ -33,7 +34,7 @@ const formatRealtimeData = (realtimeDataString) => {
     const fatGramPattern = /'fat_gramms': \w+/;
     const metersPattern = /'meters': \w+/;
     const calloriesPattern = /'callories': \w+/;
-    const timePattern = /'time': '\w\w:\w\w:\w\w'/;
+    const timePattern = /'time': \d+/;
     const batteryLevelPattern = /'battery_level': \w+/;
     const batteryStatusPattern = /'battery_status': '\w+'/;
 
@@ -42,6 +43,7 @@ const formatRealtimeData = (realtimeDataString) => {
     const fatGramString = realtimeDataString.match(fatGramPattern)[0];
     const metersString = realtimeDataString.match(metersPattern)[0];
     const calloriesString = realtimeDataString.match(calloriesPattern)[0];
+    
     const timeString = realtimeDataString.match(timePattern)[0];
     const batteryLevelString = realtimeDataString.match(batteryLevelPattern)[0];
     const batteryStatusString = realtimeDataString.match(batteryStatusPattern)[0];
@@ -51,17 +53,17 @@ const formatRealtimeData = (realtimeDataString) => {
     const fatGram = fatGramString.slice(fatGramString.indexOf(' ')+1, fatGramString.length);
     const meters = metersString.slice(metersString.indexOf(' ')+1, metersString.length);
     const callories = calloriesString.slice(calloriesString.indexOf(' ')+1, calloriesString.length);
-    const time = timeString.slice(timeString.indexOf(' ')+2, timeString.length-1);
+    const time = timeString.slice(timeString.indexOf(' ')+1, timeString.length);
     const batteryLevel = batteryLevelString.slice(batteryLevelString.indexOf(' ')+1, batteryLevelString.length);
     const batteryStatus = batteryStatusString.slice(batteryStatusString.indexOf(' ')+2, batteryStatusString.length-1);
-
+    
     return {
         heart_rate: parseInt(heartRate),
         steps: parseInt(steps),
         fat_gramms: parseInt(fatGram),
         meters: parseInt(meters),
         callories: parseInt(callories),
-        time: time,
+        time: parseInt(time),
         battery_level: parseInt(batteryLevel),
         battery_status: batteryStatus
     }
@@ -207,6 +209,7 @@ module.exports.startPython = async (req, res, next) => {
                     })
                     .end();                
             }
+            console.log(data.toString());
             socket.emit('result', formatRealtimeData(data.toString()));
         });
 
