@@ -1,9 +1,5 @@
 import { changeStatusHeart } from './changeStatusHeart';
 
-
-
-
-
 const dps = []; // dataPoints
 const chart = new CanvasJS.Chart("ChartContainer", {
     title :{
@@ -22,16 +18,13 @@ const xVal = 0;
 const yVal = 100; 
 const dataLength = 20; // number of dataPoints visible at any point
 
-const updateChart = function (data) {
-
-    const updateInterval = 2000; // Thời gian cập nhật dữ liệu 2000ms = 2s
-   // const time = new Date(); // Lấy thời gian hiện tại           
-    // Gán giá trị từ localhost:8000/get vào textbox để hiển thị bước đi, calo
-    const fat_gramms    =   document.getElementById("fat_gramms");
-    const meters        =   document.getElementById("meters");
-    const steps         =   document.getElementById("steps");
-    const callories     =   document.getElementById("callories");
-    const heart_rate    =   document.getElementById("heart_rate");
+export const updateChart = function (data) {
+    const updateInterval    =   2000; // Thời gian cập nhật dữ liệu 2000ms = 2s
+    const fat_gramms        =   document.getElementById("fat_gramms");
+    const meters            =   document.getElementById("meters");
+    const steps             =   document.getElementById("steps");
+    const callories         =   document.getElementById("callories");
+    const heart_rate        =   document.getElementById("heart_rate");
 
 
     heart_rate.value    =   data.heart_rate;
@@ -44,7 +37,10 @@ const updateChart = function (data) {
     
     xVal    =   data.time; //Thoi gian thuc csdl
     yVal    =   data.heart_rate;
-    
+  
+    const time  = new Date();
+    time        =time.setTime(time.getTime())
+    console.log (time); 
     dps.push({
         x: xVal,
         y: yVal
