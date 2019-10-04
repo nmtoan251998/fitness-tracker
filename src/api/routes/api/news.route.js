@@ -5,7 +5,7 @@ const {
     saveCrawlData,
     newsHealthPosts,
     getByDate
-} = require('../controllers/news.controller');
+} = require('../../controllers/news.controller');
 
 /**
 * @api {get} /news/crawl

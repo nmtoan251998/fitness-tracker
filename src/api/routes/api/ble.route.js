@@ -5,7 +5,7 @@ const {
     getConnectedAdds,
     startPython,
     deviceData,
-} = require('../controllers/ble.controller');
+} = require('../../controllers/ble.controller');
 
 /**
 * @api {get} /ble

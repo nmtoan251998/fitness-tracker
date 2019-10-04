@@ -3,12 +3,9 @@ const fs = Promise.promisifyAll(require('fs'));
 const httpStatus = require('http-status');
 const path = require('path');
 const { spawn, spawnSync } = require('child_process');
-const moment = require('moment');
 
 const DeviceDataModel = require('../models/deviceData.model');
-const {
-    APIError
-} = require('../utils/APIErrors');
+const { APIError } = require('../utils/APIErrors');
 
 const ASSETS_DATA_PATH = '../../assets/data';
 
@@ -141,7 +138,7 @@ module.exports.getConnectedAdds = async (req, res, next) => {
 }
 
 module.exports.startPython = async (req, res, next) => {
-    try {   
+    try {
         // get connected socket appended by a global middleware
         const socket = res.io.sockets.connected[req.query.socketID];
 
@@ -199,7 +196,7 @@ module.exports.startPython = async (req, res, next) => {
                 if (!updateConnectionResponse) {
                     throw new APIError('Update device connection to server data');
                 }
-
+                
                 isRequestSentOnce = true;
                 
                 return res
@@ -209,7 +206,7 @@ module.exports.startPython = async (req, res, next) => {
                     })
                     .end();                
             }
-            console.log(data.toString());
+                        
             socket.emit('result', formatRealtimeData(data.toString()));
         });
 

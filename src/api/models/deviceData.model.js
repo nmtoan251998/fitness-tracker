@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
 const httpStatus = require('http-status');
+const Schema = mongoose.Schema;
 
 const {
     APIError
 } = require('../utils/APIErrors');
 
 const DeviceDataSchema = new mongoose.Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    },
     macAdd: {
         type: String,
         required: true,
