@@ -8,6 +8,23 @@ const {
 } = require('../../controllers/news.controller');
 
 /**
+* @api {get} /api/news
+* @apiDescription Get news health posts crawled
+* @apiGroup News
+* @apiPermission Public*
+*
+* @apiSuccess (OK 200) {Array<Object>} ['href'] - Link to the original post
+* @apiSuccess (OK 200) {Array<Object>} ['title'] - Title of the post
+* @apiSuccess (OK 200) {Array<Object>} ['src'] - Thumbnail of post
+* @apiSuccess (OK 200) {Array<Object>} ['alt'] - Alternative link of thumbnail
+*
+* @apiError (Not Found 404) {String} msg - Crawl more data
+*
+* @apiError (Internal Server Error 500) {String} msg - Error getting cached crawled data
+*/
+Router.route('').get(newsHealthPosts);
+
+/**
 * @api {get} /api/news/crawl
 * @apiDescription Crawl data from baomoi.com for healthy news posts
 * @apiGroup News
