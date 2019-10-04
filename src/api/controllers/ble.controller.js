@@ -191,11 +191,7 @@ module.exports.startPython = async (req, res, next) => {
         
         child.stdout.on('data', async (data) => {
             if (!isRequestSentOnce) {
-                const updateConnectionResponse = await updateDeviceConnection(address);
-
-                if (!updateConnectionResponse) {
-                    throw new APIError('Update device connection to server data');
-                }
+                await updateDeviceConnection(address);
                 
                 isRequestSentOnce = true;
                 

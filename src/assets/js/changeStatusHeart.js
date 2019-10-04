@@ -50,5 +50,4 @@ export function changeStatusHeart(rate, old){
 			statusNormal();
 		}
 	};
-   
 };

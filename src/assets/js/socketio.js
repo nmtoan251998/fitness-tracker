@@ -2,13 +2,12 @@ import io from 'socket.io-client';
 // XML Http Request instance
 import axios from 'axios';
 
-import { updateChart } from './rederData';
+import { updateChart } from './renderData';
 
 const socket = io();
 
 socket.on('connect', () => {
     socket.on('result', (result) => {
-        console.log(result);
         updateChart(result);
     });
 
@@ -18,68 +17,34 @@ socket.on('connect', () => {
 });
 
 /**
- * Get connected MAC addresses
- */
-document.querySelector("#get-mac").addEventListener("click", async (event) => {    
-    event.preventDefault();
-    
-    $("#btn_connect").click(function(){
-        $("#spinner").addClass("spinner-border spinner-border-sm");
-        $('#btn_connect').prop('disabled', true);
-    });
-
-    try {      
-        // loading...
-        let loading = setInterval(() => {
-            console.log('Loading...');
-        }, 500);
-
-        const connectedAddresses = await axios({
-            method: 'get',
-            url: '/ble/mac'
-        });
-
-        // clear loading...
-        clearInterval(loading);
-        console.log('Get result, stop loading...');
-        console.log(connectedAddresses.data.addresses);
-
-        $("#spinner").removeClass("spinner-border spinner-border-sm");
-        $('#btn_connect').prop('disabled', false);
-        
-    } catch (error) {
-        console.log(error);
-    }    
-});
-
-/**
  * Start python script to read data from BLE device
  * and emit event to a socket listener to handle
  * data received from python
  */
-document.querySelector("#render-data").addEventListener("submit", async (event) => {
+$("#render-data").on("submit", async (event) => {
     event.preventDefault();
-    try {  
-        // loading...
-        let loading = setInterval(() => {
-            console.log('Loading...');
-        }, 500);
+    try {
+        $("#spinner").addClass("spinner-border spinner-border-sm");
+        $('#mac-add').attr('disabled', true);
+        $('#btn_connect').prop('disabled', true);
         
         const startPythonResult = await axios({
             method: 'get',
-            url: '/ble/start-python',
+            url: '/api/ble/start-python',
             params: {
                 add: document.querySelector('#mac-add').value,
                 socketID: socket.id
             }
         });
 
+        // handle successful response
         console.log(startPythonResult);
-        
-        // clear loading...
-        clearInterval(loading);
+
+        $("#spinner").removeClass("spinner-border spinner-border-sm");
+        $('#btn_connect').prop('disabled', false);
         console.log('Get result, stop loading...');
     } catch (error) {
+        // handle error response
         console.log(error.response.data);
     }    
 });
