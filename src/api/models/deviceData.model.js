@@ -9,7 +9,8 @@ const {
 const DeviceDataSchema = new mongoose.Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'user',
+        required: true,
     },
     macAdd: {
         type: String,

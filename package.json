@@ -44,6 +44,7 @@
     "moment": "^2.24.0",
     "nexmo": "^2.4.2",
     "nodemailer": "^6.3.0",
+    "passport": "^0.4.0",
     "puppeteer": "^1.20.0",
     "redis": "^2.8.0",
     "socket.io": "^2.2.0",

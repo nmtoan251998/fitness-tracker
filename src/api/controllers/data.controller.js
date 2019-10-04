@@ -1,21 +1,8 @@
 const httpStatus = require('http-status');
 const nodemailer = require('nodemailer');
 
-const {
-    mailer
-} = require('../../utils/mailer');
-
-const {
-    sendWarningMsg
-} = require('../../utils/messenger');
-
-module.exports.avgData = (req, res, next) => {
-    try {
-
-    } catch (error) {
-        next(error);
-    }
-}
+const { mailer } = require('../../utils/mailer');
+const { sendWarningMsg } = require('../../utils/messenger');
 
 module.exports.sendWarningSMS = async (req, res, next) => {
     try {        

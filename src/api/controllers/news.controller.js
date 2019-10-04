@@ -5,13 +5,10 @@ const moment = require('moment');
 const CronJob = require('cron').CronJob;
 
 const { redisPort } = require('../../config/vars');
-const redisClient = redis.createClient(redisPort);
-const {
-    APIError
-} = require('../utils/APIErrors');
-
+const { APIError } = require('../utils/APIErrors');
 const NewsHealthPosts = require('../models/newsHealthPost');
 
+const redisClient = redis.createClient(redisPort);
 const baseCrawlURI = 'https://baomoi.com/suc-khoe-y-te.epi';
 
 const getPostData = async (page) => {
