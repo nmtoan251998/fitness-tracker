@@ -12,5 +12,10 @@ module.exports = {
     db: {
         uri: process.env.DB_URI
     },
-    reidsPort: process.env.REDIS_PORT
+    reidsPort: process.env.REDIS_PORT,
+    sms: {
+        apiKey: process.env.SMS_API_KEY,
+        apiSecret: process.env.SMS_API_SECRET
+    },
+    secretKey: process.env.APP_SECRET_KEY
 };

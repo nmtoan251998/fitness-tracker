@@ -2,12 +2,13 @@ const redis = require('redis');
 const puppeteer = require('puppeteer');
 const httpStatus = require('http-status');
 const moment = require('moment');
+const CronJob = require('cron').CronJob;
 
 const { redisPort } = require('../../config/vars');
-const redisClient = redis.createClient(redisPort);
-
+const { APIError } = require('../utils/APIErrors');
 const NewsHealthPosts = require('../models/newsHealthPost');
 
+const redisClient = redis.createClient(redisPort);
 const baseCrawlURI = 'https://baomoi.com/suc-khoe-y-te.epi';
 
 const getPostData = async (page) => {
@@ -42,7 +43,37 @@ const crawling = async () => {
     return postEls
 }
 
-function removeDuplicateObject(arr, key) {
+/**
+ * Set cron job for crawling news health posts
+ * @param {String} time 
+ * 
+ * Seconds: 0-59
+ * Minutes: 0-59
+ * Hours: 0-23
+ * Day of Month: 1-31
+ * Months: 0-11 (Jan-Dec)
+ * Day of Week: 0-6 (Sun-Sat)
+ */
+const crawlingCronJob = async (time) => {
+    try {
+        const cronJob = new CronJob({
+            cronTime: time,
+            onTick: async function() {
+                const posts = await crawling();        
+                const postJsonData = JSON.stringify(posts, null, '\t');
+                await redisClient.set('news-health', postJsonData, redis.print);
+                console.log(`Crawling news health posts...`);
+            },
+            start: true,
+            timeZone: 'Asia/Ho_Chi_Minh'
+        });
+        return cronJob;
+    } catch (error) {
+        throw new APIError('Crawling timeout');
+    }    
+}
+
+const removeDuplicateObject = (arr, key) => {
 
     const unique = arr
         .map(e => e[key])
@@ -53,13 +84,20 @@ function removeDuplicateObject(arr, key) {
 }
 
 module.exports.crawlData = async (req, res, next) => {
-    try {           
+    try {
         const posts = await crawling();
-        
-        const postJsonData = JSON.stringify(posts, null, '\t');
-            
-        console.log(postJsonData);
-        await redisClient.set('news-health', postJsonData, redis.print);
+        const postJsonData = JSON.stringify(posts, null, '\t');        
+        await redisClient.set('news-health', postJsonData, redis.print);        
+
+        const cronJob6am = crawlingCronJob('0 0 6 * * 0-6');
+        const cronJob12am = crawlingCronJob('0 0 12 * * 0-6');
+        const cronJob6pm = crawlingCronJob('0 0 18 * * 0-6');
+        const cronJob12pm = crawlingCronJob('0 0 24 * * 0-6');
+
+        cronJob6am.start();
+        cronJob12am.start();
+        cronJob6pm.start();
+        cronJob12pm.start();
 
         return res.status(httpStatus.OK).json(posts).end();
         
@@ -81,17 +119,16 @@ module.exports.saveCrawlData = (req, res, next) => {
             const today = moment(new Date()).format("DD/MM/YYYY");
             const healthPosts = await NewsHealthPosts.findCrawledDataByDate(today);
             
-            const cachedCrawledData = JSON.parse(value);
-            
-            if (!healthPosts) {
+            const cachedCrawledData = JSON.parse(value);            
+            if (!healthPosts) {                
                 const newsHealthPosts = await new NewsHealthPosts({
                     crawlerURI: baseCrawlURI,
                     crawlDate: today,
                     data: [...cachedCrawledData],
                 }).save();
                 return res.status(httpStatus.CREATED).json(newsHealthPosts).end();
-            } else {
-                const duplicatedData = [...healthPosts, ...cachedCrawledData];
+            } else {                
+                const duplicatedData = [...healthPosts.data, ...cachedCrawledData];
                 const uniqeData = removeDuplicateObject(duplicatedData, 'title');  
                 const uniqeJsonData = JSON.stringify(uniqeData, null);                
                 redisClient.set('news-health', uniqeJsonData);
@@ -105,7 +142,27 @@ module.exports.saveCrawlData = (req, res, next) => {
                 return res.status(httpStatus.CREATED).json(updatedNewsHealthPosts).end();
             }
             
-        });                        
+        });
+
+        const updateNewsHealthPosts = new CronJob({
+            cronJob: '0 0 1 * * 0-6',
+            onTick: function() {
+                redis.get('news-health', async (error, posts) => {
+                    const today = moment(new Date()).format("DD/MM/YYYY");
+                    const healthPosts = await NewsHealthPosts.findCrawledDataByDate(today);
+
+                    await NewsHealthPosts
+                        .findByIdAndUpdate(
+                            healthPosts._id, 
+                            { data: posts }
+                        )
+                })
+            },
+            start: true,
+            timeZone: 'Asia/Ho_Chi_Minh'
+        });
+
+        updateNewsHealthPosts.start();
     } catch (error) {
         next(error);
     }

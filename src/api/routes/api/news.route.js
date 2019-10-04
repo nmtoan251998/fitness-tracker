@@ -5,10 +5,10 @@ const {
     saveCrawlData,
     newsHealthPosts,
     getByDate
-} = require('../controllers/news.controller');
+} = require('../../controllers/news.controller');
 
 /**
-* @api {get} /news/crawl
+* @api {get} /api/news/crawl
 * @apiDescription Crawl data from baomoi.com for healthy news posts
 * @apiGroup News
 * @apiPermission Public
@@ -23,7 +23,7 @@ const {
 Router.route('/crawl').get(crawlData);
 
 /**
-* @api {put} /news/crawl
+* @api {put} /api/news/crawl
 * @apiDescription Save crawled data to database
 * @apiGroup News
 * @apiPermission Public
@@ -41,7 +41,7 @@ Router.route('/crawl').get(crawlData);
 Router.route('/crawl').put(saveCrawlData);
 
 /**
-* @api {get} /news/date?date
+* @api {get} /api/news/date?date
 * @apiDescription Get news health post by date
 * @apiGroup News
 * @apiPermission Public

@@ -27,7 +27,7 @@ const AvgFitnessData = new mongoose.Schema({
         required: true,
         type: Number
     },
-    data: {
+    date: {
         type: Date,
     },
     },{ 

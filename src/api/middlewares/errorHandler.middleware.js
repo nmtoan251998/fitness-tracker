@@ -1,17 +1,14 @@
 const httpStatus = require('http-status');
 
-module.exports.errorNotFound = (req, res, next) => {
-    const error = new Error('Not Found');
-    error.status = httpStatus.NOT_FOUND;
-    next(error);
+const {
+    APIError    
+} = require('../utils/APIErrors');
+
+module.exports.notFound = (req, res, next) => {
+    const error = new APIError('Not Found', httpStatus.NOT_FOUND);
+    return res.json(error).end();
 };
 
-module.exports.errorHandler = (error, req, res, next) => {
-    res.status(error.status || httpStatus.INTERNAL_SERVER_ERROR);
-
-    return res.json({
-        error: {
-            msg: error.message
-        }
-    }).end();
+module.exports.errorHandler = (error, req, res, next) => {    
+    return res.json(error).end();
 };
