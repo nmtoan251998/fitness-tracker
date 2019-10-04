@@ -9,7 +9,7 @@ $(document).ready(function(){
   			$('#list_mac').append(output);
 
   		});
-      $(".mac_add").addEventListener('click',(event)=>{
+      $(".mac_add").on('click',(event)=>{
           event.preventDefault();
       });
   		
