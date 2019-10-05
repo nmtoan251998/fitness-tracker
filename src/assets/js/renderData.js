@@ -17,7 +17,7 @@ const chart = new CanvasJS.Chart("ChartContainer", {
 
 let xVal = 0;
 let yVal = 0; 
-let dataLength = 20; // number of dataPoints visible at any point
+let dataLength = 10; // number of dataPoints visible at any point
 
 export const updateChart = function (data) {
     const fat_gramms        =   document.getElementById("fat_gramms");
@@ -33,10 +33,7 @@ export const updateChart = function (data) {
     fat_gramms.value    =   data.fat_gramms; 
 
     changeStatusHeart();
-    
-    let time  = new Date();
-    time = time.setTime(time.getTime());
-    cnnsole.log(time);
+
     xVal = data.time;
     yVal = data.heart_rate;
         
