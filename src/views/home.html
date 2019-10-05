@@ -48,6 +48,14 @@
                         </div>
                     </div>       
                 </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <p>Device's name:</p>
+                    <p>Device's address:</p>
+                    <p>User's name:</p>
+                    <p>Email:</p>
+                </div>
+
             </div>      
             
 
@@ -124,10 +132,10 @@
                     
                     <!-- Display Status -->
                     <div class="media border p-3">
-                        <img src="../assets/images/status.png" alt="status" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        <img src="../assets/images/battery.png" alt="status" class="mr-3 mt-3 rounded-circle" style="width:60px;">
                         <div class="media-body">
                             <h5>Status  <input type="text" size="6" id="status"></h5>
-                            <p>Time:&ensp;&ensp;&ensp;<input type="text" size="10" id="status-time"></p>  
+                            <p>Level:&ensp;&ensp;&ensp;<input type="text" size="10" id="status-time"></p>  
                         </div>
                     </div>
 
@@ -157,6 +165,12 @@
                 <div class="containner-fluid">
                     <div id="ChartContainer" style="height: 300px; width:100%;"></div>
                 </div>
+
+            <!-- Hien thi cac bai viet lien quan -->    
+            </div class='row' id='news'>
+            
+            <div>
+                
             </div>
 
         </div>
@@ -173,5 +187,6 @@
         <script src="../assets/js/getMac.js"></script>
         <script src="../assets/js/inforUser.js"></script>
         <script src="../assets/js/socketio.js"></script>
+        <script src="../assets/js/renderNews.js"></script>
     </body>
 </html>
