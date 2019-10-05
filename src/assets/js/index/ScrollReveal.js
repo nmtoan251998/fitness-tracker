@@ -1,7 +1,7 @@
 const slideUp = {
     distance: '110%',
     origin: 'bottom',
-    opacity: null
+    opacity: 0
 };
 
 const slideDown = {
@@ -13,13 +13,13 @@ const slideDown = {
 const slideRight = {
     distance: '130%',
     origin: 'left',
-    opacity: null
+    opacity: 0
 };
 
 const slideLeft = {
     distance: '130%',
     origin: 'right',
-    opacity: null
+    opacity: 0
 };
 
 ScrollReveal().reveal('.introduction-miband2', slideRight);

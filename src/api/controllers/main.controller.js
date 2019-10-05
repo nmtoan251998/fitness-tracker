@@ -1,6 +1,16 @@
 const path = require('path');
 const httpStatus = require('http-status');
 
+module.exports.homePage = (req, res, next) => {
+    try {
+        const pathToFile = path.join(__dirname, '../../../dist/index.html');
+        return res.status(httpStatus.OK)
+            .sendFile(pathToFile);
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports.newsPage = (req, res, next) => {
     try {
         const pathToFile = path.join(__dirname, '../../../dist/news.html');
@@ -21,9 +31,9 @@ module.exports.blePage = (req, res, next) => {
     }
 }
 
-module.exports.homePage = (req, res, next) => {
+module.exports.fagPage = (req, res, next) => {
     try {
-        const pathToFile = path.join(__dirname, '../../../dist/index.html');
+        const pathToFile = path.join(__dirname, '../../../dist/fag.html');
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
     } catch (error) {

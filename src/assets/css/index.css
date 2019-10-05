@@ -26,10 +26,14 @@
     margin-right: 0;    
 }
 
-.desc-heartrate-feature-miband2, .step-feature-miband2-header {
+.desc-heartrate-feature-miband2 {
     margin-top: 10rem;    
 }
 
+.step-feature-miband2-header {
+    margin-top: 7.5rem;
+}
+
 .heartrate-feature-img-miband2 {
-    margin-top: 6rem;    
+    margin-top: 6rem;
 }
