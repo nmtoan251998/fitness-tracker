@@ -9,7 +9,7 @@ const options = {
         }]
     },
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: false
 };
 
 const ctx = document.getElementById('myChart');
