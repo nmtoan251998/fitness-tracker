@@ -10,12 +10,13 @@ const chart = new CanvasJS.Chart("ChartContainer", {
     },      
     data: [{
         type: "line",
-        dataPoints: dps
+        dataPoints: dps,
+        xValueType: "dateTime"
     }]
 });
 
 let xVal = 0;
-let yVal = 100; 
+let yVal = 0; 
 let dataLength = 20; // number of dataPoints visible at any point
 
 export const updateChart = function (data) {
@@ -35,7 +36,7 @@ export const updateChart = function (data) {
     
     let time  = new Date();
     time = time.setTime(time.getTime());
-
+    cnnsole.log(time);
     xVal = data.time;
     yVal = data.heart_rate;
         
