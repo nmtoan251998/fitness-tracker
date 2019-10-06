@@ -2,17 +2,51 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>HEATHCARE APPLICATION IOT</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-        <!-- Nhúng file Javasript tại đường dẫn src để có thể xây dựng 1 graph
-        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>HEATHCARE APPLICATION IOT</title>        
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>            
+
         <link rel="stylesheet" href="../assets/css/home.css" />
-    </head>
- 
+    </head> 
 
     <body>
+        <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-lg">
+            <a class="navbar-brand" href="#">FitnessTracker</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="/ble">Kết nối thiết bị</a>
+                    </li>
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="/news">Báo mới</a>
+                    </li>
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="/fag">Hướng dẫn sử dụng</a>
+                    </li>
+                </ul>
+    
+                <ul class="navbar-nav pull-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/signup">Đăng ký</a>
+                    </li>                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/signin">Đăng nhập</a>
+                    </li>                
+                </ul>
+            </div>
+        </nav>
+
         <div class="container">
             <div class="jumbotron text-center">
                 <h2> HEATHCARE APPLICATION IOT</h2><br> 

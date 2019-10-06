@@ -5,7 +5,6 @@ const path = require('path');
 const { spawn, spawnSync } = require('child_process');
 
 const DeviceDataModel = require('../models/deviceData.model');
-const { APIError } = require('../utils/APIErrors');
 
 const ASSETS_DATA_PATH = '../../assets/data';
 
@@ -101,14 +100,6 @@ const updateDeviceConnection = async (address) => {
     } catch (error) {
         return false;
     }        
-}
-
-module.exports.getIndexPage = (req, res, next) => {
-    try {
-        return res.status(httpStatus.OK).sendFile(path.join(__dirname, '../../../dist/home.html'));
-    } catch (error) {
-        next(error);
-    }
 }
 
 module.exports.getConnectedAdds = async (req, res, next) => {

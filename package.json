@@ -7,11 +7,11 @@
     "clean": "rimraf dist/*  ",
     "test": "mocha --exit src/api/tests/*.test.js --timeout 30000",
     "test-coverage": "nyc npm run test",
-    "dev:client": "parcel src/views/home.html --no-source-maps --port 3000 --no-cache",
+    "dev:client": "parcel src/views/*.html --no-source-maps --port 3000 --no-cache",
     "dev:server": "nodemon --inspect src/server",
     "dev": "concurrently -n \" Clean , Client , Server \" \"npm run clean\" \"npm run dev:client\" \"npm run dev:server\" ",
     "start-python": "python3 src/utils/miband2/sendall.py --live --mac CE:36:72:D8:4F:64",
-    "build:client": "parcel build src/views/home.html --out-dir dist --no-cache",
+    "build:client": "parcel build src/views/*.html --out-dir dist --no-cache",
     "build:server": "NODE_ENV=production babel src -s -d dist",
     "production": "concurrently -n \" Clean , Build-client , Build-server \" \"npm run clean\" \"npm run build:client\" \"npm run build:server\"",
     "start": "node bin/production"

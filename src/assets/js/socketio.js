@@ -26,7 +26,7 @@ $("#render-data").on("submit", async (event) => {
     try {
         $("#spinner").addClass("spinner-border spinner-border-sm");
         $('#mac-add').attr('disabled', true);
-        $('#btn_connect').prop('disabled', true);
+        $('#btn_connect').prop('disabled', true);        
         
         const startPythonResult = await axios({
             method: 'get',

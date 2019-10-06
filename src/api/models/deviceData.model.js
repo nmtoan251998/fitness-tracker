@@ -74,15 +74,11 @@ DeviceDataSchema.static({
         try {
             const MACAddPattern = new RegExp(/(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2})$/g);            
             
-            if (!MACAddPattern.test(macAdd)) {
-                throw new APIError('Wrong MAC address pattern', httpStatus.BAD_REQUEST);
-            }
+            if (!MACAddPattern.test(macAdd)) throw new APIError('Wrong MAC address pattern', httpStatus.BAD_REQUEST)            
 
             const data = await this.findOne({ macAdd: macAdd }).lean();            
 
-            if (!data) {
-                throw new APIError('No data found', httpStatus.NOT_FOUND);
-            }
+            if (!data) throw new APIError('No data found', httpStatus.NOT_FOUND);
 
             return data;
         } catch (error) {

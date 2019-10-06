@@ -1,24 +1,10 @@
 const Router = require('express').Router();
 
-const {    
-    getIndexPage,
+const {
     getConnectedAdds,
     startPython,
     deviceData,
 } = require('../../controllers/ble.controller');
-
-/**
-* @api {get} /api/ble
-* @apiDescription Render home page
-* @apiName Render home page
-* @apiGroup Data
-* @apiPermission Public
-*
-* @apiSuccess (OK 200) {.html} - Render file home.html
-*
-* @apiError (Not Found 404) - No such file or directory. Wrong file path.
-*/
-Router.route('').get(getIndexPage);
 
 /**
 * @api {get} /api/ble/mac
