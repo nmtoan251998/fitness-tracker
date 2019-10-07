@@ -1,4 +1,8 @@
- #heart_image {
+.navbar {
+    background-color: #141515 !important;
+}
+
+#heart_image {
             
     display:block;
     -webkit-animation: heartbeat 1s infinite;
