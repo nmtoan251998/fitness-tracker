@@ -29,4 +29,4 @@ ScrollReveal().reveal('.step-4', slideLeft);
 ScrollReveal().reveal('.step-5', slideRight);
 ScrollReveal().reveal('.step-6', slideLeft);
 ScrollReveal().reveal('.step-7', slideRight);
-ScrollReveal().reveal('.step-8', slideDown);
+ScrollReveal().reveal('.step-8', slideUp);
