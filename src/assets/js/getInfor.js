@@ -1,3 +1,4 @@
+/*
 import axios from 'axios';
 
 $(document).ready(async function(){
@@ -5,7 +6,7 @@ $(document).ready(async function(){
 		try {      
 			const getInfor = await axios({
 				method: 'get',
-				url: '/api/ble/python-start'
+				url: '/api/ble/'
 			});
 
 			console.log(getInfor);
@@ -20,4 +21,4 @@ $(document).ready(async function(){
 			// handle error response
 			console.log(error.response.data);
 		}		
-});
+}); */

@@ -15,3 +15,8 @@
 .display {
 	margin-left: 20px;
 }
+
+#list_news li {
+    list-style: none;
+    margin-bottom: 15px;
+}

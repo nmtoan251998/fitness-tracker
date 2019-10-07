@@ -86,7 +86,8 @@ const removeDuplicateObject = (arr, key) => {
 module.exports.crawlData = async (req, res, next) => {
     try {
         const posts = await crawling();
-        const postJsonData = JSON.stringify(posts, null, '\t');        
+        const postJsonData = JSON.stringify(posts, null, '\t');
+        console.log(posts);       
         await redisClient.set('news-health', postJsonData, redis.print);        
 
         const cronJob6am = crawlingCronJob('0 0 6 * * 0-6');
@@ -99,7 +100,7 @@ module.exports.crawlData = async (req, res, next) => {
         cronJob6pm.start();
         cronJob12pm.start();
 
-        return res.status(httpStatus.OK).json(posts).end();
+        return res.status(httpStatus.OK).json({ msg:'OK'}).end();
         
     } catch (error) {
         next(error);
