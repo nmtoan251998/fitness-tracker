@@ -35,7 +35,7 @@ $("#render-data").on("submit", async (event) => {
                 add: document.querySelector('#mac-add').value,
                 socketID: socket.id
             }
-        });
+        });        
 
         // handle successful response
         console.log(startPythonResult);
@@ -43,6 +43,10 @@ $("#render-data").on("submit", async (event) => {
         $("#spinner").removeClass("spinner-border spinner-border-sm");
         $('#btn_connect').prop('disabled', false);
         console.log('Get result, stop loading...');
+
+        setTimeout(() => {
+            socket.emit('meomeo', 'meomeo')
+        }, 5000)
     } catch (error) {
         // handle error response
         console.log(error.response.data);

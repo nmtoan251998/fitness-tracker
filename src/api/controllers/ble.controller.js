@@ -136,7 +136,7 @@ module.exports.startPython = async (req, res, next) => {
         const mibandMACAddPattern = new RegExp(/(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2})/g);
         if (!mibandMACAddPattern.test(req.query.add)) {
             return res.status(httpStatus.BAD_REQUEST).json({ msg: 'Invalid MI Band 2 MAC address' }).end();
-        }
+        }        
 
         // get the address like this xx:xx:xx:xx:xx:xx
         // then slice the MI Band 2 out of the result
@@ -152,6 +152,10 @@ module.exports.startPython = async (req, res, next) => {
                 cwd: path.join(__dirname, '../../utils/miband2')
             }
         );        
+
+        socket.on('disconnect', () => {
+            process.kill(-child.pid);
+        })
         
         // because the child_process is infinite request, we need to end req-res lifecycle in the first time
         // prevent the header is sent again
