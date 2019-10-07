@@ -89,15 +89,15 @@
                         <div class="form-group">
                             <label>Giới tính</label><br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" class="signup-gender" value="Nam">
+                                <input class="form-check-input signup-gender" type="radio" name="gender" value="Nam">
                                 <label class="form-check-label" for="inlineRadio1">Nam</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" class="signup-gender" value="Nữ">
+                                <input class="form-check-input signup-gender" type="radio" name="gender"  value="Nữ">
                                 <label class="form-check-label" for="inlineRadio2">Nữ</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" class="signup-gender" value="Khác">
+                                <input class="form-check-input signup-gender" type="radio" name="gender" value="Khác">
                                 <label class="form-check-label" for="inlineRadio3">Khác</label>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    <button id="signup-form-submit-button" type="button" class="btn btn-primary">Đăng ký</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
@@ -142,7 +142,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    <button type="button" id="signin-form-submit-button" class="btn btn-primary">Đăng nhập</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
@@ -338,5 +338,6 @@
     <script src="../assets/js/utils/ActiveCurrentTabInNavbar.js"></script>
     <script src="../assets/js/index/ScrollReveal.js"></script>
     <script src="../assets/js/index/Chart.js"></script>
+    <script src="../assets/js/utils/Authenticate.js"></script>
 </body>
 </html>
