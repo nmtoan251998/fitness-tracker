@@ -1,3 +1,12 @@
 .navbar {
     background-color: #141515 !important;
 }
+
+.fag-header {
+    color: #4acbae;    
+}
+
+video {    
+    width: 75%;
+    height: auto;
+}
