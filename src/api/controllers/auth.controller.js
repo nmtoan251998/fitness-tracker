@@ -55,7 +55,7 @@ module.exports.signin = async (req, res, next) => {
         }
 
         const token = await jwt.sign({
-            data: user._id
+            id: user._id
         }, secretKey, { expiresIn: '24h' });
 
         return res.status(httpStatus.OK)

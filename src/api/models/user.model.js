@@ -112,6 +112,28 @@ UserSchema.static({
         } catch (error) {
             return error;
         }                
+    },
+
+    /**
+     * Find user by user id
+     * @param {ObjectId} id 
+     * 
+     * @return {<User>}
+     * 
+     * @throws {<APIError>}
+     */
+    findUserById: async function(id) {
+        try {            
+            if (!mongoose.Types.ObjectId.isValid(id)) {                
+                throw new APIError('Invalid user id', httpStatus.BAD_REQUEST);
+            }            
+
+            const user = await this.findById(id);
+
+            return user;
+        } catch (error) {            
+            return error;
+        }
     }
 })
 

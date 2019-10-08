@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const path = require('path');
 const methodOverride = require('method-override');
 const cors = require('cors');
+const passport = require('passport');
 
 /**
  * Server instances requirements
@@ -43,6 +44,11 @@ app.use(cors());
 
 // use Http request such as PUT, DELETE
 app.use(methodOverride());
+
+// OAuth provider
+app.use(passport.initialize());
+
+require('./passport')(passport);
 
 // append socketio instance to every server response
 app.use(function(req, res, next) {
