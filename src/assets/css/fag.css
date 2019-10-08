@@ -1,0 +1,39 @@
+body {
+    overflow-x: hidden !important;
+}
+
+.navbar {
+    background-color: #141515 !important;
+}
+
+.fag-header {
+    color: #4acbae;    
+}
+
+video {    
+    width: 75%;
+    height: auto;
+}
+
+@media only screen and (max-width: 750px) {
+    body {
+        font-size: 12px;
+    }
+    h2 {
+        font-size: 1.3rem !important;
+    }    
+
+    .video-demo {
+        margin-bottom: 0 !important;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    .img-responsive {
+        width: 25% !important;
+    }
+
+    .img-m-responsive {
+        margin-right: 2rem !important;
+    }    
+}

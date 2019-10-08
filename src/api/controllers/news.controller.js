@@ -86,22 +86,24 @@ const removeDuplicateObject = (arr, key) => {
 module.exports.crawlData = async (req, res, next) => {
     try {
         const posts = await crawling();
-        const postJsonData = JSON.stringify(posts, null, '\t');
-        console.log(posts);       
-        await redisClient.set('news-health', postJsonData, redis.print);        
+        const postJsonData = JSON.stringify(posts, null, '\t');        
+        await redisClient.set('news-health', postJsonData, redis.print);
 
-        const cronJob6am = crawlingCronJob('0 0 6 * * 0-6');
-        const cronJob12am = crawlingCronJob('0 0 12 * * 0-6');
-        const cronJob6pm = crawlingCronJob('0 0 18 * * 0-6');
-        const cronJob12pm = crawlingCronJob('0 0 24 * * 0-6');
+        try {
+            const cronJob6am = await crawlingCronJob('0 0 6 * * 0-6');
+            const cronJob12am = await crawlingCronJob('0 0 12 * * 0-6');
+            const cronJob6pm = await crawlingCronJob('0 0 18 * * 0-6');
+            const cronJob12pm = await crawlingCronJob('0 0 24 * * 0-6');
 
-        cronJob6am.start();
-        cronJob12am.start();
-        cronJob6pm.start();
-        cronJob12pm.start();
-
-        return res.status(httpStatus.OK).json({ msg:'OK'}).end();
+            cronJob6am.start();
+            cronJob12am.start();
+            cronJob6pm.start();
+            cronJob12pm.start();
+        } catch (error) {
+            throw new APIError('Error setting cron jobs');
+        }        
         
+        return res.status(httpStatus.OK).json(posts).end();
     } catch (error) {
         next(error);
     }

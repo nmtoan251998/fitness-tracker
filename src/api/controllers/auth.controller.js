@@ -1,12 +1,13 @@
 const httpStatus = require('http-status');
 const jwt = require('jsonwebtoken');
+const { validationResult } = require('express-validator');
 
 const UserModel = require('../models/user.model');
 const { APIError } = require('../utils/APIErrors');
 const { secretKey } = require('../../config/vars');
 
 module.exports.signup = async (req, res, next) => {
-    try {
+    try {        
         const {
             email, 
             name,

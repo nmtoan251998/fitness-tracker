@@ -5,6 +5,11 @@ const {
     signin,
 } = require('../controllers/auth.controller');
 
+const {
+    validateSignUpInput,
+    validateSignInInput
+} = require('../validation/auth.validation');
+
 /**
 * @api {post} /auth/signup
 * @apiDescription Create new user account
@@ -29,8 +34,13 @@ const {
 * @apiSuccess (Created 201) {Date} updatedAt
 *
 * @apiError (Bad Request 400) {String} msg - This email is already taken
+*
+* @apiError (Unprocessable Entity 422) {Array<Object>} {].value - Error value
+* @apiError (Unprocessable Entity 422) {Array<Object>} {].msg - Error message
+* @apiError (Unprocessable Entity 422) {Array<Object>} {].param - Error parameter
+* @apiError (Unprocessable Entity 422) {Array<Object>} {].location - Error location
 */
-Router.route('/signup').post(signup);
+Router.route('/signup').post(validateSignUpInput, signup);
 
 /**
 * @api {post} /auth/signin
@@ -53,13 +63,14 @@ Router.route('/signup').post(signup);
 * @apiSuccess (OK 200) {String} token - Bearer json web token
 *
 * @apiError (Bad Request 400) {String} name - APIError
-* @apiError (Bad Request 400) {String} message - Wrong email or password
-* @apiError (Bad Request 400) {Number} status - 400
+* @apiError (Bad Request 400) {String} message - Error description
+* @apiError (Bad Request 400) {Number} status - Error status code
 *
-* @apiError (Bad Request 400) {String} name - APIError
-* @apiError (Bad Request 400) {String} message - No user found with this email
-* @apiError (Bad Request 400) {Number} status - 400
+* @apiError (Unprocessable Entity 422) {Array<Object>} {}.value - Error value
+* @apiError (Unprocessable Entity 422) {Array<Object>} {}.msg - Error message
+* @apiError (Unprocessable Entity 422) {Array<Object>} {}.param - Error parameter
+* @apiError (Unprocessable Entity 422) {Array<Object>} {}.location - Error location
 */
-Router.route('/signin').post(signin);
+Router.route('/signin').post(validateSignInInput, signin);
 
 module.exports = Router;

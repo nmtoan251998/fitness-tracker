@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>            
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="../assets/css/fag.css">
 
     <title>Hướng dẫn sử dụng</title>
 </head>
+
 <body>
     <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-lg">
-        <a class="navbar-brand" href="#">FitnessTracker</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="/">FitnessTracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -33,19 +38,253 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav pull-right">
+            <ul class="navbar-nav pull-right unauthenticated">
                 <li class="nav-item">
-                    <a class="nav-link" href="/auth/signup">Đăng ký</a>
-                </li>                
+                    <a class="nav-link" data-toggle="modal" data-target="#signup-form-container">Đăng ký</a>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/auth/signin">Đăng nhập</a>
-                </li>                
+                    <a class="nav-link" data-toggle="modal" data-target="#signin-form-container">Đăng nhập</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav pull-right authenticated" style="display: none">
+                <li class="nav-item">
+                    <a class="nav-link signined-user" data-toggle="modal"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link logout" href="/auth/logout" data-toggle="modal">Đăng xuất</a>
+                </li>
             </ul>
         </div>
     </nav>
+
+    <div class="modal fade" id="signup-form-container" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng ký tài khoản</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label for="signup-email">Địa chỉ email</label>
+                            <input type="email" class="form-control" id="signup-email" aria-describedby="emailHelp"
+                                placeholder="Nhập vào địa chỉ email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-password">Mật khẩu</label>
+                            <input type="password" class="form-control" id="signup-password"
+                                placeholder="Nhập vào mật khẩu">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-name">Họ và tên</label>
+                            <input type="text" class="form-control" id="signup-name" placeholder="Nhập vào tên của bạn">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-phone">Số điện thoại</label>
+                            <input type="text" class="form-control" id="signup-phone"
+                                placeholder="Nhập vào số điện thoại của bạn">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-age">Tuổi</label>
+                            <input type="number" class="form-control" id="signup-age"
+                                placeholder="Nhập vào tuổi của bạn">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Giới tính</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input signup-gender" type="radio" name="gender" value="Nam">
+                                <label class="form-check-label" for="inlineRadio1">Nam</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input signup-gender" type="radio" name="gender" value="Nữ">
+                                <label class="form-check-label" for="inlineRadio2">Nữ</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input signup-gender" type="radio" name="gender" value="Khác">
+                                <label class="form-check-label" for="inlineRadio3">Khác</label>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="signup-form-submit-button" type="button" class="btn btn-primary">Đăng ký</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="signin-form-container" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng nhập</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="signin-form">
+                        <div class="form-group">
+                            <label for="signin-email">Địa chỉ email</label>
+                            <input type="email" class="form-control" id="signin-email" aria-describedby="emailHelp"
+                                placeholder="Nhập vào địa chỉ email">
+                            <small id="emailHelp" class="form-text text-muted">Chúng tôi sẽ không cho ai khác biết tài
+                                khoản của bạn.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="signin-password">Mật khẩu</label>
+                            <input type="password" class="form-control" id="signin-password"
+                                placeholder="Nhập vào mật khẩu">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="remember-me">
+                            <label class="form-check-label" for="remember-me">Nhớ tài khoản</label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="signin-form-submit-button" class="btn btn-primary">Đăng nhập</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-1 mt-5 px-5">
+        <div>
+            <h2 class="text-center fag-header">Bước 1: Tải ứng dụng MI Fit</h2>
+            <p class="text-center fag-text">Đầu tiên bạn cần vào ứng dụng App Store (IOS) hoặc Google Play Store
+                (Android) để có thể tải ứng dụng MI Fit về điện thoại</p>
+        </div>
+        <div class="text-center">
+            <img class="img-responsive w-75" src="../assets/images/huong_dan_su_dung_mi_band/download_miband.PNG"
+                alt="MI Fit">
+        </div>
+    </div>
+
+    <div class="step-2 mt-5 pb-2 pt-5 px-5 text-white" style="background-color: #141515">
+        <div>
+            <h2 class="text-center fag-header">Bước 2: Mở ứng dụng MI Fit và kết nối đến MI Band</h2>
+            <p class="text-center fag-text">Bên dưới là màn hình của ứng dụng MI Fit, bạn cần ấn vào dấu '+' trên góc
+                phải màn hình</p>
+        </div>
+        <div class="text-center">
+            <img class="img-responsive w-75" src="../assets/images/huong_dan_su_dung_mi_band/open_mmiband.PNG"
+                alt="Open MI Fit">
+        </div>
+    </div>
+
+    <div class="step-3 mt-5 px-5">
+        <div>
+            <h2 class="text-center fag-header">Bước 3: Pair Mi Fit với thiết bị</h2>
+            <p class="text-center fag-text">Để Mi Fit và MI Band có thể kết nối với nhau, bạn cần mở wifi và bluetooth,
+                sau đó nhấn vào ô Band và agree.</p>
+        </div>
+        <div class="text-center">
+            <img class="img-responsive w-75" src="../assets/images/huong_dan_su_dung_mi_band/pair_miband.PNG"
+                alt="Pairing"">
+        </div>
+    </div>
+
+    <div class=" step-4 mt-5 pb-2 pt-5 px-5 text-white" style="background-color: #141515">
+            <div>
+                <h2 class="text-center fag-header">Bước 4: Chờ đợi tìm kiếm</h2>
+                <p class="text-center fag-text">Sau khi nhấn <i>agree</i> thì ứng dụng Mi Fit sẽ tìm kiếm thiết bị MI
+                    Band để kết nối.</p>
+            </div>
+            <div class="text-center">
+                <img class="img-responsive w-75" src="../assets/images/huong_dan_su_dung_mi_band/searching_miband.PNG"
+                    alt="Searching">
+            </div>
+    </div>
+
+    <div class="step-5 mt-5 px-5">
+        <div>
+            <h2 class="text-center fag-header">Bước 5: Kết quả tìm kiếm</h2>
+            <p class="text-center fag-text">Ở bước này sẽ có 2 trường hợp xảy ra là kết nối thất bại và thành công.
+            </p>
+            <p class="text-center fag-text">Nếu kết quả là thất bại, bạn cần nhấn vào chữ Try again.</p>
+            <p class="text-center fag-text">Và ngược lại nếu Mi Fit đã tìm thấy MI Band, bạn cần nhấn vào nút tròn ở
+                MI Band để đồng ý tạo kết nối</p>
+        </div>
+        <div class="text-center">
+            <img class="img-responsive img-m-responsive" style="margin-right: 1rem; width: 45%"
+                src="../assets/images/huong_dan_su_dung_mi_band/fail_case.PNG" alt="Fail case">
+            <img class="img-responsive" style="width: 45%"
+                src="../assets/images/huong_dan_su_dung_mi_band/successful_case.PNG" alt="Successful case">
+        </div>
+    </div>
+
+    <div class="step-6 mt-5 pb-2 pt-5 px-5 text-white" style="background-color: #141515">
+        <div>
+            <h2 class="text-center fag-header">Bước 6: Kết nối thành công</h2>
+            <p class="text-center fag-text">Và đây là màn hình của ứng dụng Mi Fit khi đã kết nối thành công tới MI
+                Band.</p>
+        </div>
+        <div class="text-center">
+            <img class="img-responsive img-m-responsive" style="margin-right: 1rem; width: 45%"
+                src="../assets/images/huong_dan_su_dung_mi_band/connected.PNG" alt="Connected">
+            <img class="img-responsive" style="width: 45%"
+                src="../assets/images/huong_dan_su_dung_mi_band/connected_1.PNG" alt="Connected">
+        </div>
+    </div>
+
+    <div class="step-7 mt-5 px-5">
+        <div>
+            <h2 class="text-center fag-header">Bước 7: Lấy địa chỉ MAC của MI Band</h2>
+            <p class="text-center fag-text">Ở bước này, bạn sẽ phải lấy địa chỉ MAC của MI Band 2 bằng cách kéo
+                xuống dưới cùng của hình trên.</p>
+        </div>
+        <div class="text-center">
+            <img class="img-responsive w-75" src="../assets/images/huong_dan_su_dung_mi_band/get_address.PNG"
+                alt="MAC address">
+        </div>
+    </div>
+
+    <div class="step-8 mt-5 pb-2 pt-5 px-5 text-white" style="background-color: #141515">
+        <div class="mb-5 video-demo">
+            <h2 class="text-center fag-header">Demo dự án.</h2>
+        </div>
+
+        <div class="text-center">
+            <video controls>
+                <source
+                    src="https://res.cloudinary.com/dxrg9mbke/video/upload/v1569414140/portfolio/CodersX-ContentManagementSystem_evwso9.mp4"
+                    type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>   
+    <script src="../assets/js/fag/Fag.js"></script>
+    <script src="../assets/js/utils/ActiveCurrentTabInNavbar.js"></script>
+    <script src="../assets/js/fag/ScrollReveal.js"></script>
 </body>
+
 </html>
