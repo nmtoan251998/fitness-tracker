@@ -13,7 +13,7 @@ $(document).ready(function(){
 				method: 'get',
 				url: '/api/ble/mac'
 			});
-
+			console.log(connectedAddresses);
 			// remove duplicate elements from array
 			const macAddresses = [...new Set([...connectedAddresses.data.addresses])];
 			$('#list_mac').empty();
@@ -29,6 +29,11 @@ $(document).ready(function(){
 				const macAddPattern =  /(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2})/;
 				const macAdd = event.target.textContent.match(macAddPattern)[0].trim();
 			});
+
+
+			if (connectedAddresses.status != 200) {
+				alert (connectedAddresses.status + ':' + connectedAddresses.statusText);
+			}
 			
 		} catch (error) {
 			// handle error response

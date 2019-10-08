@@ -2,6 +2,7 @@ import { changeStatusHeart } from './changeStatusHeart';
 
 const dps = []; // dataPoints
 const chart = new CanvasJS.Chart("ChartContainer", {
+    maintainAspectRatio: false,
     title :{
         text: "Heart Beat"
     },

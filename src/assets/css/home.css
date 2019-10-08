@@ -20,3 +20,7 @@
     list-style: none;
     margin-bottom: 15px;
 }
+
+button { 
+  width: 100px; 
+} 

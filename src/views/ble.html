@@ -55,18 +55,18 @@
 
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3"></div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="col-lg-5 col-md-5 col-sm-4">
                     
                     <div class="display"> 
                         <div class="row">
                             <form id="render-data">
-                                <input type="text" name="add" size="22" id="mac-add">
+                                <input type="text" name="add" size="18" id="mac-add">
                                 <button type="submit" class="btn btn-primary btn-sm" id="btn_connect"><span id="spinner"></span>Connect</button>
                             </form>
                         </div>
                         <br>
                         <div class="row">
-                            <span>List MAC addresses connected:</span>
+                            <span>List MAC addresses:</span>
                             <button id="get-mac" class="btn btn-primary btn-sm">Get MAC</button>
                         </div>
                         <div class="row">
@@ -161,15 +161,6 @@
 
 
                 <div class="col-sm-6">
-                    
-                    <!-- Display Status -->
-                    <div class="media border p-3">
-                        <img src="../assets/images/battery.png" alt="status" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-                        <div class="media-body">
-                            <h5>Status  <input type="text" size="6" id="status"></h5>
-                            <p>Level:&ensp;&ensp;&ensp;<input type="text" size="10" id="status-time"></p>  
-                        </div>
-                    </div>
 
                     <!-- Display Fat -->
                     <div class="media border p-3">
@@ -189,13 +180,22 @@
                         </div>
                     </div>
 
+                     <!-- Display Status -->
+                    <div class="media border p-3">
+                        <img src="../assets/images/battery.png" alt="status" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        <div class="media-body">
+                            <h5>Status  <input type="text" size="6" id="status"></h5>
+                            <p>Level:&ensp;&ensp;&ensp;<input type="text" size="10" id="status-time"></p>  
+                        </div>
+                    </div>
+
                 </div>
             </div>
         
             <!-- thiết lập kích thước cho graph thông qua id ChartContainer đã thiết lập ở trên  -->
             <div style="margin: 20px 15px 15px 10px">
                 <div class="containner-fluid">
-                    <div id="ChartContainer" style="height: 300px; width:100%;"></div>
+                    <div id="ChartContainer" style="position: relative; height:40vh; width:80vw"></div>
                 </div>
             </div>
 
