@@ -17,7 +17,7 @@
 </head>
 <body>
     <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-lg">
-        <a class="navbar-brand" href="#">FitnessTracker</a>
+        <a class="navbar-brand" href="/">FitnessTracker</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -38,12 +38,21 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav pull-right">
+            <ul class="navbar-nav pull-right unauthenticated">
                 <li class="nav-item">                        
                     <a class="nav-link" data-toggle="modal" data-target="#signup-form-container">Đăng ký</a>
                 </li>                
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#signin-form-container">Đăng nhập</a>
+                </li>                
+            </ul>
+
+            <ul class="navbar-nav pull-right authenticated" style="display: none">
+                <li class="nav-item">                        
+                    <a class="nav-link signined-user" data-toggle="modal"></a>
+                </li>                
+                <li class="nav-item">
+                    <a class="nav-link logout" href="/auth/logout" data-toggle="modal">Đăng xuất</a>
                 </li>                
             </ul>
         </div>        
@@ -335,9 +344,10 @@
 
     <script src="https://unpkg.com/scrollreveal"></script>        
 
+    <script src="../assets/js/index/Index.js"></script>
     <script src="../assets/js/utils/ActiveCurrentTabInNavbar.js"></script>
     <script src="../assets/js/index/ScrollReveal.js"></script>
     <script src="../assets/js/index/Chart.js"></script>
-    <script src="../assets/js/utils/Authenticate.js"></script>
+
 </body>
 </html>

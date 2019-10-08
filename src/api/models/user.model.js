@@ -38,8 +38,7 @@ const UserSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        required: true,
-        default: 'other',
+        required: true
     },
     role: {
         type: String,

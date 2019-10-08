@@ -1,227 +1,358 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <title>HEATHCARE APPLICATION IOT</title>        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <title>HEATHCARE APPLICATION IOT</title>
 
-        <link rel="stylesheet" href="../assets/css/home.css" />
-    </head> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-    <body>
-        <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-lg">
-            <a class="navbar-brand" href="#">FitnessTracker</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item mr-3">
-                        <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item mr-3">
-                        <a class="nav-link" href="/ble">Kết nối thiết bị</a>
-                    </li>
-                    <li class="nav-item mr-3">
-                        <a class="nav-link" href="/news">Báo mới</a>
-                    </li>
-                    <li class="nav-item mr-3">
-                        <a class="nav-link" href="/fag">Hướng dẫn sử dụng</a>
-                    </li>
-                </ul>
-    
-                <ul class="navbar-nav pull-right">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth/signup">Đăng ký</a>
-                    </li>                
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth/signin">Đăng nhập</a>
-                    </li>                
-                </ul>
-            </div>
-        </nav>
+    <link rel="stylesheet" href="../assets/css/ble.css" />
+</head>
 
-        <div class="container">
-            <div class="jumbotron text-center">
-                <h2> HEATHCARE APPLICATION IOT</h2><br> 
-            </div> 
-          
+<body>
+    <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-lg">
+        <a class="navbar-brand" href="/">FitnessTracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3"></div>
-                <div class="col-lg-5 col-md-5 col-sm-4">
-                    
-                    <div class="display"> 
-                        <div class="row">
-                            <form id="render-data">
-                                <input type="text" name="add" size="28" id="mac-add">
-                                <button type="submit" class="btn btn-primary btn-sm" id="btn_connect"><span id="spinner"></span>Connect</button>
-                            </form>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <span>List of MAC addresses connected:&ensp;</span>
-                            <button id="get-mac" class="btn btn-primary btn-sm">Get MAC</button>
-                        </div>
-                        <div class="row">
-                            <ol id="list_mac">
-                                
-                            </ol>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <label>Gender:&ensp;</label><input type="text" name="gender" size="4" id="gender" /><span>&emsp;</span>
-                            <label>Old:&ensp; </label><input type='text' name="old" size="4" id="old" /><span>&emsp;</span>
-                            <button type="button" class ="btn btn-primary btn-sm" data-toggle="modal" data-target="#inforModal">Change</button>
-                        </div>
-                    </div>       
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="/ble">Kết nối thiết bị</a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="/news">Báo mới</a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="/fag">Hướng dẫn sử dụng</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav pull-right unauthenticated">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#signup-form-container">Đăng ký</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#signin-form-container">Đăng nhập</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav pull-right authenticated" style="display: none">
+                <li class="nav-item">
+                    <a class="nav-link signined-user" data-toggle="modal"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link logout" href="/auth/logout" data-toggle="modal">Đăng xuất</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="signup-form-container" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng ký tài khoản</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <p>Device's name:</p>
-                    <p>Device's address:</p>
-                    <p>User's name:</p>
-                    <p>Email:</p>
+                <div class="modal-body">
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label for="signup-email">Địa chỉ email</label>
+                            <input type="email" class="form-control" id="signup-email" aria-describedby="emailHelp"
+                                placeholder="Nhập vào địa chỉ email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-password">Mật khẩu</label>
+                            <input type="password" class="form-control" id="signup-password"
+                                placeholder="Nhập vào mật khẩu">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-name">Họ và tên</label>
+                            <input type="text" class="form-control" id="signup-name" placeholder="Nhập vào tên của bạn">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-phone">Số điện thoại</label>
+                            <input type="text" class="form-control" id="signup-phone"
+                                placeholder="Nhập vào số điện thoại của bạn">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-age">Tuổi</label>
+                            <input type="number" class="form-control" id="signup-age"
+                                placeholder="Nhập vào tuổi của bạn">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Giới tính</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input signup-gender" type="radio" name="gender" value="Nam">
+                                <label class="form-check-label" for="inlineRadio1">Nam</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input signup-gender" type="radio" name="gender" value="Nữ">
+                                <label class="form-check-label" for="inlineRadio2">Nữ</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input signup-gender" type="radio" name="gender" value="Khác">
+                                <label class="form-check-label" for="inlineRadio3">Khác</label>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
 
-            </div>      
-            
-
-
-            <div class="modal" id="inforModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <i class='fas fa-users' style='font-size:24px'>&ensp;</i>
-                            <h4>Infor user</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                    
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <form action="">
-                                <div class="form-group">
-                                    <label for="new_gender">Choose Sex:</label>
-                                    <select class="form-control" id="new_gender">
-                                        <option></option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        <option>Others</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="new_old">Enter old:</label>
-                                    <input type="text" class="form-control" id="new_old">
-                                </div>
-                              <button type="submit" id="change_infor" class="btn btn-primary">Save</button>
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
-                            </form>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button id="signup-form-submit-button" type="button" class="btn btn-primary">Đăng ký</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
-            <br>
+        </div>
+    </div>
 
-            <div class="row">
-                <div class="col-sm-6">
-                    
-                    <!-- Display heart raw -->
-                    <div class="media border p-3" id="heart_rate_box">
-                        <img id="heart_image" src="../assets/images/heart.png" alt="Heart-rate" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-                        <div class="media-body">
-                            <h4>Heart-raw</h4>
-                            <p><input type="text" size="6" id="heart_rate"><span>&ensp;beat</span></p>  
-                        </div>
-                    </div>
-                    
-                    <!-- Display step -->
-                    <div class="media border p-3">
-                        <img src="../assets/images/step.png" alt="Real-time step" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-                        <div class="media-body">
-                            <h4>Real-time step</h4>
-                            <p><input type="text" size="6" id="steps"><span>&ensp;steps</span></p>  
-                        </div>
-                    </div>
-
-                    <!-- Display callories -->
-                    <div class="media border p-3">
-                        <img src="../assets/images/chick.png" alt="Callories" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-                        <div class="media-body">
-                            <h4>Callories</h4>
-                            <p><input type="text" size="6" id="callories"><span>&ensp;Kcal</span></p>  
-                        </div>
-                    </div>
-
+    <div class="modal fade" id="signin-form-container" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng nhập</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
-
-                <div class="col-sm-6">
-                    
-                    <!-- Display Status -->
-                    <div class="media border p-3">
-                        <img src="../assets/images/battery.png" alt="status" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-                        <div class="media-body">
-                            <h5>Status  <input type="text" size="6" id="status"></h5>
-                            <p>Level:&ensp;&ensp;&ensp;<input type="text" size="10" id="status-time"></p>  
+                <div class="modal-body">
+                    <form id="signin-form">
+                        <div class="form-group">
+                            <label for="signin-email">Địa chỉ email</label>
+                            <input type="email" class="form-control" id="signin-email" aria-describedby="emailHelp"
+                                placeholder="Nhập vào địa chỉ email">
+                            <small id="emailHelp" class="form-text text-muted">Chúng tôi sẽ không cho ai khác biết tài
+                                khoản của bạn.</small>
                         </div>
-                    </div>
-
-                    <!-- Display Fat -->
-                    <div class="media border p-3">
-                        <img src="../assets/images/fatburn.png" alt="Fat burn" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-                        <div class="media-body">
-                            <h4>Fat burned  </h4>
-                            <p>Total:&ensp;&ensp;<input type="text" size="6" id="fat_gramms"></p>  
+                        <div class="form-group">
+                            <label for="signin-password">Mật khẩu</label>
+                            <input type="password" class="form-control" id="signin-password"
+                                placeholder="Nhập vào mật khẩu">
                         </div>
-                    </div>
-
-                    <!-- Display Meters -->
-                    <div class="media border p-3">
-                        <img src="../assets/images/meter.png" alt="meters" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-                        <div class="media-body">
-                            <h4>Meters</h4>
-                            <p>Total:&ensp;&ensp;<input type="text" size="6" id="meters">&ensp;meters</p>  
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="remember-me">
+                            <label class="form-check-label" for="remember-me">Nhớ tài khoản</label>
                         </div>
-                    </div>
+                    </form>
+                </div>
 
+                <div class="modal-footer">
+                    <button type="button" id="signin-form-submit-button" class="btn btn-primary">Đăng nhập</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
-        
-            <!-- thiết lập kích thước cho graph thông qua id ChartContainer đã thiết lập ở trên  -->
-            <div style="margin: 20px 15px 15px 10px">
-                <div class="containner-fluid">
-                    <div id="ChartContainer" style="height: 300px; width:100%;"></div>
-                </div>
+        </div>
+    </div>
 
-            <!-- Hien thi cac bai viet lien quan -->    
-            </div class='row' id='news'>
-            
-            <div>
-                
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h2> HEATHCARE APPLICATION IOT</h2><br>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+            <div class="col-lg-5 col-md-5 col-sm-4">
+
+                <div class="display">
+                    <div class="row">
+                        <form id="render-data">
+                            <input type="text" name="add" size="28" id="mac-add">
+                            <button type="submit" class="btn btn-primary btn-sm" id="btn_connect"><span
+                                    id="spinner"></span>Connect</button>
+                        </form>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <span>List of MAC addresses connected:&ensp;</span>
+                        <button id="get-mac" class="btn btn-primary btn-sm">Get MAC</button>
+                    </div>
+                    <div class="row">
+                        <ol id="list_mac">
+
+                        </ol>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label>Gender:&ensp;</label><input type="text" name="gender" size="4"
+                            id="gender" /><span>&emsp;</span>
+                        <label>Old:&ensp; </label><input type='text' name="old" size="4" id="old" /><span>&emsp;</span>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                            data-target="#inforModal">Change</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p>Device's name:</p>
+                <p>Device's address:</p>
+                <p>User's name:</p>
+                <p>Email:</p>
             </div>
 
         </div>
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>     
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-       
-        <script src="../assets/js/utils/ActiveCurrentTabInNavbar.js"></script>
+        <div class="modal" id="inforModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <i class='fas fa-users' style='font-size:24px'>&ensp;</i>
+                        <h4>Infor user</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
 
-        <script src="../assets/js/renderData.js"></script>
-        <script src="../assets/js/getMac.js"></script>
-        <script src="../assets/js/inforUser.js"></script>
-        <script src="../assets/js/socketio.js"></script>
-        <script src="../assets/js/renderNews.js"></script>
-    </body>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="form-group">
+                                <label for="new_gender">Choose Sex:</label>
+                                <select class="form-control" id="new_gender">
+                                    <option></option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="new_old">Enter old:</label>
+                                <input type="text" class="form-control" id="new_old">
+                            </div>
+                            <button type="submit" id="change_infor" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                <!-- Display heart raw -->
+                <div class="media border p-3" id="heart_rate_box">
+                    <img id="heart_image" src="../assets/images/heart.png" alt="Heart-rate"
+                        class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                    <div class="media-body">
+                        <h4>Heart-raw</h4>
+                        <p><input type="text" size="6" id="heart_rate"><span>&ensp;beat</span></p>
+                    </div>
+                </div>
+
+                <!-- Display step -->
+                <div class="media border p-3">
+                    <img src="../assets/images/step.png" alt="Real-time step" class="mr-3 mt-3 rounded-circle"
+                        style="width:60px;">
+                    <div class="media-body">
+                        <h4>Real-time step</h4>
+                        <p><input type="text" size="6" id="steps"><span>&ensp;steps</span></p>
+                    </div>
+                </div>
+
+                <!-- Display callories -->
+                <div class="media border p-3">
+                    <img src="../assets/images/chick.png" alt="Callories" class="mr-3 mt-3 rounded-circle"
+                        style="width:60px;">
+                    <div class="media-body">
+                        <h4>Callories</h4>
+                        <p><input type="text" size="6" id="callories"><span>&ensp;Kcal</span></p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-6">
+
+                <!-- Display Status -->
+                <div class="media border p-3">
+                    <img src="../assets/images/battery.png" alt="status" class="mr-3 mt-3 rounded-circle"
+                        style="width:60px;">
+                    <div class="media-body">
+                        <h5>Status <input type="text" size="6" id="status"></h5>
+                        <p>Level:&ensp;&ensp;&ensp;<input type="text" size="10" id="status-time"></p>
+                    </div>
+                </div>
+
+                <!-- Display Fat -->
+                <div class="media border p-3">
+                    <img src="../assets/images/fatburn.png" alt="Fat burn" class="mr-3 mt-3 rounded-circle"
+                        style="width:60px;">
+                    <div class="media-body">
+                        <h4>Fat burned </h4>
+                        <p>Total:&ensp;&ensp;<input type="text" size="6" id="fat_gramms"></p>
+                    </div>
+                </div>
+
+                <!-- Display Meters -->
+                <div class="media border p-3">
+                    <img src="../assets/images/meter.png" alt="meters" class="mr-3 mt-3 rounded-circle"
+                        style="width:60px;">
+                    <div class="media-body">
+                        <h4>Meters</h4>
+                        <p>Total:&ensp;&ensp;<input type="text" size="6" id="meters">&ensp;meters</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- thiết lập kích thước cho graph thông qua id ChartContainer đã thiết lập ở trên  -->
+        <div style="margin: 20px 15px 15px 10px">
+            <div class="containner-fluid">
+                <div id="ChartContainer" style="height: 300px; width:100%;"></div>
+            </div>
+
+            <!-- Hien thi cac bai viet lien quan -->
+            <div class='row' id='news'></div>
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script src="../assets/js/utils/ActiveCurrentTabInNavbar.js"></script>
+
+    <script src="../assets/js/ble/Ble.js"></script>
+    <script src="../assets/js/renderData.js"></script>
+    <script src="../assets/js/getMac.js"></script>
+    <script src="../assets/js/inforUser.js"></script>
+    <script src="../assets/js/socketio.js"></script>
+    <script src="../assets/js/renderNews.js"></script>
+</body>
+
 </html>
