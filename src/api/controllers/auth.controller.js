@@ -1,25 +1,32 @@
 const httpStatus = require('http-status');
 const jwt = require('jsonwebtoken');
-const { validationResult } = require('express-validator');
 
 const UserModel = require('../models/user.model');
-const { APIError } = require('../utils/APIErrors');
-const { secretKey } = require('../../config/vars');
+const {
+    APIError
+} = require('../utils/APIErrors');
+const {
+    secretKey
+} = require('../../config/vars');
 
 module.exports.signup = async (req, res, next) => {
-    try {        
+    try {
         const {
-            email, 
+            email,
             name,
             password,
             phone,
             age,
-            gender,            
+            gender,
         } = req.body;
-        
-        const isEmailExisted = await UserModel.findOne({ email }).lean();        
+
+        const isEmailExisted = await UserModel.findOne({
+            email
+        }).lean();
         if (isEmailExisted) {
-            return res.status(httpStatus.BAD_REQUEST).json({ msg: 'This email is already taken' }).end();
+            return res.status(httpStatus.BAD_REQUEST).json({
+                msg: 'This email is already taken'
+            }).end();
         }
 
         const newUser = await new UserModel({
@@ -28,10 +35,16 @@ module.exports.signup = async (req, res, next) => {
             password,
             phone,
             age: parseInt(age),
-            gender,            
+            gender,
         }).save();
 
-        return res.status(httpStatus.CREATED).json(newUser).end();
+        return res.status(httpStatus.CREATED)
+            .json({
+                user: newUser,
+                msg: 'Successfully create new account'
+            })
+            .end();
+
     } catch (error) {
         next(error);
     }
@@ -46,22 +59,33 @@ module.exports.signin = async (req, res, next) => {
 
         const user = await UserModel.findUserByEmail(email);
         if (user instanceof APIError) {
-            return res.status(httpStatus.BAD_REQUEST).json(user).end();
+            return res.status(user.status)
+                .json({
+                    msg: user.message
+                })
+                .end();
         }
-                        
-        const isPasswordMatched = await user.comparePassword(password);        
+
+        const isPasswordMatched = await user.comparePassword(password);
         if (isPasswordMatched instanceof APIError) {
-            return res.status(httpStatus.BAD_REQUEST).json(isPasswordMatched).end();
-        }
+            return res.status(isPasswordMatched.status)
+                .json({
+                    msg: isPasswordMatched.message
+                })
+                .end();
+        }        
 
         const token = await jwt.sign({
             id: user._id
-        }, secretKey, { expiresIn: '24h' });
+        }, secretKey, {
+            expiresIn: '24h'
+        });
 
         return res.status(httpStatus.OK)
-            .json({ 
+            .json({
                 user,
-                token: 'Bearer ' + token
+                token: 'Bearer ' + token,
+                msg: 'Successfully log in, wait a minute.'
             })
             .end();
     } catch (error) {

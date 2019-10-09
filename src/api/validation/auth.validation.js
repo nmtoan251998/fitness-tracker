@@ -36,10 +36,10 @@ exports.validateSignUpInput = [
         .withMessage('Age field is required')
         .bail()
         .isDecimal()
-        .withMessage('Are you kidding me?')
+        .withMessage('Age field must be an integer')
         .bail()
         .isInt({ gt: 0 })
-        .withMessage('Are you serious?'),
+        .withMessage('Age field must be greater than 0'),
 
     check('gender')
         .not()

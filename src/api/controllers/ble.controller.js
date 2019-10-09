@@ -151,11 +151,11 @@ module.exports.startPython = async (req, res, next) => {
                 shell: true,
                 cwd: path.join(__dirname, '../../utils/miband2')
             }
-        );        
-
+        );
+        
         socket.on('disconnect', () => {
             process.kill(-child.pid);
-        })
+        });
         
         // because the child_process is infinite request, we need to end req-res lifecycle in the first time
         // prevent the header is sent again

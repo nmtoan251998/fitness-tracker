@@ -1,4 +1,5 @@
 const Router = require('express').Router();
+const passport = require('passport');
 
 const {
     homePage,
@@ -6,6 +7,8 @@ const {
     newsPage,
     fagPage,
     notFoundPage,
+    unauthorizedPage,
+    forbiddenPage,
 } = require('../controllers/main.controller');
 
 /**
@@ -20,7 +23,11 @@ Router.route('/').get(homePage);
  * @api {get} /news
  * @public
  */
-Router.route('/news').get(newsPage);
+Router.route('/news')
+    .get(passport.authenticate('jwt', {
+        session: false,
+        failureRedirect: '/401'
+    }), newsPage);
 
 /**
  * Render ble page
@@ -42,5 +49,19 @@ Router.route('/fag').get(fagPage);
  * @public
  */
 Router.route('/404').get(notFoundPage);
+
+/**
+ * Render unauthorized page
+ * @api {get} /401
+ * @public
+ */
+Router.route('/401').get(unauthorizedPage);
+
+/**
+ * Render forbidden page
+ * @api {get} /403
+ * @public
+ */
+Router.route('/403').get(forbiddenPage);
 
 module.exports = Router;

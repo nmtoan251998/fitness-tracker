@@ -19,6 +19,8 @@ const {
 // Express instance
 const {
     notFound,
+    unauthorized,
+    forbidden,
     errorHandler
 } = require('../api/middlewares/errorHandler.middleware');
 const Router = require(path.join(__dirname, '../api/routes/index.route'));
@@ -62,6 +64,8 @@ app.use(adminRouter);
 
 // Global errors handler
 app.use(notFound);
+app.use(forbidden);
+app.use(unauthorized);
 app.use(errorHandler);
 
 /**

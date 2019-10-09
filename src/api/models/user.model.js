@@ -79,6 +79,7 @@ UserSchema.method({
      * @param {String} candidatePassword 
      * 
      * @return {Boolean}
+     * @throws {<APIError>}
      */
     comparePassword: async function(candidatePassword) {
         try {

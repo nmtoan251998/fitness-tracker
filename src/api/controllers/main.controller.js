@@ -50,3 +50,23 @@ module.exports.notFoundPage = (req, res, next) => {
         next(error);
     }
 }
+
+module.exports.unauthorizedPage = (req, res, next) => {
+    try {
+        const pathToFile = path.join(__dirname, '../../../dist/401.html');
+        return res.status(httpStatus.OK)
+            .sendFile(pathToFile);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.forbiddenPage = (req, res, next) => {
+    try {
+        const pathToFile = path.join(__dirname, '../../../dist/403.html');
+        return res.status(httpStatus.OK)
+            .sendFile(pathToFile);
+    } catch (error) {
+        next(error);
+    }
+}

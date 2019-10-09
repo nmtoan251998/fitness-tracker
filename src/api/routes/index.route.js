@@ -1,4 +1,5 @@
 const Router = require('express').Router();
+const passport = require('passport');
 
 const mainRoutes = require('./main.route');
 const authRoutes = require('./auth.route');
