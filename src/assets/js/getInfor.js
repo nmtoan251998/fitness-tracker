@@ -6,7 +6,7 @@ $(document).ready(async function(){
 		try {      
 			const getInfor = await axios({
 				method: 'get',
-				url: '/api/ble/'
+				url: '/api/auth/'
 			});
 
 			console.log(getInfor);
