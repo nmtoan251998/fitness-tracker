@@ -2,6 +2,18 @@ const httpStatus = require('http-status');
 
 const UserModel = require('../models/user.model');
 
+module.exports.getQueryToken = (req, res, next) => {
+    try {        
+        const token = req.cookies.jwt;
+
+        req.headers.authorization = 'Bearer ' + token;
+        
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports.isAdmin = async (req, res, next) => {
     const currentUser = req.user;
 

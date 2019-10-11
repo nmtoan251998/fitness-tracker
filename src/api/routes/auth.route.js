@@ -3,6 +3,7 @@ const Router = require('express').Router();
 const {
     signup,
     signin,
+    logout,
 } = require('../controllers/auth.controller');
 
 const {
@@ -72,5 +73,15 @@ Router.route('/signup').post(validateSignUpInput, signup);
 * @apiError (Unprocessable Entity 422) {Array<Object>} {}.location - Error location
 */
 Router.route('/signin').post(validateSignInInput, signin);
+
+/**
+* @api {get} /auth/logout
+* @apiDescription Clear jwt cookie value
+* @apiGroup Auth
+* @apiPermission Public
+*
+* @apiSuccess (OK 200) {String} msg - Cookie cleared
+*/
+Router.route('/logout').get(logout);
 
 module.exports = Router;

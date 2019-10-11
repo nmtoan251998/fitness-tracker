@@ -42,10 +42,8 @@ export const changeNavBarWhenLogedIn = (isLogedIn) => {
     $('.signined-user').text(email);
 }
 
-export const auth = (isLogedIn) => {
-    if (isLogedIn === false) {
-        // return window.location = '/';
-    }
+export const auth = () => {
+    
 }
 
 export const signin = (email, password) => {
@@ -66,7 +64,6 @@ export const signin = (email, password) => {
             })
 
             if (signinResult.status === 200) {
-                console.log(signinResult);
                 HandleResponse('.signin-response', signinResult.data.msg, signinResult.status);
                 // handle response
                 saveAuthData({ token: signinResult.data.token, email: signinResult.data.user.email });
@@ -78,10 +75,9 @@ export const signin = (email, password) => {
 
                     changeNavBarWhenLogedIn(true);
                 }, 1500);                
-            }            
+            }
             return;
-        } catch (error) {            
-            console.log(error.response);
+        } catch (error) {
             if (error.response.data.msg) {
                 HandleResponse('.signin-response', error.response.data.msg, error.response.status);    
             } else {
@@ -145,10 +141,12 @@ export const signup = () => {
 }
 
 export const logout = () => {
-    $('.logout').on('click', (event) => {
+    $('.logout').on('click', async (event) => {
         event.preventDefault();
 
         deleteAuthData();
+
+        await axios.get('/auth/logout');
 
         window.location = window.location.pathname;
     });

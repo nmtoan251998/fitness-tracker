@@ -11,6 +11,10 @@ const {
     forbiddenPage,
 } = require('../controllers/main.controller');
 
+const {
+    getQueryToken
+} = require('../middlewares/auth.middleware');
+
 /**
  * Render home page
  * @api {get} /
@@ -21,14 +25,14 @@ Router.route('/').get(homePage);
 /**
  * Render news page
  * @api {get} /news
- * @public
+ * @private
  */
 Router.route('/news')
-    .get(passport.authenticate('jwt', {
-        session: false,
-        failureRedirect: '/401'
-    }), newsPage);
-
+    .get(getQueryToken,
+        passport.authenticate('jwt', {
+            session: false,
+            failureRedirect: '/401'
+    }),newsPage);    
 /**
  * Render ble page
  * @api {get} /ble

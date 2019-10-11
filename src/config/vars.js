@@ -17,5 +17,8 @@ module.exports = {
         apiKey: process.env.SMS_API_KEY,
         apiSecret: process.env.SMS_API_SECRET
     },
-    secretKey: process.env.APP_SECRET_KEY
+    secretKey: {
+        value: process.env.APP_SECRET_KEY,
+        expiration: process.env.APP_SECRET_KEY_EXPIRATION
+    }
 };

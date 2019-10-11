@@ -6,7 +6,8 @@ const {
     APIError
 } = require('../utils/APIErrors');
 const {
-    secretKey
+    secretKey,
+    env
 } = require('../../config/vars');
 
 module.exports.signup = async (req, res, next) => {
@@ -73,12 +74,18 @@ module.exports.signin = async (req, res, next) => {
                     msg: isPasswordMatched.message
                 })
                 .end();
-        }        
+        }
 
         const token = await jwt.sign({
-            id: user._id
-        }, secretKey, {
-            expiresIn: '24h'
+                id: user._id
+            },
+            secretKey.value, {
+                expiresIn: secretKey.expiration + 'h'
+            });
+
+        res.cookie('jwt', token, {
+            maxAge: secretKey.expiration * 3600,
+            httpOnly: env === 'production' ? true : false
         });
 
         return res.status(httpStatus.OK)
@@ -88,6 +95,18 @@ module.exports.signin = async (req, res, next) => {
                 msg: 'Successfully log in, wait a minute.'
             })
             .end();
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.logout = (req, res, next) => {
+    try {
+        res.clearCookie('jwt');
+
+        return res.status(httpStatus.OK).json({
+            msg: 'Cookie cleared'
+        }).end();
     } catch (error) {
         next(error);
     }

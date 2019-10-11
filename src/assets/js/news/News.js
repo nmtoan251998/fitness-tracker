@@ -3,14 +3,15 @@ import { signin, signup, checkLogIn, changeNavBarWhenLogedIn, logout, auth } fro
 (async () => {    
     changeNavBarWhenLogedIn(checkLogIn());
 
-    // add sign in event 
+    // add sign in event
     await signin();
 
     // add sign up event
     signup();
 
-    auth(checkLogIn());
-
     // add log out event
     logout();
+
+    auth();
 })();
+
