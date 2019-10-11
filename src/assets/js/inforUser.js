@@ -3,7 +3,6 @@ const gender  =	document.getElementById('gender');
 const old     =	document.getElementById('old');
 
 if (old.value == '') {
-  console.log('yyy');
   document.getElementById("get-mac").disabled = true;
   document.getElementById("btn_connect").disabled = true;
 }
@@ -31,7 +30,6 @@ $(document).ready(function(){
 });
 
 if (old.value != ''){
-  console.log('nnnn');
   document.getElementById("get-mac").disabled = false;
   document.getElementById("btn_connect").disabled = false;
 }
