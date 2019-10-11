@@ -1,3 +1,16 @@
+import axios from 'axios';
+
+try {      
+	const warning = await axios({
+		method: 'post',
+		url: '/api/data/warning'
+	});
+	console.log(warning);
+} catch (error) {
+	// handle error response
+	console.log(error.response.data);
+}		
+
 
 const   heart_rate_box   =    document.getElementById('heart_rate_box');
 const   heart_rate       =    document.getElementById('heart_rate');
