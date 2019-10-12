@@ -30,14 +30,14 @@ $(document).ready(function(){
 				const macAdd = event.target.textContent.match(macAddPattern)[0].trim();
 			});
 
-
-			if (connectedAddresses.status != 200) {
-				alert (connectedAddresses.status + ':' + connectedAddresses.statusText);
-			}
 			
 		} catch (error) {
-			// handle error response
-			console.log(error.response.data);
-		}		
+			if (error.response.data.msg) {
+                HandleResponse('.mac-response', error.response.data.msg, error.response.status);    
+            } else {
+                const errorsData = error.response.data.map(data => data.msg);
+                HandleResponse('.mac-response', errorsData, error.response.status);
+            }     
+			}		
 	}); 	
 });

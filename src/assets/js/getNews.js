@@ -17,13 +17,13 @@ $(document).ready(async function(){
 			$('#list_news').append(output); 
 		});
 
-		$('#error').empty();
-		if (crawnews.status != 200) {
-			const text = '<div class="alert alert-secondary"><h1><strong>' + crawnews.status + '</strong><span>  ' + crawnews.statusText + '</span></h1></div>';
-			$('#error').append(text);
-		}
+		
 	} catch (error) {
-		// handle error response
-		//console.log(error.response.data);
-	}		
+		if (error.response.data.msg) {
+                HandleResponse('.news-response', error.response.data.msg, error.response.status);    
+            } else {
+                const errorsData = error.response.data.map(data => data.msg);
+                HandleResponse('.news-response', errorsData, error.response.status);
+            }   
+		}		
 }); 	
