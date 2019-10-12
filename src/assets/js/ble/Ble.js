@@ -1,4 +1,4 @@
-import { signin, signup, checkLogIn, changeNavBarWhenLogedIn, logout } from '../utils/Authenticate';
+import { signin, signup, checkLogIn, changeNavBarWhenLogedIn, logout, auth } from '../utils/Authenticate';
 
 (async () => {
     changeNavBarWhenLogedIn(checkLogIn());
@@ -11,4 +11,6 @@ import { signin, signup, checkLogIn, changeNavBarWhenLogedIn, logout } from '../
 
     // add log out event
     logout();
+
+    auth();
 })();

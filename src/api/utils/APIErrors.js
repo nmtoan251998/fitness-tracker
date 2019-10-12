@@ -7,7 +7,7 @@ class ApplicationError extends Error {
         Error.captureStackTrace(this.constructor);
         this.name = this.constructor.name;
         this.message = message;
-        this.status = status;
+        this.status = status;        
     }
 }
 

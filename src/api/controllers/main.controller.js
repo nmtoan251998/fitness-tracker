@@ -13,7 +13,9 @@ module.exports.homePage = (req, res, next) => {
 
 module.exports.newsPage = (req, res, next) => {
     try {
-        const pathToFile = path.join(__dirname, '../../../dist/news.html');
+        const pathToFile = path.join(__dirname, '../../../dist/news.html');                
+        
+        // console.log(res);
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
     } catch (error) {
@@ -24,6 +26,7 @@ module.exports.newsPage = (req, res, next) => {
 module.exports.blePage = (req, res, next) => {
     try {
         const pathToFile = path.join(__dirname, '../../../dist/ble.html');
+
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
     } catch (error) {
@@ -44,6 +47,26 @@ module.exports.fagPage = (req, res, next) => {
 module.exports.notFoundPage = (req, res, next) => {
     try {
         const pathToFile = path.join(__dirname, '../../../dist/404.html');
+        return res.status(httpStatus.OK)
+            .sendFile(pathToFile);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.unauthorizedPage = (req, res, next) => {
+    try {
+        const pathToFile = path.join(__dirname, '../../../dist/401.html');
+        return res.status(httpStatus.OK)
+            .sendFile(pathToFile);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.forbiddenPage = (req, res, next) => {
+    try {
+        const pathToFile = path.join(__dirname, '../../../dist/403.html');
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
     } catch (error) {
