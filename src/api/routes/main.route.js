@@ -32,7 +32,7 @@ Router.route('/news')
         passport.authenticate('jwt', {
             session: false,
             failureRedirect: '/401'
-    }),newsPage);    
+        }), newsPage);
 /**
  * Render ble page
  * @api {get} /ble

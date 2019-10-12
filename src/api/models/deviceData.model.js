@@ -2,9 +2,7 @@ const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 const Schema = mongoose.Schema;
 
-const {
-    APIError
-} = require('../utils/APIErrors');
+const APIError = require('../utils/APIErrors');
 
 const DeviceDataSchema = new mongoose.Schema({
     user: {
@@ -18,7 +16,7 @@ const DeviceDataSchema = new mongoose.Schema({
         trim: true,
         match: /(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2})/g,
         unique: true,
-    }, 
+    },
     serial: {
         type: String,
         trim: true,
@@ -38,10 +36,9 @@ const DeviceDataSchema = new mongoose.Schema({
         required: true,
     },
     connectionTime: [String]
-},  {
-        timestamps: true
-    }
-);
+}, {
+    timestamps: true
+});
 
 /**
  * Add yours
@@ -70,15 +67,25 @@ DeviceDataSchema.static({
      *  - message: No data found
      *  - status: 404
      */
-    findByMacAdd: async function(macAdd) {
+    findByMacAdd: async function (macAdd) {
         try {
-            const MACAddPattern = new RegExp(/(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2})$/g);            
-            
-            if (!MACAddPattern.test(macAdd)) throw new APIError('Wrong MAC address pattern', httpStatus.BAD_REQUEST)            
+            const MACAddPattern = new RegExp(/(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2})$/g);
 
-            const data = await this.findOne({ macAdd: macAdd }).lean();            
+            if (!MACAddPattern.test(macAdd)) {
+                throw new APIError({
+                    message: 'Wrong MAC address pattern',
+                    status: httpStatus.BAD_REQUEST
+                })
+            }
 
-            if (!data) throw new APIError('No data found', httpStatus.NOT_FOUND);
+            const data = await this.findOne({
+                macAdd: macAdd
+            }).lean();
+
+            if (!data) throw new APIError({
+                message: 'No data found',
+                status: httpStatus.NOT_FOUND
+            });
 
             return data;
         } catch (error) {

@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const httpStatus = require('http-status');
 
-const { APIError } = require('../utils/APIErrors');
-const { env } = require('../../config/vars');
+const APIError = require('../utils/APIErrors');
+const {
+    env
+} = require('../../config/vars');
 
 const UserSchema = new mongoose.Schema({
     email: {
@@ -29,7 +31,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true,
         lowercase: true,
-        required: true,    
+        required: true,
     },
     age: {
         type: Number,
@@ -46,10 +48,9 @@ const UserSchema = new mongoose.Schema({
         lowercase: true,
         trim: true,
     }
-    }, {
-        timestamps: true,
-    }
-);
+}, {
+    timestamps: true,
+});
 
 /**
  * Add yours
@@ -62,15 +63,15 @@ const UserSchema = new mongoose.Schema({
  * Hash users password in the pre-save hook
  * @return {Promise<String>}
  */
-UserSchema.pre('save', async function() {
-    try {      
+UserSchema.pre('save', async function () {
+    try {
         const round = (env === 'test') ? 1 : 10;
         const user = this;
-        
+
         user.password = await bcrypt.hash(this.password, round);
     } catch (error) {
         return error;
-    }    
+    }
 })
 
 UserSchema.method({
@@ -81,18 +82,21 @@ UserSchema.method({
      * @return {Boolean}
      * @throws {<APIError>}
      */
-    comparePassword: async function(candidatePassword) {
+    comparePassword: async function (candidatePassword) {
         try {
             const isPasswordMatched = await bcrypt.compare(candidatePassword, this.password);
             if (!isPasswordMatched) {
 
-                throw new APIError('Wrong email or password', httpStatus.BAD_REQUEST);
-            }            
+                throw new APIError({
+                    message: 'Wrong email or password',
+                    status: httpStatus.BAD_REQUEST
+                });
+            }
             return isPasswordMatched;
-        } catch(error) {
+        } catch (error) {
             return error;
-        }        
-    },        
+        }
+    },
 })
 
 UserSchema.static({
@@ -102,17 +106,22 @@ UserSchema.static({
      * 
      * @return {<User>}
      */
-    findUserByEmail: async function(email) {
+    findUserByEmail: async function (email) {
         try {
-            const user = await this.findOne({ email: email });
+            const user = await this.findOne({
+                email: email
+            });
             if (!user) {
-                throw new APIError('No user found with this email', httpStatus.BAD_REQUEST);
+                throw new APIError({
+                    message: 'No user found with this email',
+                    status: httpStatus.BAD_REQUEST
+                });
             }
-            
+
             return user;
         } catch (error) {
             return error;
-        }                
+        }
     },
 
     /**
@@ -123,16 +132,19 @@ UserSchema.static({
      * 
      * @throws {<APIError>}
      */
-    findUserById: async function(id) {
-        try {            
-            if (!mongoose.Types.ObjectId.isValid(id)) {                
-                throw new APIError('Invalid user id', httpStatus.BAD_REQUEST);
-            }            
+    findUserById: async function (id) {
+        try {
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                throw new APIError({
+                    message: 'Invalid user id',
+                    status: httpStatus.BAD_REQUEST
+                });
+            }
 
             const user = await this.findById(id);
 
             return user;
-        } catch (error) {            
+        } catch (error) {
             return error;
         }
     }
