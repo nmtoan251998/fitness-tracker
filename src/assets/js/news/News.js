@@ -1,4 +1,4 @@
-/*import { signin, signup, checkLogIn, changeNavBarWhenLogedIn, logout, auth } from '../utils/Authenticate';
+import { signin, signup, checkLogIn, changeNavBarWhenLogedIn, logout, auth } from '../utils/Authenticate';
 
 (async () => {    
     changeNavBarWhenLogedIn(checkLogIn());
@@ -14,4 +14,3 @@
 
     auth();
 })();
-*/
