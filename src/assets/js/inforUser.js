@@ -2,6 +2,11 @@
 const gender  =	document.getElementById('gender');
 const old     =	document.getElementById('old');
 
+if (old.value == '') {
+  document.getElementById("get-mac").disabled = true;
+  document.getElementById("btn_connect").disabled = true;
+}
+
 if ( typeof(Storage) !== "undefined") {
     old.value     = 	localStorage.getItem('old');
     gender.value 	=	localStorage.getItem('gender');	
@@ -24,5 +29,9 @@ $(document).ready(function(){
   });
 });
 
+if (old.value != ''){
+  document.getElementById("get-mac").disabled = false;
+  document.getElementById("btn_connect").disabled = false;
+}
 
 

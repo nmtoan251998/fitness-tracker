@@ -13,7 +13,7 @@ $(document).ready(function(){
 				method: 'get',
 				url: '/api/ble/mac'
 			});
-
+			console.log(connectedAddresses);
 			// remove duplicate elements from array
 			const macAddresses = [...new Set([...connectedAddresses.data.addresses])];
 			$('#list_mac').empty();
@@ -29,10 +29,15 @@ $(document).ready(function(){
 				const macAddPattern =  /(([a-zA-Z0-9]{2}:){5})([a-zA-Z0-9]{2})/;
 				const macAdd = event.target.textContent.match(macAddPattern)[0].trim();
 			});
+
 			
 		} catch (error) {
-			// handle error response
-			console.log(error.response.data);
-		}		
+			if (error.response.data.msg) {
+                HandleResponse('.mac-response', error.response.data.msg, error.response.status);    
+            } else {
+                const errorsData = error.response.data.map(data => data.msg);
+                HandleResponse('.mac-response', errorsData, error.response.status);
+            }     
+			}		
 	}); 	
 });
