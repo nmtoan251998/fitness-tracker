@@ -8,7 +8,7 @@ const {
     redisPort
 } = require('../../config/vars');
 const APIError = require('../utils/APIErrors');
-const NewsHealthPosts = require('../models/newsHealthPost');
+const NewsHealthPosts = require('../models/newsHealthPost.model');
 
 const redisClient = redis.createClient(redisPort);
 const baseCrawlURI = 'https://baomoi.com/suc-khoe-y-te.epi';

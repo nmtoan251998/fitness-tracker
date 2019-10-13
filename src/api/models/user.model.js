@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const httpStatus = require('http-status');
+const jwt = require('jsonwebtoken');
 
 const APIError = require('../utils/APIErrors');
 const {
-    env
+    env,
+    secretKey
 } = require('../../config/vars');
 
 const UserSchema = new mongoose.Schema({
@@ -88,7 +90,7 @@ UserSchema.method({
             if (!isPasswordMatched) {
 
                 throw new APIError({
-                    message: 'Wrong email or password',
+                    message: 'Sai tài khoản hoặc mật khẩu rùi',
                     status: httpStatus.BAD_REQUEST
                 });
             }
@@ -113,7 +115,7 @@ UserSchema.static({
             });
             if (!user) {
                 throw new APIError({
-                    message: 'No user found with this email',
+                    message: 'Không tìm thấy email nào giống như này cả',
                     status: httpStatus.BAD_REQUEST
                 });
             }
@@ -147,6 +149,15 @@ UserSchema.static({
         } catch (error) {
             return error;
         }
+    },
+    /**
+     * Verify a json web token and return current loged in user id
+     * @param {String} token - json web token
+     * 
+     * @return {ObjecId}
+     */
+    verifyJwt: async function(token) {
+        return await jwt.verify(token, secretKey.value);
     }
 })
 

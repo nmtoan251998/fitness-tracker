@@ -1,6 +1,12 @@
 const Router = require('express').Router();
 const passport = require('passport');
 
+const {
+    isLogedIn
+} = require('../middlewares/auth.middleware');
+
+Router.use(isLogedIn);
+
 const mainRoutes = require('./main.route');
 const authRoutes = require('./auth.route');
 

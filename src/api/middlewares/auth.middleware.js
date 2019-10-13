@@ -2,11 +2,20 @@ const httpStatus = require('http-status');
 
 const UserModel = require('../models/user.model');
 
+module.exports.isLogedIn = (req, res, next) => {
+    try {
+        // console.log(req);
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports.getQueryToken = (req, res, next) => {
     try {
         const token = req.cookies.jwt;
 
-        req.headers.authorization = 'Bearer ' + token;
+        req.headers.authorization = token;
 
         next();
     } catch (error) {

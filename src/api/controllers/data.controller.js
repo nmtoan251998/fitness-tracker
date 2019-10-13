@@ -3,10 +3,10 @@ const nodemailer = require('nodemailer');
 
 const {
     mailer
-} = require('../../utils/mailer');
+} = require('../../lib/mailer');
 const {
     sendWarningMsg
-} = require('../../utils/messenger');
+} = require('../../lib/messenger');
 
 module.exports.sendWarningSMS = async (req, res, next) => {
     try {

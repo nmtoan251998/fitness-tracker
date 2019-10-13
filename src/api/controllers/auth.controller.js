@@ -76,7 +76,7 @@ module.exports.signin = async (req, res, next) => {
             }
         );
 
-        res.cookie("jwt", token, {
+        res.cookie("jwt", 'Bearer ' +token, {
             maxAge: secretKey.expiration * 3600,
             httpOnly: env === "production" ? true : false
         });
@@ -84,9 +84,10 @@ module.exports.signin = async (req, res, next) => {
         return res
             .status(httpStatus.OK)
             .json({
+                msg: "Đăng nhập thành công, chờ xíu.",
                 user,
                 token: "Bearer " + token,
-                msg: "Successfully log in, wait a minute."
+                tokenExpiration: secretKey.expiration * 3600
             })
             .end();
     } catch (error) {
