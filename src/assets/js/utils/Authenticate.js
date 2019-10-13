@@ -1,24 +1,39 @@
 import axios from 'axios';
 import HandleResponse from './HandleServerResponse';
 
-const saveAuthData = ({ token, email }) => {
-    localStorage.setItem('jwtAuth', token);
+const saveAuthData = ({ token, tokenExpiration, email }) => {
+    localStorage.setItem('jwtExpiration', tokenExpiration);
+    localStorage.setItem('jwt', token);
     localStorage.setItem('user', email);
 }
 
 const deleteAuthData = () => {
-    localStorage.removeItem('jwtAuth');
+    localStorage.removeItem('jwtExpiration');
+    localStorage.removeItem('jwt');
     localStorage.removeItem('user');
 }
 
 const getAuthData = () => {
-    const token = localStorage.getItem('jwtAuth');
+    const expiration = localStorage.getItem('jwtExpiration');
+    const token = localStorage.getItem('jwt');
     const email = localStorage.getItem('user');
 
     return {
+        tokenExpiration: expiration,
         token: token,
         email: email
     }
+}
+
+const reAuth = () => {        
+    const { token, tokenExpiration } = getAuthData();
+    
+    const now = new Date();
+    const time = now.getTime();
+    const expireTime = time + tokenExpiration;
+    now.setTime(expireTime);
+
+    document.cookie = `jwt=${token};expires=${now.toGMTString()};path=/`;
 }
 
 export const checkLogIn = () => {
@@ -28,8 +43,10 @@ export const checkLogIn = () => {
         return false;
     }
 
+    reAuth();
     return true;
 }
+
 
 export const changeNavBarWhenLogedIn = (isLogedIn) => {
     if (isLogedIn === false) return;
@@ -66,7 +83,11 @@ export const signin = (email, password) => {
             if (signinResult.status === 200) {
                 HandleResponse('.signin-response', signinResult.data.msg, signinResult.status);
                 // handle response
-                saveAuthData({ token: signinResult.data.token, email: signinResult.data.user.email });
+                saveAuthData({ 
+                    tokenExpiration: signinResult.data.tokenExpiration, 
+                    token: signinResult.data.token, 
+                    email: signinResult.data.user.email 
+                });
                                 
                 signin();
 

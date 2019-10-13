@@ -1,4 +1,9 @@
-
+/**
+ * Handle response and add response message to UI
+ * @param selector - class or id of html element to display messages
+ * @param responseData - response data from server
+ * @param stausCode - response status code
+ */
 export default (selector, responseData, statusCode) => {    
     const messageContainer = document.querySelector(selector);    
 
@@ -14,7 +19,7 @@ export default (selector, responseData, statusCode) => {
     let output = '';
 
     if (typeof responseData === 'string') {
-        output += `<li>${responseData}</li>`;
+        output += `<li style="list-style-type: none">${responseData}</li>`;
     } else {
         responseData.forEach(msg => {
             output += `<li>${msg}</li>`;        

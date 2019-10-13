@@ -2,12 +2,21 @@ const httpStatus = require('http-status');
 
 const UserModel = require('../models/user.model');
 
+module.exports.isLogedIn = (req, res, next) => {
+    try {
+        // console.log(req);
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports.getQueryToken = (req, res, next) => {
-    try {        
+    try {
         const token = req.cookies.jwt;
 
-        req.headers.authorization = 'Bearer ' + token;
-        
+        req.headers.authorization = token;
+
         next();
     } catch (error) {
         next(error);
@@ -21,7 +30,9 @@ module.exports.isAdmin = async (req, res, next) => {
 
     if (user.role !== 'admin') {
         return res.status(httpStatus.FORBIDDEN)
-            .json({ msg: 'You have no permission to access this resource' })
+            .json({
+                msg: 'You have no permission to access this resource'
+            })
             .end();
     }
 
