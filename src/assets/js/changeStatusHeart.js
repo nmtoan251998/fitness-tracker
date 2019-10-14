@@ -10,9 +10,13 @@ function sendWarning (){
 			url: '/api/data/warning/sms'
 		});
 	} catch (error) {
-		// handle error response
-	//	console.log(error.response.data);
-	}	
+			if (error.response.data.msg) {
+                HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
+            } else {
+                const errorsData = error.response.data.map(data => data.msg);
+                HandleResponse('.sms-response', errorsData, error.response.status);
+            }   	
+	};	
 };
 
 function statusDanger(){
