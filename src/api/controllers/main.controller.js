@@ -14,8 +14,7 @@ module.exports.homePage = (req, res, next) => {
 module.exports.newsPage = (req, res, next) => {
     try {
         const pathToFile = path.join(__dirname, '../../../dist/news.html');                
-        
-        // console.log(res);
+                
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
     } catch (error) {
