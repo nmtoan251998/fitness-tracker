@@ -9,6 +9,12 @@ function sendWarning (){
 			method: 'post',
 			url: '/api/data/warning/sms'
 		});
+
+		axios ({
+			method: 'post',
+			url: '/api/data/warning/mail'
+		});
+		
 	} catch (error) {
 			if (error.response.data.msg) {
                 HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
