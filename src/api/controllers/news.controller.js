@@ -116,20 +116,20 @@ module.exports.crawlData = async (req, res, next) => {
 }
 
 module.exports.saveCrawlData = (req, res, next) => {
-    try {
+    try {        
         // set cron job to automatically update news health posts every day at 1 am
         const updateNewsHealthPosts = new CronJob({
-            cronJob: '0 0 1 * * 0-6',
+            cronTime: '0 0 6 * * 0-6',
             onTick: function () {
                 redis.get('news-health', async (error, posts) => {
-                    const today = moment(new Date()).format("DD/MM/YYYY");
+                    const today = moment(new Date()).format("DD/MM/YYYY");                    
                     const healthPosts = await NewsHealthPosts.findCrawledDataByDate(today);
 
                     await NewsHealthPosts
                         .findByIdAndUpdate(
                             healthPosts._id, {
-                            data: posts
-                        }
+                                data: posts
+                            }
                         )
                 })
             },
@@ -178,8 +178,8 @@ module.exports.saveCrawlData = (req, res, next) => {
                 const updatedNewsHealthPosts = await NewsHealthPosts
                     .findByIdAndUpdate(
                         healthPosts._id, {
-                        data: uniqeData
-                    }
+                            data: uniqeData
+                        }
                     );
 
                 return res.status(httpStatus.CREATED).json({
