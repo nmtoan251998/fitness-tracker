@@ -38,6 +38,9 @@ export const renderConnectedMacAddresses = () => {
 					// });
 				});
 			}
+			else {
+				HandleResponse('.mac-response', connectedAddresses.data.msg, connectedAddresses.status);	
+			}
 		} catch (error) {
 			if (error.response.data.msg) {
 				HandleResponse('.mac-response', error.response.data.msg, error.response.status);
