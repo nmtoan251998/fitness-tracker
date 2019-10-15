@@ -4,18 +4,31 @@ import HandleResponse from './utils/HandleServerResponse';
 const   heart_rate_box   =    document.getElementById('heart_rate_box');
 const   heart_rate       =    document.getElementById('heart_rate');
 
-function sendWarning (){
+function sendSMS (){
 	try {      
 		axios({
 			method: 'post',
 			url: '/api/data/warning/sms'
 		});
 
-		axios ({
+	} catch (error) {
+			if (error.response.data.msg) {
+                HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
+            } else {
+                const errorsData = error.response.data.map(data => data.msg);
+                HandleResponse('.sms-response', errorsData, error.response.status);
+            }   	
+	};	
+};
+
+
+function sendMail (){
+	try {      
+		axios({
 			method: 'post',
 			url: '/api/data/warning/mail'
 		});
-
+		
 	} catch (error) {
 			if (error.response.data.msg) {
                 HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
@@ -37,12 +50,16 @@ function statusNormal(){
 };
 
 //Kiểm tra nhịp tim theo lứa tuổi để cảnh báo
-export function changeStatusHeart(rate, old){
-	
+export function changeStatusHeart(rate){
+
+	const oldVal = document.getElementById("old");
+	const old = oldVal.value;
+
 	if (old >= 18 ) {
 		if (rate < 60 || rate > 100) {
 			statusDanger();
-			sendWarning();
+			sendSMS();
+			sendMail()
 		}
 		else {
 			statusNormal();
@@ -52,7 +69,8 @@ export function changeStatusHeart(rate, old){
 	if (old >= 7 && old < 18) {
 		if (rate < 75 || rate > 110) {
 			statusDanger();
-			sendWarning();
+			sendSMS();
+			sendMail()
 		}
 		else {
 			statusNormal();
@@ -62,7 +80,8 @@ export function changeStatusHeart(rate, old){
 	if (old >= 2 && old < 7) {
 		if (rate < 75 || rate > 120) {
 			statusDanger();
-			sendWarning();
+			sendSMS();
+			sendMail()
 		}
 		else {
 			statusNormal();
@@ -72,7 +91,8 @@ export function changeStatusHeart(rate, old){
 	if (old >= 1 && old < 2) {
 		if (rate < 80 || rate > 130) {
 			statusDanger();
-			sendWarning();
+			sendSMS();
+			sendMail()
 		}
 		else {
 			statusNormal();

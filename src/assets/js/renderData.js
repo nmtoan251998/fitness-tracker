@@ -26,7 +26,7 @@ export const updateChart = function (data) {
     const steps             =   document.getElementById("steps");
     const callories         =   document.getElementById("callories");
     const heart_rate        =   document.getElementById("heart_rate");
-    const status        =   document.getElementById("status");
+    const status            =   document.getElementById("status");
     const statusTime        =   document.getElementById("status-time");
 
     heart_rate.value    =   data.heart_rate;
@@ -36,8 +36,9 @@ export const updateChart = function (data) {
     fat_gramms.value    =   data.fat_gramms; 
     status.value        =   data.battery_status;
     statusTime.value    =   data.battery_level; 
-    changeStatusHeart(130, 20);
     
+
+    changeStatusHeart(data.heart_rate);
 
     xVal = data.time;
     yVal = data.heart_rate;
