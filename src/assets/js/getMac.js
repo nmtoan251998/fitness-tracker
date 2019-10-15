@@ -1,5 +1,6 @@
 // XML Http Request instance
 import axios from 'axios';
+import HandleResponse from './HandleServerResponse';
 
 export const renderConnectedMacAddresses = () => {
 	$("#get-mac").click(async function () {
