@@ -36,8 +36,8 @@ export const updateChart = function (data) {
     fat_gramms.value    =   data.fat_gramms; 
     status.value        =   data.battery_status;
     statusTime.value    =   data.battery_level; 
-
-    changeStatusHeart();
+    changeStatusHeart(130, 20);
+    
 
     xVal = data.time;
     yVal = data.heart_rate;

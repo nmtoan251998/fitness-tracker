@@ -1,5 +1,5 @@
 import axios from 'axios';
-import HandleResponse from './HandleServerResponse';
+import HandleResponse from './utils/HandleServerResponse';
 
 $(document).ready(async function(){
 		

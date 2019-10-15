@@ -1,4 +1,5 @@
 import axios from 'axios';
+import HandleResponse from './utils/HandleServerResponse';
 
 const   heart_rate_box   =    document.getElementById('heart_rate_box');
 const   heart_rate       =    document.getElementById('heart_rate');
@@ -10,13 +11,10 @@ function sendWarning (){
 			url: '/api/data/warning/sms'
 		});
 
-	/*	axios ({
+		axios ({
 			method: 'post',
 			url: '/api/data/warning/mail'
 		});
-
-	*/
-
 
 	} catch (error) {
 			if (error.response.data.msg) {
@@ -40,7 +38,7 @@ function statusNormal(){
 
 //Kiểm tra nhịp tim theo lứa tuổi để cảnh báo
 export function changeStatusHeart(rate, old){
-	console.log('hello');
+	
 	if (old >= 18 ) {
 		if (rate < 60 || rate > 100) {
 			statusDanger();
