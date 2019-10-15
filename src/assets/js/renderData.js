@@ -37,8 +37,8 @@ export const updateChart = function (data) {
     status.value        =   data.battery_status;
     statusTime.value    =   data.battery_level; 
     
-
     changeStatusHeart(data.heart_rate);
+    
 
     xVal = data.time;
     yVal = data.heart_rate;

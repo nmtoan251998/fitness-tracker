@@ -54,48 +54,52 @@ export function changeStatusHeart(rate){
 
 	const oldVal = document.getElementById("old");
 	const old = oldVal.value;
+	console.log(old);
+	if (old != '') {
+		if (old >= 18 ) {
+			if (rate < 60 || rate > 100) {
+				statusDanger();
+				sendSMS();
+				sendMail()
+			}
+			else {
+				statusNormal();
+			}
+		};
 
-	if (old >= 18 ) {
-		if (rate < 60 || rate > 100) {
-			statusDanger();
-			sendSMS();
-			sendMail()
-		}
-		else {
-			statusNormal();
-		}
-	};
+		if (old >= 7 && old < 18) {
+			if (rate < 75 || rate > 110) {
+				statusDanger();
+				sendSMS();
+				sendMail()
+			}
+			else {
+				statusNormal();
+			}
+		};
 
-	if (old >= 7 && old < 18) {
-		if (rate < 75 || rate > 110) {
-			statusDanger();
-			sendSMS();
-			sendMail()
-		}
-		else {
-			statusNormal();
-		}
-	};
+		if (old >= 2 && old < 7) {
+			if (rate < 75 || rate > 120) {
+				statusDanger();
+				sendSMS();
+				sendMail()
+			}
+			else {
+				statusNormal();
+			}
+		};
 
-	if (old >= 2 && old < 7) {
-		if (rate < 75 || rate > 120) {
-			statusDanger();
-			sendSMS();
-			sendMail()
-		}
-		else {
-			statusNormal();
-		}
-	};
+		if (old >= 1 && old < 2) {
+			if (rate < 80 || rate > 130) {
+				statusDanger();
+				sendSMS();
+				sendMail()
+			}
+			else {
+				statusNormal();
+			}
+		};	
+	}
 
-	if (old >= 1 && old < 2) {
-		if (rate < 80 || rate > 130) {
-			statusDanger();
-			sendSMS();
-			sendMail()
-		}
-		else {
-			statusNormal();
-		}
-	};
+	
 };
