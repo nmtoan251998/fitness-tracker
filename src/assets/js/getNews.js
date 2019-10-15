@@ -11,7 +11,7 @@ $(document).ready(async function(){
 		});
 
 		 if (crawnews.status === 200) {
-            HandleResponse('.news-response-response', crawnews.data.msg, crawnews.status);
+            HandleResponse('.news-response', crawnews.data.msg, crawnews.status);
 			$('#list_news').empty();
 			console.log(crawnews);
 			crawnews.data.forEach(item => {
