@@ -35,7 +35,6 @@ function statusNormal(){
     heart_rate.style.backgroundColor		= 'white';
 };
 
-
 //Kiểm tra nhịp tim theo lứa tuổi để cảnh báo
 export function changeStatusHeart(rate, old){
 	console.log('hello');

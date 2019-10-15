@@ -2,19 +2,25 @@ import io from 'socket.io-client';
 // XML Http Request instance
 import axios from 'axios';
 
-import { updateChart } from './renderData';
+import {
+    updateChart
+} from './renderData';
+
+import { renderConnectedMacAddresses } from './getMac';
 
 const socket = io();
 
 socket.on('connect', () => {
-    socket.on('result', (result) => {
-        updateChart(result);
+    socket.on('realtime-data', (data) => {
+        updateChart(data);
     });
 
-    socket.on('exit-process', (msg) => {
-        socket.close();        
+    socket.on('exit-process', () => {
+        socket.close();
     });
 });
+
+renderConnectedMacAddresses();
 
 /**
  * Start python script to read data from BLE device
@@ -26,8 +32,8 @@ $("#render-data").on("submit", async (event) => {
     try {
         $("#spinner").addClass("spinner-border spinner-border-sm");
         $('#mac-add').attr('disabled', true);
-        $('#btn_connect').prop('disabled', true);        
-        
+        $('#btn_connect').prop('disabled', true);
+
         const startPythonResult = await axios({
             method: 'get',
             url: '/api/ble/start-python',
@@ -35,20 +41,12 @@ $("#render-data").on("submit", async (event) => {
                 add: document.querySelector('#mac-add').value,
                 socketID: socket.id
             }
-        });        
-
-        // handle successful response
-        console.log(startPythonResult);
+        });
 
         $("#spinner").removeClass("spinner-border spinner-border-sm");
         $('#btn_connect').prop('disabled', false);
-        console.log('Get result, stop loading...');
-
-        setTimeout(() => {
-            socket.emit('meomeo', 'meomeo')
-        }, 5000)
     } catch (error) {
         // handle error response
         console.log(error.response.data);
-    }    
+    }
 });
