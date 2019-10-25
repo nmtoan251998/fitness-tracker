@@ -13,7 +13,6 @@ export const renderConnectedMacAddresses = () => {
 			});
 			// remove duplicate elements from array
 			if (connectedAddresses.status === 200) {
-				HandleResponse('.mac-response', connectedAddresses.data.msg, connectedAddresses.status);
 				const macAddresses = [...new Set([...connectedAddresses.data.addresses])];
 				$('#list_mac').empty();
 				macAddresses.forEach(item => {
