@@ -1,4 +1,42 @@
 import { changeStatusHeart } from './changeStatusHeart';
+import axios from 'axios';
+import HandleResponse from './utils/HandleServerResponse';
+
+// goi api de gui thong bao qua sms va mail
+function sendSMS (){
+    try {      
+        axios({
+            method: 'post',
+            url: '/api/data/warning/sms'
+        }); 
+        console.log ('sent sms');
+    } catch (error) {
+            if (error.response.data.msg) {
+                HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
+            } else {
+                const errorsData = error.response.data.map(data => data.msg);
+                HandleResponse('.sms-response', errorsData, error.response.status);
+            }       
+    };  
+};
+
+
+function sendMail (){
+    try {      
+        axios({
+            method: 'post',
+            url: '/api/data/warning/mail'
+        }); 
+        console.log ('sent email');
+    } catch (error) {
+            if (error.response.data.msg) {
+                HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
+            } else {
+                const errorsData = error.response.data.map(data => data.msg);
+                HandleResponse('.sms-response', errorsData, error.response.status);
+            }       
+    };  
+};
 
 const dps = []; // dataPoints
 const chart = new CanvasJS.Chart("ChartContainer", {
@@ -20,6 +58,10 @@ let xVal = 0;
 let yVal = 0; 
 let dataLength = 10; // number of dataPoints visible at any point
 
+const flag = false;
+
+
+
 export const updateChart = function (data) {
     const fat_gramms        =   document.getElementById("fat_gramms");
     const meters            =   document.getElementById("meters");
@@ -37,8 +79,18 @@ export const updateChart = function (data) {
     status.value        =   data.battery_status;
     statusTime.value    =   data.battery_level; 
     
-    changeStatusHeart(data.heart_rate);
-    
+    const check = changeStatusHeart(100);
+    if (check == 0 && flag === false) {
+        console.log (check);
+        sendSMS();
+        sendMail();
+        flag = true;
+    }
+
+    if (check == 1 ) {
+        console.log (check);
+        flag = false;
+    }
 
     xVal = data.time;
     yVal = data.heart_rate;
@@ -56,62 +108,3 @@ export const updateChart = function (data) {
 };
 
 
-/*
-updateChart(data);
-setInterval(function(){
-    updateChart()
-}, updateInterval);
-
-
-const dataHeart = [];
-    
-const Chart = new CanvasJS.Chart("ChartContainer", {
-    zoomEnabled: true, // Dùng thuộc tính có thể zoom vào graph
-    title: {
-        text: "HEART BEAT GRAPH" // Viết tiêu đề cho graph
-    },
-    toolTip: { // Hiển thị truường trên graph
-        shared: true
-    },
-    axisX: {
-        title: "chart updates every 2 secs" // Chú thích cho trục X
-    },
-    data: [{
-        type: "line", // Chọn kiểu dữ liệu đường
-        xValueType: "dateTime", // Cài đặt kiểu giá trị tại trục X là thuộc tính thời gian
-        showInLegend: true, // Hiển thị "temp" ở mục chú thích (legend items)
-        name: "heart beat",
-        dataPoints: dataHeart // Dữ liệu hiển thị sẽ lấy từ data
-    }],
-});
-let yHeartVal = 0; // Biến lưu giá trị nhip tim theo trục Y
-const time = new Date(); // Lấy thời gian hiện tại
-
-export const updateChart = function(data) {
-    const updateInterval = 2000;
-
-    const fat_gramms    =   document.getElementById("fat_gramms");
-    const meters        =   document.getElementById("meters");
-    const steps         =   document.getElementById("steps");
-    const callories     =   document.getElementById("callories");
-    const heart_rate    =   document.getElementById("heart_rate");
-
-    heart_rate.value    =   data.heart_rate;
-    steps.value         =   data.steps;
-    callories.value     =   data.callories;
-    meters.value        =   data.meters;
-    fat_gramms.value    =   data.fat_gramms;    
-
-    changeStatusHeart();
-
-    time.setTime(time.getTime() + updateInterval);
-    yHeartVal = data.heart_rate;
-    
-    dataHeart.push({ // cập nhât dữ liệu mới từ server
-        x: time.getTime(),
-        y: yHeartVal
-    });
-
-    Chart.render(); // chuyển đổi dữ liệu của của graph thành mô hình đồ họa
-};
-*/

@@ -3,14 +3,14 @@ import HandleResponse from './utils/HandleServerResponse';
 
 const   heart_rate_box   =    document.getElementById('heart_rate_box');
 const   heart_rate       =    document.getElementById('heart_rate');
-
+/*
 function sendSMS (){
 	try {      
 		axios({
 			method: 'post',
 			url: '/api/data/warning/sms'
-		});
-
+		}); 
+		console.log ('sent sms');
 	} catch (error) {
 			if (error.response.data.msg) {
                 HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
@@ -27,8 +27,8 @@ function sendMail (){
 		axios({
 			method: 'post',
 			url: '/api/data/warning/mail'
-		});
-		
+		}); 
+		console.log ('sent email');
 	} catch (error) {
 			if (error.response.data.msg) {
                 HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
@@ -38,7 +38,7 @@ function sendMail (){
             }   	
 	};	
 };
-
+*/
 function statusDanger(){
 	heart_rate_box.style.backgroundColor 	= '#ffb3b3';
     heart_rate.style.backgroundColor 		= '#ffb3b3';
@@ -49,21 +49,28 @@ function statusNormal(){
     heart_rate.style.backgroundColor		= 'white';
 };
 
+
+
 //Kiểm tra nhịp tim theo lứa tuổi để cảnh báo
 export function changeStatusHeart(rate){
 
 	const oldVal = document.getElementById("old");
 	const old = oldVal.value;
 	console.log(old);
+	
 	if (old != '') {
 		if (old >= 18 ) {
 			if (rate < 60 || rate > 100) {
 				statusDanger();
+				return  0;
+				/*
 				sendSMS();
-				sendMail()
+				sendMail();
+				*/
 			}
 			else {
 				statusNormal();
+				return 1;
 			}
 		};
 
@@ -71,7 +78,7 @@ export function changeStatusHeart(rate){
 			if (rate < 75 || rate > 110) {
 				statusDanger();
 				sendSMS();
-				sendMail()
+				sendMail();
 			}
 			else {
 				statusNormal();
@@ -82,7 +89,7 @@ export function changeStatusHeart(rate){
 			if (rate < 75 || rate > 120) {
 				statusDanger();
 				sendSMS();
-				sendMail()
+				sendMail();
 			}
 			else {
 				statusNormal();
@@ -93,13 +100,13 @@ export function changeStatusHeart(rate){
 			if (rate < 80 || rate > 130) {
 				statusDanger();
 				sendSMS();
-				sendMail()
+				sendMail();
 			}
 			else {
 				statusNormal();
 			}
 		};	
 	}
-
+	
 	
 };
