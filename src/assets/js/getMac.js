@@ -18,14 +18,7 @@ export const renderConnectedMacAddresses = () => {
 				macAddresses.forEach(item => {
 					const output = '<li><a class="mac_add" href="/data/start-python?add=' + item + '">' + item + '</a></li>';
 					$('#list_mac').append(output);
-				});
-
-				const macAddresses = [...new Set([...connectedAddresses.data.addresses])];
-				$('#list_mac').empty();
-				macAddresses.forEach(item => {
-					const output = '<li><a class="mac_add" href="/data/start-python?add=' + item + '">' + item + '</a></li>';
-					$('#list_mac').append(output);
-				});
+				});				
 
 				$(".mac_add").on('click', async (event) => {
 					event.preventDefault();
