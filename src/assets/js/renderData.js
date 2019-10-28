@@ -80,7 +80,7 @@ export const updateChart = function (data) {
     status.value        =   data.battery_status;
     statusTime.value    =   data.battery_level; 
     
-    const check = changeStatusHeart(100);
+    const check = changeStatusHeart(data.heart_rate);
     if (check == 0 && flag === false) {
         console.log (check);
         sendSMS();
