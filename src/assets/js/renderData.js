@@ -2,6 +2,7 @@ import { changeStatusHeart } from './changeStatusHeart';
 
 const dps = []; // dataPoints
 const chart = new CanvasJS.Chart("ChartContainer", {
+    maintainAspectRatio: false,
     title :{
         text: "Heart Beat"
     },
@@ -25,14 +26,19 @@ export const updateChart = function (data) {
     const steps             =   document.getElementById("steps");
     const callories         =   document.getElementById("callories");
     const heart_rate        =   document.getElementById("heart_rate");
+    const status            =   document.getElementById("status");
+    const statusTime        =   document.getElementById("status-time");
 
     heart_rate.value    =   data.heart_rate;
     steps.value         =   data.steps;
     callories.value     =   data.callories;
     meters.value        =   data.meters;
     fat_gramms.value    =   data.fat_gramms; 
-
-    changeStatusHeart();
+    status.value        =   data.battery_status;
+    statusTime.value    =   data.battery_level; 
+    
+    changeStatusHeart(data.heart_rate);
+    
 
     xVal = data.time;
     yVal = data.heart_rate;

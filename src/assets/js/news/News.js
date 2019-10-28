@@ -14,4 +14,3 @@ import { signin, signup, checkLogIn, changeNavBarWhenLogedIn, logout, auth } fro
 
     auth();
 })();
-

@@ -6,13 +6,12 @@ body {
     background-color: #141515 !important;
 }
 
-#heart_image {
-            
+#heart_image {     
     display:block;
     -webkit-animation: heartbeat 1s infinite;
 }
-@-webkit-keyframes heartbeat {
 
+@-webkit-keyframes heartbeat {
     92% { transform: scale(1, 1);}
     94% {  transform: scale(1.2, 1.2); }
     96% {  transform: scale(1, 1); }
@@ -23,3 +22,12 @@ body {
 .display {
 	margin-left: 20px;
 }
+
+#list_news li {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+#infor-group button { 
+  width: 100px; 
+} 

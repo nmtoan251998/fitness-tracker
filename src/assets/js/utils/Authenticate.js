@@ -79,7 +79,7 @@ export const signin = (email, password) => {
                     password: passwordVal,
                 }
             })
-
+            console.log(signinResult);
             if (signinResult.status === 200) {
                 HandleResponse('.signin-response', signinResult.data.msg, signinResult.status);
                 // handle response
@@ -99,6 +99,7 @@ export const signin = (email, password) => {
             }
             return;
         } catch (error) {
+            console.log(error.response);
             if (error.response.data.msg) {
                 HandleResponse('.signin-response', error.response.data.msg, error.response.status);    
             } else {

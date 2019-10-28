@@ -219,7 +219,7 @@ module.exports.startPython = async (req, res, next) => {
                     .end();
             }
 
-            socket.emit('result', formatRealtimeData(data.toString()));
+            socket.emit('realtime-data', formatRealtimeData(data.toString()));
         });
 
     } catch (error) {
