@@ -58,6 +58,7 @@ let xVal = 0;
 let yVal = 0; 
 let dataLength = 10; // number of dataPoints visible at any point
 
+// flag check send sms and email
 const flag = false;
 
 
