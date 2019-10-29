@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
+    "doc": "apidoc -i src/ -o docs/api/",
     "clean": "rimraf dist/*  ",
     "test": "mocha --exit src/api/tests/*.test.js --timeout 30000",
     "test-coverage": "nyc npm run test",
@@ -27,6 +28,7 @@
     "last 1 edge version"
   ],
   "dependencies": {
+    "apidoc": "^0.17.7",
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
     "bluebird": "^3.5.5",

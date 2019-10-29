@@ -13,10 +13,10 @@ const {
  * @apiGroup News
  * @apiPermission Public
  *
- * @apiSuccess (OK 200) {Array<Object>} ['href'] - Link to the original post
- * @apiSuccess (OK 200) {Array<Object>} ['title'] - Title of the post
- * @apiSuccess (OK 200) {Array<Object>} ['src'] - Thumbnail of post
- * @apiSuccess (OK 200) {Array<Object>} ['alt'] - Alternative link of thumbnail
+ * @apiSuccess (OK 200) {Object[]} href - Link to the original post
+ * @apiSuccess (OK 200) {Object[]} title - Title of the post
+ * @apiSuccess (OK 200) {Object[]} src - Thumbnail of post
+ * @apiSuccess (OK 200) {Object[]} alt - Alternative link of thumbnail
  *
  * @apiError (Not Found 404) {String} msg - Crawl more data
  *
@@ -30,10 +30,10 @@ Router.route('').get(newsHealthPosts);
  * @apiGroup News
  * @apiPermission Public
  *
- * @apiSuccess (OK 200) {Array<Object>} ['href'] - Link to the original post
- * @apiSuccess (OK 200) {Array<Object>} ['title'] - Title of the post
- * @apiSuccess (OK 200) {Array<Object>} ['src'] - Thumbnail of post
- * @apiSuccess (OK 200) {Array<Object>} ['alt'] - Alternative link of thumbnail
+ * @apiSuccess (OK 200) {Object[]} href - Link to the original post
+ * @apiSuccess (OK 200) {Object[]} title - Title of the post
+ * @apiSuccess (OK 200) {Object[]} src - Thumbnail of post
+ * @apiSuccess (OK 200) {Object[]} alt - Alternative link of thumbnail
  *
  * @apiError (INTERNAL_SERVER_ERROR 500) {String} error.msg - Exceed Timeout
  */
@@ -51,10 +51,10 @@ Router.route('/crawl').post(crawlData);
  * @apiSuccess (Created 201) {String} crawlDate - Crawled date
  * @apiSuccess (Created 201) {Date} createdAt - Document created time
  * @apiSuccess (Created 201) {Date} updatedAt - Document last updated time
- * @apiSuccess (Created 201) {Array<Object>} ['href'] - Link to the original post
- * @apiSuccess (Created 201) {Array<Object>} ['title'] - Title of the post
- * @apiSuccess (Created 201) {Array<Object>} ['src'] - Thumbnail of post
- * @apiSuccess (Created 201) {Array<Object>} ['alt'] - Alternative link of thumbnail
+ * @apiSuccess (Created 201) {Object[]} href - Link to the original post
+ * @apiSuccess (Created 201) {Object[]} title - Title of the post
+ * @apiSuccess (Created 201) {Object[]} src - Thumbnail of post
+ * @apiSuccess (Created 201) {Object[]} alt - Alternative link of thumbnail
  */
 Router.route('/crawl').put(saveCrawlData);
 
@@ -67,12 +67,10 @@ Router.route('/crawl').put(saveCrawlData);
  * @apiParam {String {dd/mm/yyyy} } date - Date to get news health post
  *
  * @apiSuccess (OK 200) {String} date - date to get news health posts
- * @apiSuccess (OK 200) {Array<Object>} ['href'] - Link to the original post
- * @apiSuccess (OK 200) {Array<Object>} ['title'] - Title of the post
- * @apiSuccess (OK 200) {Array<Object>} ['src'] - Thumbnail of post
- * @apiSuccess (OK 200) {Array<Object>} ['alt'] - Alternative link of thumbnail
- *
- * @apiError (StatusMessage StatusCode) {Type} name - Description
+ * @apiSuccess (OK 200) {Object[]} href - Link to the original post
+ * @apiSuccess (OK 200) {Object[]} title - Title of the post
+ * @apiSuccess (OK 200) {Object[]} src - Thumbnail of post
+ * @apiSuccess (OK 200) {Object[]} alt - Alternative link of thumbnail
  */
 Router.route('/date').get(getByDate);
 

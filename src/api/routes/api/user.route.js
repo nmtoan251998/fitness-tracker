@@ -14,7 +14,7 @@ const {
  * @apiGroup User
  * @apiPermission Private
  *
- * @apiSuccess (OK 200) {ObjectId} _id
+ * @apiSuccess (OK 200) {String} _id
  * @apiSuccess (OK 200) {String} email
  * @apiSuccess (OK 200) {String} password
  * @apiSuccess (OK 200) {String} name
@@ -39,16 +39,16 @@ Router.route('')
  * @apiGroup User
  * @apiPermission Private
  *
- * @apiSuccess (OK 200) {Array<Object>} {}._id
- * @apiSuccess (OK 200) {Array<Object>} {}.email
- * @apiSuccess (OK 200) {Array<Object>} {}.password
- * @apiSuccess (OK 200) {Array<Object>} {}.name
- * @apiSuccess (OK 200) {Array<Object>} {}.role
- * @apiSuccess (OK 200) {Array<Object>} {}.gender
- * @apiSuccess (OK 200) {Array<Object>} {}.phone
- * @apiSuccess (OK 200) {Array<Object>} {}.age
- * @apiSuccess (OK 200) {Array<Object>} {}.createdAt
- * @apiSuccess (OK 200) {Array<Object>} {}.updatedAt
+ * @apiSuccess (OK 200) {Object[]} _id
+ * @apiSuccess (OK 200) {Object[]} email
+ * @apiSuccess (OK 200) {Object[]} password
+ * @apiSuccess (OK 200) {Object[]} name
+ * @apiSuccess (OK 200) {Object[]} role
+ * @apiSuccess (OK 200) {Object[]} gender
+ * @apiSuccess (OK 200) {Object[]} phone
+ * @apiSuccess (OK 200) {Object[]} age
+ * @apiSuccess (OK 200) {Object[]} createdAt
+ * @apiSuccess (OK 200) {Object[]} updatedAt
  *
  * @apiError (Unauthorized 401) {String} Unauthorized
  */
@@ -65,7 +65,7 @@ Router.route('/all')
  *
  * @apiSuccess (OK 200) {Number} deletedCount - Number of account deleted
  *
- * @apiError (Bad Request 400) {<APIError>} - Invalid user id
+ * @apiError (Bad Request 400) {Object} APIErorr - Invalid user id
  * @apiError (Unauthorized 401) {String} Unauthorized
  * @apiError (Not Found 404) {String} msg - No users found
  */
@@ -81,9 +81,9 @@ Router.route('/all')
  * @apiGroup User
  * @apiPermission Private
  *
- * @apiParam {ObjectId} id - Valid mongoose id
+ * @apiParam {String} id - Valid mongoose id
  *
- * @apiSuccess (OK 200) {ObjectId} _id
+ * @apiSuccess (OK 200) {String} _id
  * @apiSuccess (OK 200) {String} email
  * @apiSuccess (OK 200) {String} password
  * @apiSuccess (OK 200) {String} name
@@ -94,7 +94,7 @@ Router.route('/all')
  * @apiSuccess (OK 200) {Date} createdAt
  * @apiSuccess (OK 200) {Date} updatedAt
  *
- * @apiError (Bad Request 400) {<APIError>} - Invalid user id
+ * @apiError (Bad Request 400) {Object} APIError - Invalid user id
  * @apiError (Unauthorized 401) {String} Unauthorized
  * @apiError (For Bidden 403) {String} msg - What are you trying to do?
  */

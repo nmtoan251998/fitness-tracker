@@ -13,7 +13,7 @@ const {
  * @apiGroup BLE
  * @apiPermission Public
  *
- * @apiSuccess (OK 200) {[<String>]} addresses - MAC addresses received by spawning shell command
+ * @apiSuccess (OK 200) {String[]} addresses - MAC addresses received by spawning shell command
  */
 Router.route('/mac').get(getConnectedAdds);
 
@@ -41,10 +41,10 @@ Router.route('/start-python').get(startPython)
  *
  * @apiParam {String} mac - MAC address to get device data
  *
- * @apiSuccess (OK 200) {String<ObjectId>} result._id - MongoDb object id
+ * @apiSuccess (OK 200) {String} result._id - MongoDb object id
  * @apiSuccess (OK 200) {String} result.macAdd - Connecting MAC address of BLE
  * @apiSuccess (OK 200) {String} result.serial - Connecting serial of BLE
- * @apiSuccess (OK 200) {[String]} result.connectionTime - Connection time of connecting BLE device
+ * @apiSuccess (OK 200) {String[]} result.connectionTime - Connection time of connecting BLE device
  * @apiSuccess (OK 200) {String} result.softwareRevision - Connecting software revision of BLE
  * @apiSuccess (OK 200) {String} result.hardwareRevision - Connecting hardware revision of BLE
  * @apiSuccess (OK 200) {Date} result.createdAt - Created time of data

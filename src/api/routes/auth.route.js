@@ -24,7 +24,7 @@ const {
  * @apiParam {Number} age - User age
  * @apiParam {String} gender - User gender
  *
- * @apiSuccess (Created 201) {ObjectId} _id
+ * @apiSuccess (Created 201) {String} _id
  * @apiSuccess (Created 201) {String} email
  * @apiSuccess (Created 201) {String} password
  * @apiSuccess (Created 201) {String} name
@@ -36,10 +36,10 @@ const {
  *
  * @apiError (Bad Request 400) {String} msg - This email is already taken
  *
- * @apiError (Unprocessable Entity 422) {Array<Object>} {].value - Error value
- * @apiError (Unprocessable Entity 422) {Array<Object>} {].msg - Error message
- * @apiError (Unprocessable Entity 422) {Array<Object>} {].param - Error parameter
- * @apiError (Unprocessable Entity 422) {Array<Object>} {].location - Error location
+ * @apiError (Unprocessable Entity 422) {Object[]} value - Error value
+ * @apiError (Unprocessable Entity 422) {Object[]} msg - Error message
+ * @apiError (Unprocessable Entity 422) {Object[]} param - Error parameter
+ * @apiError (Unprocessable Entity 422) {Object[]} location - Error location
  */
 Router.route('/signup').post(validateSignUpInput, signup);
 
@@ -52,7 +52,7 @@ Router.route('/signup').post(validateSignUpInput, signup);
  * @apiParam {String} email - User email
  * @apiParam {String} password - User password
  *
- * @apiSuccess (OK 200) {ObjectId} user._id
+ * @apiSuccess (OK 200) {String} user._id
  * @apiSuccess (OK 200) {String} user.email
  * @apiSuccess (OK 200) {String} user.password
  * @apiSuccess (OK 200) {String} user.name
@@ -67,10 +67,10 @@ Router.route('/signup').post(validateSignUpInput, signup);
  * @apiError (Bad Request 400) {String} message - Error description
  * @apiError (Bad Request 400) {Number} status - Error status code
  *
- * @apiError (Unprocessable Entity 422) {Array<Object>} {}.value - Error value
- * @apiError (Unprocessable Entity 422) {Array<Object>} {}.msg - Error message
- * @apiError (Unprocessable Entity 422) {Array<Object>} {}.param - Error parameter
- * @apiError (Unprocessable Entity 422) {Array<Object>} {}.location - Error location
+ * @apiError (Unprocessable Entity 422) {Object[]} value - Error value
+ * @apiError (Unprocessable Entity 422) {Object[]} msg - Error message
+ * @apiError (Unprocessable Entity 422) {Object[]} param - Error parameter
+ * @apiError (Unprocessable Entity 422) {Object[]} location - Error location
  */
 Router.route('/signin').post(validateSignInInput, signin);
 

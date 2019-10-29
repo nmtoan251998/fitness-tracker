@@ -16,5 +16,4 @@ dist
 # environment
 .env 
 
-src/utils/miband2
 src/assets/data
