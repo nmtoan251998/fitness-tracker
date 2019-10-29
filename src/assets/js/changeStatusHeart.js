@@ -21,23 +21,6 @@ function sendSMS (){
 	};	
 };
 
-
-function sendMail (){
-	try {      
-		axios({
-			method: 'post',
-			url: '/api/data/warning/mail'
-		}); 
-		console.log ('sent email');
-	} catch (error) {
-			if (error.response.data.msg) {
-                HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
-            } else {
-                const errorsData = error.response.data.map(data => data.msg);
-                HandleResponse('.sms-response', errorsData, error.response.status);
-            }   	
-	};	
-};
 */
 function statusDanger(){
 	heart_rate_box.style.backgroundColor 	= '#ffb3b3';
@@ -65,7 +48,6 @@ export function changeStatusHeart(rate){
 				return  0;
 				/*
 				sendSMS();
-				sendMail();
 				*/
 			}
 			else {
@@ -77,33 +59,42 @@ export function changeStatusHeart(rate){
 		if (old >= 7 && old < 18) {
 			if (rate < 75 || rate > 110) {
 				statusDanger();
+				return  0;
+				/*
 				sendSMS();
-				sendMail();
+				*/
 			}
 			else {
 				statusNormal();
+				return 1;
 			}
 		};
 
 		if (old >= 2 && old < 7) {
 			if (rate < 75 || rate > 120) {
 				statusDanger();
+				return  0;
+				/*
 				sendSMS();
-				sendMail();
+				*/
 			}
 			else {
 				statusNormal();
+				return 1;
 			}
 		};
 
 		if (old >= 1 && old < 2) {
 			if (rate < 80 || rate > 130) {
 				statusDanger();
+				return  0;
+				/*
 				sendSMS();
-				sendMail();
+				*/
 			}
 			else {
 				statusNormal();
+				return 1;
 			}
 		};	
 	}

@@ -21,11 +21,11 @@ $(document).ready(async function () {
 				$('#list_news').append(output);
 			});
 
-			if (crawnews.status === 404) {
-				HandleResponse('.news-response', crawnews.data.msg, crawnews.status);
-			}
+			
 		}
-
+		if (crawnews.status === 404) {
+			HandleResponse('.news-response', crawnews.data.msg, crawnews.status);
+		}
 
 	} catch (error) {
 		console.log(error.response);

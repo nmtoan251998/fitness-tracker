@@ -2,7 +2,7 @@ import { changeStatusHeart } from './changeStatusHeart';
 import axios from 'axios';
 import HandleResponse from './utils/HandleServerResponse';
 
-// goi api de gui thong bao qua sms va mail
+// goi api de gui thong bao qua sms 
 function sendSMS (){
     try {      
         axios({
@@ -21,22 +21,7 @@ function sendSMS (){
 };
 
 
-function sendMail (){
-    try {      
-        axios({
-            method: 'post',
-            url: '/api/data/warning/mail'
-        }); 
-        console.log ('sent email');
-    } catch (error) {
-            if (error.response.data.msg) {
-                HandleResponse('.sms-response', error.response.data.msg, error.response.status);    
-            } else {
-                const errorsData = error.response.data.map(data => data.msg);
-                HandleResponse('.sms-response', errorsData, error.response.status);
-            }       
-    };  
-};
+
 
 const dps = []; // dataPoints
 const chart = new CanvasJS.Chart("ChartContainer", {
@@ -84,7 +69,6 @@ export const updateChart = function (data) {
     if (check == 0 && flag === false) {
         console.log (check);
         sendSMS();
-        sendMail();
         flag = true;
     }
 
