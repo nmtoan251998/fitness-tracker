@@ -4,12 +4,12 @@ import axios from 'axios';
 $(document).ready(async function(){
 		
 		try {      
-			const getInfor = await axios({
+	/*		const getInfor = await axios({
 				method: 'get',
-				url: '/api/ble/mac'
+				url: '/api/ble/:mac'
 			});
 
-			console.log(getInfor);
+	//		console.log(getInfor);
 			if (getInfor.status === 200) {
 				$('#device-serial').empty();
 				$('#device-add').empty();
@@ -24,7 +24,7 @@ $(document).ready(async function(){
 				HandleResponse('.infor-response', getInfor.data.msg, getInfor.status);
 			}
 			
-
+*/
 		} catch (error) {
 			// handle error response
 			console.log(error.response.data);

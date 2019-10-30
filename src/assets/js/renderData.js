@@ -44,7 +44,7 @@ let yVal = 0;
 let dataLength = 10; // number of dataPoints visible at any point
 
 // flag check send sms and email
-const flag = false;
+let flag = false;
 
 
 
@@ -66,14 +66,21 @@ export const updateChart = function (data) {
     statusTime.value    =   data.battery_level; 
     
     const check = changeStatusHeart(data.heart_rate);
+    
+    let i =0; //count sms
+    //check if heart rate greater than and flag fasle send sms. turn on flag
     if (check == 0 && flag === false) {
         console.log (check);
-        sendSMS();
+     //   sendSMS();
+        i= i++;
+        console.log('send sms ' + i);
         flag = true;
     }
 
+    // check heart rate smaller than bound turn off flag 
     if (check == 1 ) {
         console.log (check);
+        console.log ('stop send sms');
         flag = false;
     }
 
