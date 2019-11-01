@@ -2,11 +2,11 @@ import { changeStatusHeart } from './changeStatusHeart';
 import axios from 'axios';
 import HandleResponse from './utils/HandleServerResponse';
 
-// goi api de gui thong bao qua sms 
+ 
 function sendSMS (){
     try {      
         axios({
-            method: 'get',
+            method: 'post',
             url: '/api/data/warning/sms'
         }); 
         console.log ('sent sms');
@@ -67,17 +67,17 @@ export const updateChart = function (data) {
     
     const check = changeStatusHeart(data.heart_rate);
     
-    let i =0; //count sms
-    //check if heart rate greater than and flag fasle send sms. turn on flag
+    let i =0; 
+    
     if (check == 0 && flag === false) {
         console.log (check);
-        sendSMS();
+        //call function send sms
+     //   sendSMS();
         i= i++;
         console.log('send sms ' + i);
         flag = true;
     }
 
-    // check heart rate smaller than bound turn off flag 
     if (check == 1 ) {
         console.log (check);
         console.log ('stop send sms');
