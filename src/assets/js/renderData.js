@@ -6,7 +6,7 @@ import HandleResponse from './utils/HandleServerResponse';
 function sendSMS (){
     try {      
         axios({
-            method: 'post',
+            method: 'get',
             url: '/api/data/warning/sms'
         }); 
         console.log ('sent sms');
@@ -71,7 +71,7 @@ export const updateChart = function (data) {
     //check if heart rate greater than and flag fasle send sms. turn on flag
     if (check == 0 && flag === false) {
         console.log (check);
-     //   sendSMS();
+        sendSMS();
         i= i++;
         console.log('send sms ' + i);
         flag = true;

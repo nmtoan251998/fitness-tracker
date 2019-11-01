@@ -13,7 +13,7 @@ const {
  *
  * @apiSuccess (OK 200) {String} msg - Successfully send message to user
  */
-Router.route('/warning/sms').post(sendWarningSMS);
+Router.route('/warning/sms').get(sendWarningSMS);
 
 /**
  * @api {get} /api/data/warning/mail
@@ -24,6 +24,6 @@ Router.route('/warning/sms').post(sendWarningSMS);
  * @apiSuccess (OK 200) {String} msg - Successfully send mail to user
  * @apiSuccess (OK 200) {String} uri - RegExp(/https:/)
  */
-Router.route('/warning/mail').post(sendWarningMail);
+Router.route('/warning/mail').get(sendWarningMail);
 
 module.exports = Router;
