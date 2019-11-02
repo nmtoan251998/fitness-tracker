@@ -2,11 +2,10 @@ import { changeStatusHeart } from './changeStatusHeart';
 import axios from 'axios';
 import HandleResponse from './utils/HandleServerResponse';
 
- 
 function sendSMS (){
     try {      
         axios({
-            method: 'post',
+            method: 'get',
             url: '/api/data/warning/sms'
         }); 
         console.log ('sent sms');
@@ -72,7 +71,7 @@ export const updateChart = function (data) {
     if (check == 0 && flag === false) {
         console.log (check);
         //call function send sms
-     //   sendSMS();
+        sendSMS();
         i= i++;
         console.log('send sms ' + i);
         flag = true;
@@ -81,7 +80,6 @@ export const updateChart = function (data) {
     if (check == 1 ) {
         console.log (check);
         console.log ('stop send sms');
-        flag = false;
     }
 
     xVal = data.time;
