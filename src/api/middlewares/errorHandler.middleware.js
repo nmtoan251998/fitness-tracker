@@ -31,5 +31,5 @@ module.exports.notFound = (req, res, next) => {
 }
 
 module.exports.errorHandler = (error, req, res, next) => {
-    return res.status(error.status).json(error).end();
+  //  return res.status(error.status).json(error).end();
 }
