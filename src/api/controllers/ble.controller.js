@@ -171,7 +171,11 @@ module.exports.startPython = async (req, res, next) => {
         );
 
         socket.on('disconnect', () => {
-            process.kill(-child.pid);
+            try {
+                process.kill(-child.pid);
+            } catch (error) {
+                console.log;
+            }            
         });
 
         // because the child_process is infinite request, we need to end req-res lifecycle in the first time
@@ -205,7 +209,7 @@ module.exports.startPython = async (req, res, next) => {
             socket.emit('exit-process', 'meomeo');
         });
 
-        child.stdout.on('data', async (data) => {
+        child.stdout.on('data', async (data) => {            
             if (!isRequestSentOnce) {
                 await updateDeviceConnection(address);
 
@@ -218,8 +222,9 @@ module.exports.startPython = async (req, res, next) => {
                     })
                     .end();
             }
-
+            
             socket.emit('realtime-data', formatRealtimeData(data.toString()));
+            console.log(formatRealtimeData(data.toString()));
         });
 
     } catch (error) {

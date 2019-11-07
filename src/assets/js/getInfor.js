@@ -12,6 +12,7 @@ $(document).ready(async function(){
 					method: 'get',
 					url: '/api/ble/device/'+mac.value
 				});
+				console.log('alo');
 		
 				console.log(getInfor);
 				if (getInfor.status === 200) {
