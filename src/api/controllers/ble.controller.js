@@ -221,10 +221,9 @@ module.exports.startPython = async (req, res, next) => {
                         msg: 'Successful to start python and save device data'
                     })
                     .end();
-            }
+            }            
             
-            socket.emit('realtime-data', formatRealtimeData(data.toString()));
-            console.log(formatRealtimeData(data.toString()));
+            socket.emit('realtime-data', formatRealtimeData(data.toString()));            
         });
 
     } catch (error) {
