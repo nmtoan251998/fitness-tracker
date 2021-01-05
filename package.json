@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "apidoc": "^0.17.7",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bcrypt": "^3.0.6",
     "bluebird": "^3.5.5",
     "body-parser": "^1.19.0",
